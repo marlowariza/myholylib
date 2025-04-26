@@ -1,0 +1,2 @@
+# myholylib
+SyntaxError
