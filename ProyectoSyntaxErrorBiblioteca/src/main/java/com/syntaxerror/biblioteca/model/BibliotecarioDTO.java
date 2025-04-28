@@ -4,44 +4,72 @@ import com.syntaxerror.biblioteca.model.enums.Turnos;
 import java.util.Date;
 
 public class BibliotecarioDTO extends PersonaDTO {
-
+    
+    private Integer idBibliotecario;
     private Turnos turno;
-    private Date fechaContrato;
+    private Date fechaContratoInicio;
+    private Date fechaContratoFinal;
+    private Boolean vigente;
 
     //Constructores
     public BibliotecarioDTO() {
-        this.fechaContrato = null;
+        this.idBibliotecario=null;
+        this.fechaContratoInicio = null;
+        this.fechaContratoFinal = null;
+        this.vigente=null;
     }
 
-    public BibliotecarioDTO(Integer idPersona, Date fechaNacimiento, String nombre, String direccion,
-            String telefono, String email, String contrasenha,
-            Turnos turno, Date fechaContrato) {
-        super(idPersona, fechaNacimiento, nombre, direccion,
-                telefono, email, contrasenha);
+    public BibliotecarioDTO(Integer idPersona, String nombre, String direccion,
+            String telefono, String correo, String contrasenha,
+            Turnos turno,Integer idBibliotecario ,Date fechaContratoInicio,Date fechaContratoFinal,Boolean vigente) {
+        super(idPersona, nombre,direccion,
+                telefono, correo, contrasenha);
+        this.idBibliotecario=idBibliotecario;
         this.turno = turno;
-        this.fechaContrato = fechaContrato;
+        this.fechaContratoInicio = fechaContratoInicio;
+        this.fechaContratoFinal = fechaContratoFinal;
+        this.vigente=vigente;
     }
 
     public BibliotecarioDTO(BibliotecarioDTO bibliotecario) {
         super(bibliotecario);
+        this.idBibliotecario=bibliotecario.idBibliotecario;
         this.turno = bibliotecario.turno;
-        this.fechaContrato = bibliotecario.fechaContrato;
+        this.fechaContratoInicio = bibliotecario.fechaContratoInicio;
+        this.fechaContratoFinal = bibliotecario.fechaContratoFinal;
     }
 
     //Getters y Setters
-    public Turnos getTurno() {
-        return turno;
+    public Integer getIdBibliotecario() {
+        return idBibliotecario;
     }
 
-    public void setTurno(Turnos turno) {
-        this.turno = turno;
+    public void setIdBibliotecario(Integer idBibliotecario) {
+        this.idBibliotecario = idBibliotecario;
     }
 
-    public Date getFechaContrato() {
-        return fechaContrato;
+    public Date getFechaContratoInicio() {
+        return fechaContratoInicio;
     }
 
-    public void setFechaContrato(Date fechaContrato) {
-        this.fechaContrato = fechaContrato;
+    public void setFechaContratoInicio(Date fechaContratoInicio) {
+        this.fechaContratoInicio = fechaContratoInicio;
     }
+
+    public Date getFechaContratoFinal() {
+        return fechaContratoFinal;
+    }
+
+    public void setFechaContratoFinal(Date fechaContratoFinal) {
+        this.fechaContratoFinal = fechaContratoFinal;
+    }
+
+    public Boolean getVigente() {
+        return vigente;
+    }
+
+    public void setVigente(Boolean vigente) {
+        this.vigente = vigente;
+    }
+
 }

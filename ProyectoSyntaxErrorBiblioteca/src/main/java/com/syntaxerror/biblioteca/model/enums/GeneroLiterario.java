@@ -1,6 +1,0 @@
-package com.syntaxerror.biblioteca.model.enums;
-
-public enum GeneroLiterario {
-    FANTASIA, CIENCIA_FICCION, MISTERIO, ROMANCE, DRAMA, POESIA, AVENTURA, HISTORICO,
-    TERROR, HUMOR, ENSAYO, FICCION_CONTEMPORANEA, BIOGRAFIA, AUTOAYUDA
-}

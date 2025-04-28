@@ -1,47 +1,49 @@
 package com.syntaxerror.biblioteca.model;
 
-import com.syntaxerror.biblioteca.model.enums.EstadoPrestamo;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class PrestamoDTO {
 
     private String idPrestamo;
+    private Date fechaSolicitud;
     private Date fechaPrestamo;
     private Date fechaDevolucion;
-    private Date fechaRealDevolucion;
-    private EstadoPrestamo estado;
     private LectorDTO lector;
 
-    private MaterialDTO material;
+    private ArrayList<EjemplarDTO> ejemplares;
+    private ArrayList<SancionDTO> sanciones;
 
     // Constructores
     public PrestamoDTO() {
         this.idPrestamo = null;
-        this.fechaDevolucion = null;
+        this.fechaSolicitud = null;
         this.fechaPrestamo = null;
-        this.fechaRealDevolucion = null;
-        this.material = null;
+        this.fechaDevolucion = null;
+        this.lector = null;
+        this.ejemplares = new ArrayList<>();
+        this.sanciones = new ArrayList<>();
     }
 
-    public PrestamoDTO(String idPrestamo, Date fechaPrestamo, Date fechaDevolucion, Date fechaRealDevolucion, EstadoPrestamo estado, LectorDTO lector, MaterialDTO material) {
+    public PrestamoDTO(String idPrestamo, Date fechaSolicitud, Date fechaPrestamo, Date fechaDevolucion, LectorDTO lector) {
         this.idPrestamo = idPrestamo;
         this.fechaPrestamo = fechaPrestamo;
         this.fechaDevolucion = fechaDevolucion;
-        this.fechaRealDevolucion = fechaRealDevolucion;
-        this.estado = estado;
+        this.fechaSolicitud = fechaSolicitud;
         this.lector = lector;
-        this.material = material;
+        this.ejemplares = new ArrayList<>();
+        this.sanciones = new ArrayList<>();
     }
 
     public PrestamoDTO(PrestamoDTO prestamo) {
         this.idPrestamo = prestamo.idPrestamo;
         this.fechaPrestamo = prestamo.fechaPrestamo;
         this.fechaDevolucion = prestamo.fechaDevolucion;
-        this.fechaRealDevolucion = prestamo.fechaRealDevolucion;
-        this.estado = prestamo.estado;
+        this.fechaSolicitud = prestamo.fechaSolicitud;
         this.lector = prestamo.lector;
-        this.material = prestamo.material;
+        this.sanciones = new ArrayList<>(prestamo.sanciones);
+        this.ejemplares = new ArrayList<>(prestamo.ejemplares);
+
     }
 
     // Getters y Setters
@@ -69,22 +71,6 @@ public class PrestamoDTO {
         this.fechaDevolucion = fechaDevolucion;
     }
 
-    public Date getFechaRealDevolucion() {
-        return fechaRealDevolucion;
-    }
-
-    public void setFechaRealDevolucion(Date fechaRealDevolucion) {
-        this.fechaRealDevolucion = fechaRealDevolucion;
-    }
-
-    public EstadoPrestamo getEstado() {
-        return estado;
-    }
-
-    public void setEstado(EstadoPrestamo estado) {
-        this.estado = estado;
-    }
-
     public LectorDTO getLector() {
         return lector;
     }
@@ -93,25 +79,24 @@ public class PrestamoDTO {
         this.lector = lector;
     }
 
-    public MaterialDTO getMaterial() {
-        return material;
+    public Date getFechaSolicitud() {
+        return fechaSolicitud;
     }
 
-    public void setMaterial(MaterialDTO material) {
-        this.material = material;
+    public void setFechaSolicitud(Date fechaSolicitud) {
+        this.fechaSolicitud = fechaSolicitud;
     }
 
-//    public void agregarMaterial(MaterialDTO material) {
-//        if (material != null && !materiales.contains(material)) {
-//            materiales.add(material);
-//            material.agregarPrestamo(this); // Aseguramos la bidireccionalidad
-//        }
-//    }
-//
-//    public void quitarMaterial(MaterialDTO material) {
-//        if (material != null && materiales.contains(material)) {
-//            materiales.remove(material);
-//            material.quitarPrestamo(this); // Eliminamos la relación en ambos sentidos
-//        }
-//    }
+    public void agregarEjemplar(EjemplarDTO ejemplar) {
+        if (ejemplar != null) {
+            this.ejemplares.add(ejemplar);
+        }
+    }
+
+    public void agregarSancion(SancionDTO sancion) {
+        if (sancion != null) {
+            this.sanciones.add(sancion);
+        }
+    }
+
 }
