@@ -10,8 +10,7 @@ public class SedeDTO {
     private String distrito;
     private String telefono_contacto;
     private String correo_contacto;
-
-    private ArrayList<MaterialDTO> materiales;
+    private ArrayList<EjemplarDTO> ejemplares;
     private ArrayList<PersonaDTO> personas;
 
     public SedeDTO() {
@@ -21,20 +20,19 @@ public class SedeDTO {
         this.distrito = null;
         this.telefono_contacto = null;
         this.correo_contacto = null;
-        this.materiales = new ArrayList<>();
+        this.ejemplares = new ArrayList<>();
         this.personas = new ArrayList<>();
     }
 
     public SedeDTO(Integer idSede, String nombre, String direccion, String distrito,
-            String telefono_contacto, String correo_contacto,
-            ArrayList<MaterialDTO> materiales, ArrayList<PersonaDTO> personas) {
+            String telefono_contacto, String correo_contacto) {
         this.idSede = idSede;
         this.nombre = nombre;
         this.direccion = direccion;
         this.distrito = distrito;
         this.telefono_contacto = telefono_contacto;
         this.correo_contacto = correo_contacto;
-        this.materiales = new ArrayList<>();
+        this.ejemplares = new ArrayList<>();
         this.personas = new ArrayList<>();
     }
 
@@ -45,7 +43,7 @@ public class SedeDTO {
         this.distrito = otraSede.distrito;
         this.telefono_contacto = otraSede.telefono_contacto;
         this.correo_contacto = otraSede.correo_contacto;
-        this.materiales = otraSede.materiales != null ? new ArrayList<>(otraSede.materiales) : new ArrayList<>();
+        this.ejemplares = otraSede.ejemplares != null ? new ArrayList<>(otraSede.ejemplares) : new ArrayList<>();
         this.personas = otraSede.personas != null ? new ArrayList<>(otraSede.personas) : new ArrayList<>();
     }
 
@@ -97,17 +95,15 @@ public class SedeDTO {
         this.idSede = idSede;
     }
 
-    public void agregarMaterial(MaterialDTO material) {
-        if (!materiales.contains(material)) {
-            materiales.add(material);
-            material.agregarSede(this); // relación bidireccional
+    public void agregarEjemplar(EjemplarDTO m) {
+        if (!ejemplares.contains(m)) {
+            ejemplares.add(m);
         }
     }
 
-    public void quitarMaterial(MaterialDTO material) {
-        if (materiales.contains(material)) {
-            materiales.remove(material);
-            material.quitarSede(this);
+    public void quitarEjemplar(EjemplarDTO m) {
+        if (ejemplares.contains(m)) {
+            ejemplares.remove(m);
         }
     }
 

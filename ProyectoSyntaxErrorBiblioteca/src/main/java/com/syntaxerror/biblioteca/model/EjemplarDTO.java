@@ -14,7 +14,6 @@ public class EjemplarDTO {
     private String ubicacion;
 
     private SedeDTO sede;
-
     private MaterialDTO material;
 
     public EjemplarDTO() {
@@ -106,6 +105,7 @@ public class EjemplarDTO {
 
     public void setSede(SedeDTO sede) {
         this.sede = sede;
+        sede.agregarEjemplar(this);
     }
 
     public MaterialDTO getMaterial() {
