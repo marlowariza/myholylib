@@ -1,81 +1,57 @@
 package com.syntaxerror.biblioteca.model;
 
+import com.syntaxerror.biblioteca.model.enums.NivelDeIngles;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class LectorDTO extends PersonaDTO {
 
-    private Integer categoria;
-    private Integer cantidadPrestamos;
-    private Integer cantidadPenalizaciones;
-    private ArrayList<PenalidadDTO> penalidades;
+    private Integer idLector;
+    private NivelDeIngles nivel;
     private ArrayList<PrestamoDTO> prestamos;
 
     // Constructores
     public LectorDTO() {
-        this.categoria = null;
-        this.cantidadPenalizaciones = null;
-        this.cantidadPrestamos = null;
-        this.penalidades = new ArrayList<>();
+        this.idLector = null;
+        this.nivel = null;
         this.prestamos = new ArrayList<>();
     }
 
-    public LectorDTO(Integer idPersona, Date fechaNacimiento, String nombre, String direccion,
-            String telefono, String email, String contrasenha, Integer categoria,
-            Integer cantidadPrestamos, Integer cantidadPenalizaciones) {
-        super(idPersona, fechaNacimiento, nombre, direccion, telefono, email, contrasenha);
-        this.categoria = categoria;
-        this.cantidadPrestamos = cantidadPrestamos;
-        this.cantidadPenalizaciones = cantidadPenalizaciones;
-        this.penalidades = new ArrayList<>();
+    public LectorDTO(Integer idPersona, String nombre, String direccion,
+            String telefono, String correo, String contrasenha, Integer idLector, NivelDeIngles nivel) {
+        super(idPersona, nombre, direccion, telefono, correo, contrasenha);
+        this.idLector = idLector;
+        this.nivel = nivel;
         this.prestamos = new ArrayList<>();
     }
 
     public LectorDTO(LectorDTO lector) {
         super(lector);
-        this.categoria = lector.categoria;
-        this.cantidadPrestamos = lector.cantidadPrestamos;
-        this.cantidadPenalizaciones = lector.cantidadPenalizaciones;
-        this.penalidades = new ArrayList<>(lector.penalidades);
+        this.idLector = lector.idLector;
+        this.nivel = lector.nivel;
         this.prestamos = new ArrayList<>(lector.prestamos);
     }
 
     //Getters y setters
-    public Integer getCategoria() {
-        return categoria;
+    public Integer getIdLector() {
+        return idLector;
     }
 
-    public void setCategoria(Integer categoria) {
-        this.categoria = categoria;
+    public void setIdLector(Integer idLector) {
+        this.idLector = idLector;
     }
 
-    public Integer getCantidadPrestamos() {
-        return cantidadPrestamos;
+    public NivelDeIngles getNivel() {
+        return nivel;
     }
 
-    public void setCantidadPrestamos(Integer cantidadPrestamos) {
-        this.cantidadPrestamos = cantidadPrestamos;
+    public void setNivel(NivelDeIngles nivel) {
+        this.nivel = nivel;
     }
 
-    public Integer getCantidadPenalizaciones() {
-        return cantidadPenalizaciones;
-    }
-
-    public void setCantidadPenalizaciones(Integer cantidadPenalizaciones) {
-        this.cantidadPenalizaciones = cantidadPenalizaciones;
-    }
-
-    public void agregarPenalidad(PenalidadDTO penalidad) {
-        if (penalidad != null) {
-            this.penalidades.add(penalidad);
-            this.cantidadPenalizaciones = this.penalidades.size();
-        }
-    }
 
     public void agregarPrestamo(PrestamoDTO prestamo) {
         if (prestamo != null) {
             this.prestamos.add(prestamo);
-            this.cantidadPrestamos = this.prestamos.size();
         }
     }
 

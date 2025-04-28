@@ -1,46 +1,40 @@
 package com.syntaxerror.biblioteca.model;
 
-import java.util.Date;
-
 
 public abstract class PersonaDTO {
     private Integer idPersona; 
-    private Date fechaNacimiento; 
     private String nombre;
     private String direccion;
     private String telefono; 
-    private String email;
+    private String correo;
     private String contrasenha;
     
     //Constructores
-    public PersonaDTO(Integer idPersona, Date fechaNacimiento, String nombre, String direccion,
-                   String telefono, String email, String contrasenha) {
+    public PersonaDTO(Integer idPersona, String nombre, String direccion,
+                   String telefono, String correo, String contrasenha) {
         this.idPersona = idPersona;
-        this.fechaNacimiento = fechaNacimiento;
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.email = email;
+        this.correo = correo;
         this.contrasenha = contrasenha;
     }
     
     public PersonaDTO(){
         this.idPersona=null;
-        this.fechaNacimiento=null;
         this.nombre=null;
         this.direccion=null;
         this.telefono=null;
-        this.email=null;
+        this.correo=null;
         this.contrasenha=null;
     }
     
     public PersonaDTO(PersonaDTO persona) {
         this.idPersona = persona.idPersona;
-        this.fechaNacimiento = persona.fechaNacimiento;
         this.nombre = persona.nombre;
         this.direccion = persona.direccion;
         this.telefono = persona.telefono;
-        this.email = persona.email;
+        this.correo = persona.correo;
         this.contrasenha = persona.contrasenha;
     }
 
@@ -53,13 +47,6 @@ public abstract class PersonaDTO {
         this.idPersona = idPersona;
     }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
 
     public String getNombre() {
         return nombre;
@@ -85,12 +72,12 @@ public abstract class PersonaDTO {
         this.telefono = telefono;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCorreo(String email) {
+        this.correo = email;
     }
 
     public String getContrasenha() {
