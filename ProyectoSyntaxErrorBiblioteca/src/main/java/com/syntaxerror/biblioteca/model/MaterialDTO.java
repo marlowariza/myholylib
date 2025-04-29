@@ -10,7 +10,6 @@ public class MaterialDTO {
     private NivelDeIngles nivel;
     private Integer anioPublicacion;
     private EditorialDTO editorial;
-    private ArrayList<AutorDTO> autores;
     private ArrayList<TemaDTO> temas;
 
     // Constructores
@@ -22,7 +21,6 @@ public class MaterialDTO {
         this.anioPublicacion= null;
         this.editorial = null;
         this.temas = new ArrayList<>();
-        this.autores = new ArrayList<>();
     }
     public MaterialDTO(Integer idMaterial, String titulo, String edicion, NivelDeIngles nivel, Integer anioPublicacion,
             EditorialDTO editorial) {
@@ -33,7 +31,6 @@ public class MaterialDTO {
         this.anioPublicacion = anioPublicacion;
         this.editorial = editorial;
         this.temas = new ArrayList<>();
-        this.autores = new ArrayList<>();
     }
     public MaterialDTO(MaterialDTO material) {
         this.idMaterial = material.idMaterial;
@@ -43,7 +40,6 @@ public class MaterialDTO {
         this.anioPublicacion = material.anioPublicacion;
         this.editorial= material.editorial;
         this.temas = new ArrayList<>(material.temas);
-        this.autores = new ArrayList<>(material.autores);
     }
 
     public Integer getIdMaterial() {
@@ -108,12 +104,6 @@ public class MaterialDTO {
         if (!this.temas.contains(m)) {
             this.temas.add(m);
             m.agregarMaterial(this); // relación bidireccional
-        }
-    }
-    public void agregarAutores(AutorDTO m) {
-        if (!this.autores.contains(m)) {
-            this.autores.add(m);
-            m.agregarMateriales(this); // relación bidireccional
         }
     }
 
