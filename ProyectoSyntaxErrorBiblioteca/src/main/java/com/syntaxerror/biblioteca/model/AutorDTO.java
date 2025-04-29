@@ -1,7 +1,7 @@
 package com.syntaxerror.biblioteca.model;
 
 import java.util.ArrayList;
-//GUARDA GUARDA GUARDA GUARDA GUARDA
+
 public class AutorDTO {
 
     private Integer idAutor;
@@ -78,9 +78,9 @@ public class AutorDTO {
     public void setCantidadObras(Integer cantidadObras) {
         this.cantidadObras = cantidadObras;
     }
-    public void agregarMateriales(MaterialDTO n) {
-        if (!this.materiales.contains(n)) {
-            this.materiales.add(n); // relación bidireccional
+    public void agregarMateriales(MaterialDTO m) {
+        if (!this.materiales.contains(m)) {
+            this.materiales.add(m); // relación bidireccional
         }
     }
 }
