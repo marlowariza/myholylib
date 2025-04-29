@@ -80,9 +80,10 @@ public class AutorDTO {
         this.cantidadObras = cantidadObras;
     }
 
-    public void agregarMaterial(MaterialDTO m) {
-        if (!this.materiales.contains(m)) {
-            this.materiales.add(m);
-        }
+public void agregarMaterial(MaterialDTO material) {
+    if (!this.materiales.contains(material)) {
+        this.materiales.add(material);
+        material.agregarAutor(this); // Relación bidireccional
     }
+}
 }

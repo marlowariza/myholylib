@@ -1,5 +1,6 @@
 package com.syntaxerror.biblioteca.model;
 
+import com.syntaxerror.biblioteca.model.enums.EstadoPrestamo;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,8 +11,7 @@ public class PrestamoDTO {
     private Date fechaPrestamo;
     private Date fechaDevolucion;
     private LectorDTO lector;
-
-    private ArrayList<EjemplarDTO> ejemplares;
+    private ArrayList<PrestamoEjemplarDTO> prestamosEjemplares;
     private ArrayList<SancionDTO> sanciones;
 
     // Constructores
@@ -21,7 +21,7 @@ public class PrestamoDTO {
         this.fechaPrestamo = null;
         this.fechaDevolucion = null;
         this.lector = null;
-        this.ejemplares = new ArrayList<>();
+        this.prestamosEjemplares = new ArrayList<>();
         this.sanciones = new ArrayList<>();
     }
 
@@ -31,7 +31,7 @@ public class PrestamoDTO {
         this.fechaDevolucion = fechaDevolucion;
         this.fechaSolicitud = fechaSolicitud;
         this.lector = lector;
-        this.ejemplares = new ArrayList<>();
+        this.prestamosEjemplares = new ArrayList<>();
         this.sanciones = new ArrayList<>();
     }
 
@@ -42,7 +42,7 @@ public class PrestamoDTO {
         this.fechaSolicitud = prestamo.fechaSolicitud;
         this.lector = prestamo.lector;
         this.sanciones = new ArrayList<>(prestamo.sanciones);
-        this.ejemplares = new ArrayList<>(prestamo.ejemplares);
+        this.prestamosEjemplares = new ArrayList<>(prestamo.prestamosEjemplares);
 
     }
 
@@ -87,16 +87,16 @@ public class PrestamoDTO {
         this.fechaSolicitud = fechaSolicitud;
     }
 
-    public void agregarEjemplar(EjemplarDTO ejemplar) {
-        if (ejemplar != null) {
-            this.ejemplares.add(ejemplar);
-        }
-    }
 
     public void agregarSancion(SancionDTO sancion) {
         if (sancion != null) {
             this.sanciones.add(sancion);
         }
     }
+    
+    public void agregarEjemplar(EjemplarDTO ejemplar, EstadoPrestamo estado, Date fechaRealDevolucion) {
+    PrestamoEjemplarDTO nuevoRegistro = new PrestamoEjemplarDTO(this, ejemplar, estado, fechaRealDevolucion);
+    this.prestamosEjemplares.add(nuevoRegistro);
+}
 
 }
