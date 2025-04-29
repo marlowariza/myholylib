@@ -1,5 +1,7 @@
 package com.syntaxerror.biblioteca.model;
 
+import com.syntaxerror.biblioteca.model.enums.EstadoPrestamo;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -16,6 +18,8 @@ public class EjemplarDTO {
     private SedeDTO sede;
     private MaterialDTO material;
 
+    private ArrayList<PrestamoEjemplarDTO> prestamosEjemplares;
+    
     public EjemplarDTO() {
         this.idEjemplar = null;
         this.fechaAdquisicion = null;
@@ -23,6 +27,7 @@ public class EjemplarDTO {
         this.ubicacion = null;
         this.sede = null;
         this.material = null;
+        this.prestamosEjemplares = new ArrayList<>();
     }
 
     public EjemplarDTO(Integer idEjemplar, Date fechaAdquisicion, Boolean disponible,
@@ -33,6 +38,7 @@ public class EjemplarDTO {
         this.ubicacion = ubicacion;
         this.sede = sede;
         this.material = material;
+        this.prestamosEjemplares = new ArrayList<>();
     }
 
     /**
@@ -115,4 +121,10 @@ public class EjemplarDTO {
     public void setMaterial(MaterialDTO material) {
         this.material = material;
     }
+    
+    public void agregarPrestamo(PrestamoDTO prestamo, EstadoPrestamo estado, Date fechaRealDevolucion) {
+    PrestamoEjemplarDTO nuevoRegistro = new PrestamoEjemplarDTO(prestamo, this, estado, fechaRealDevolucion);
+    this.prestamosEjemplares.add(nuevoRegistro);
+}
+    
 }
