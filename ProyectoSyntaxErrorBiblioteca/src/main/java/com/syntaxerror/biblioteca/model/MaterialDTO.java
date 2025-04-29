@@ -1,7 +1,6 @@
 package com.syntaxerror.biblioteca.model;
-
-import com.syntaxerror.biblioteca.model.enums.NivelDeIngles;
 import java.util.ArrayList;
+import com.syntaxerror.biblioteca.model.enums.NivelDeIngles;
 
 public class MaterialDTO {
 
@@ -11,9 +10,7 @@ public class MaterialDTO {
     private NivelDeIngles nivel;
     private Integer anioPublicacion;
     private EditorialDTO editorial;
-    private ArrayList<EjemplarDTO> ejemplares;
     private ArrayList<TemaDTO> temas;
-    private ArrayList<EjemplarDigitalDTO> ejemplaresDigitales;
 
     // Constructores
     public MaterialDTO() {
@@ -24,8 +21,6 @@ public class MaterialDTO {
         this.anioPublicacion= null;
         this.editorial = null;
         this.temas = new ArrayList<>();
-        this.ejemplares = new ArrayList<>();
-        this.ejemplaresDigitales = new ArrayList<>();
     }
     public MaterialDTO(Integer idMaterial, String titulo, String edicion, NivelDeIngles nivel, Integer anioPublicacion,
             EditorialDTO editorial) {
@@ -36,8 +31,6 @@ public class MaterialDTO {
         this.anioPublicacion = anioPublicacion;
         this.editorial = editorial;
         this.temas = new ArrayList<>();
-        this.ejemplares = new ArrayList<>();
-        this.ejemplaresDigitales = new ArrayList<>();
     }
     public MaterialDTO(MaterialDTO material) {
         this.idMaterial = material.idMaterial;
@@ -46,9 +39,7 @@ public class MaterialDTO {
         this.nivel = material.nivel;
         this.anioPublicacion = material.anioPublicacion;
         this.editorial= material.editorial;
-        this.ejemplares = new ArrayList<>(material.ejemplares);
         this.temas = new ArrayList<>(material.temas);
-        this.ejemplaresDigitales = new ArrayList<>(material.ejemplaresDigitales);
     }
 
     public Integer getIdMaterial() {
@@ -108,22 +99,6 @@ public class MaterialDTO {
 
     public void setEditorial(EditorialDTO editorial) {
         this.editorial = editorial;
-    }
-
-    public void agregarEjemplar(EjemplarDTO m) {
-        if (!this.ejemplares.contains(m)) {
-            this.ejemplares.add(m);
-        }
-    }
-    public void quitarEjemplar(EjemplarDTO m) {
-        if (ejemplares.contains(m)) {
-            ejemplares.remove(m);
-        }
-    }
-    public void agregarEjemplarDigital(EjemplarDigitalDTO m) {
-        if (!this.ejemplaresDigitales.contains(m)) {
-            this.ejemplaresDigitales.add(m);
-        }
     }
     public void agregarTema(TemaDTO m) {
         if (!this.temas.contains(m)) {

@@ -1,7 +1,5 @@
 package com.syntaxerror.biblioteca.model;
 
-import java.util.ArrayList;
-
 public class SedeDTO {
 
     private Integer idSede;
@@ -10,8 +8,6 @@ public class SedeDTO {
     private String distrito;
     private String telefono_contacto;
     private String correo_contacto;
-    private ArrayList<EjemplarDTO> ejemplares;
-    private ArrayList<PersonaDTO> personas;
 
     public SedeDTO() {
         this.idSede = null;
@@ -20,8 +16,6 @@ public class SedeDTO {
         this.distrito = null;
         this.telefono_contacto = null;
         this.correo_contacto = null;
-        this.ejemplares = new ArrayList<>();
-        this.personas = new ArrayList<>();
     }
 
     public SedeDTO(Integer idSede, String nombre, String direccion, String distrito,
@@ -32,8 +26,6 @@ public class SedeDTO {
         this.distrito = distrito;
         this.telefono_contacto = telefono_contacto;
         this.correo_contacto = correo_contacto;
-        this.ejemplares = new ArrayList<>();
-        this.personas = new ArrayList<>();
     }
 
     public SedeDTO(SedeDTO otraSede) {
@@ -43,8 +35,6 @@ public class SedeDTO {
         this.distrito = otraSede.distrito;
         this.telefono_contacto = otraSede.telefono_contacto;
         this.correo_contacto = otraSede.correo_contacto;
-        this.ejemplares = otraSede.ejemplares != null ? new ArrayList<>(otraSede.ejemplares) : new ArrayList<>();
-        this.personas = otraSede.personas != null ? new ArrayList<>(otraSede.personas) : new ArrayList<>();
     }
 
     public String getNombre() {
@@ -93,23 +83,5 @@ public class SedeDTO {
 
     public void setIdSede(Integer idSede) {
         this.idSede = idSede;
-    }
-
-    public void agregarEjemplar(EjemplarDTO m) {
-        if (!ejemplares.contains(m)) {
-            ejemplares.add(m);
-        }
-    }
-
-    public void quitarEjemplar(EjemplarDTO m) {
-        if (ejemplares.contains(m)) {
-            ejemplares.remove(m);
-        }
-    }
-
-    public void agregarPersona(PersonaDTO persona) {
-        if (personas != null) {
-            this.personas.add(persona);
-        }
     }
 }

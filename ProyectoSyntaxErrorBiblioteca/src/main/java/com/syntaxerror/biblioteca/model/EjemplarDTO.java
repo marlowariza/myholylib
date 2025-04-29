@@ -1,5 +1,5 @@
 package com.syntaxerror.biblioteca.model;
-
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -12,9 +12,9 @@ public class EjemplarDTO {
     private Date fechaAdquisicion;
     private Boolean disponible;
     private String ubicacion;
-
     private SedeDTO sede;
     private MaterialDTO material;
+    private ArrayList<Prestamo_EjemplarDTO> prestamos;
 
     public EjemplarDTO() {
         this.idEjemplar = null;
@@ -23,6 +23,7 @@ public class EjemplarDTO {
         this.ubicacion = null;
         this.sede = null;
         this.material = null;
+        this.prestamos = new ArrayList<>();
     }
 
     public EjemplarDTO(Integer idEjemplar, Date fechaAdquisicion, Boolean disponible,
@@ -33,6 +34,7 @@ public class EjemplarDTO {
         this.ubicacion = ubicacion;
         this.sede = sede;
         this.material = material;
+        this.prestamos = new ArrayList<>();
     }
 
     /**
@@ -105,7 +107,6 @@ public class EjemplarDTO {
 
     public void setSede(SedeDTO sede) {
         this.sede = sede;
-        sede.agregarEjemplar(this);
     }
 
     public MaterialDTO getMaterial() {
@@ -114,5 +115,10 @@ public class EjemplarDTO {
 
     public void setMaterial(MaterialDTO material) {
         this.material = material;
+    }
+    public void agregarPrestamo(Prestamo_EjemplarDTO m) {
+        if (!this.prestamos.contains(m)) {
+            this.prestamos.add(m);
+        }
     }
 }

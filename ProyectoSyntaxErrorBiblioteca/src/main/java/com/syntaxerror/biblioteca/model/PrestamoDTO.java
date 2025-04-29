@@ -10,9 +10,7 @@ public class PrestamoDTO {
     private Date fechaPrestamo;
     private Date fechaDevolucion;
     private LectorDTO lector;
-
-    private ArrayList<EjemplarDTO> ejemplares;
-    private ArrayList<SancionDTO> sanciones;
+    private ArrayList<Prestamo_EjemplarDTO> ejemplares;
 
     // Constructores
     public PrestamoDTO() {
@@ -22,7 +20,6 @@ public class PrestamoDTO {
         this.fechaDevolucion = null;
         this.lector = null;
         this.ejemplares = new ArrayList<>();
-        this.sanciones = new ArrayList<>();
     }
 
     public PrestamoDTO(String idPrestamo, Date fechaSolicitud, Date fechaPrestamo, Date fechaDevolucion, LectorDTO lector) {
@@ -32,7 +29,6 @@ public class PrestamoDTO {
         this.fechaSolicitud = fechaSolicitud;
         this.lector = lector;
         this.ejemplares = new ArrayList<>();
-        this.sanciones = new ArrayList<>();
     }
 
     public PrestamoDTO(PrestamoDTO prestamo) {
@@ -41,7 +37,6 @@ public class PrestamoDTO {
         this.fechaDevolucion = prestamo.fechaDevolucion;
         this.fechaSolicitud = prestamo.fechaSolicitud;
         this.lector = prestamo.lector;
-        this.sanciones = new ArrayList<>(prestamo.sanciones);
         this.ejemplares = new ArrayList<>(prestamo.ejemplares);
 
     }
@@ -86,17 +81,9 @@ public class PrestamoDTO {
     public void setFechaSolicitud(Date fechaSolicitud) {
         this.fechaSolicitud = fechaSolicitud;
     }
-
-    public void agregarEjemplar(EjemplarDTO ejemplar) {
-        if (ejemplar != null) {
-            this.ejemplares.add(ejemplar);
+    public void agregarEjemplar(Prestamo_EjemplarDTO m) {
+        if (!this.ejemplares.contains(m)) {
+            this.ejemplares.add(m);
         }
     }
-
-    public void agregarSancion(SancionDTO sancion) {
-        if (sancion != null) {
-            this.sanciones.add(sancion);
-        }
-    }
-
 }

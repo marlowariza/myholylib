@@ -8,16 +8,17 @@ public abstract class PersonaDTO {
     private String telefono; 
     private String correo;
     private String contrasenha;
-    
+    private SedeDTO sede;
     //Constructores
     public PersonaDTO(Integer idPersona, String nombre, String direccion,
-                   String telefono, String correo, String contrasenha) {
+                   String telefono, String correo, String contrasenha, SedeDTO sede) {
         this.idPersona = idPersona;
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
         this.correo = correo;
         this.contrasenha = contrasenha;
+        this.sede = sede;
     }
     
     public PersonaDTO(){
@@ -27,6 +28,7 @@ public abstract class PersonaDTO {
         this.telefono=null;
         this.correo=null;
         this.contrasenha=null;
+        this.sede = null;
     }
     
     public PersonaDTO(PersonaDTO persona) {
@@ -36,6 +38,7 @@ public abstract class PersonaDTO {
         this.telefono = persona.telefono;
         this.correo = persona.correo;
         this.contrasenha = persona.contrasenha;
+        this.sede = persona.sede;
     }
 
     //Setters y getters
@@ -87,4 +90,12 @@ public abstract class PersonaDTO {
     public void setContrasenha(String contrasenha) {
         this.contrasenha = contrasenha;
     }
+    public SedeDTO getSede() {
+        return sede;
+    }
+
+    public void setSede(SedeDTO sede) {
+        this.sede = sede;
+    }
+
 }

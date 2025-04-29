@@ -12,8 +12,6 @@ public class SancionDTO {
     private Date duracion;
     private String descripcion;
     private PrestamoDTO prestamo;
-
-
     // Constructores
     public SancionDTO() {
         this.idsancion = null;
