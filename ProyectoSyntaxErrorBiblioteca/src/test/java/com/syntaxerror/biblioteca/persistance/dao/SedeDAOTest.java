@@ -1,4 +1,3 @@
-
 package com.syntaxerror.biblioteca.persistance.dao;
 
 import com.syntaxerror.biblioteca.db.DBManager;
@@ -8,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Order;
 
 /**
  *
@@ -31,138 +32,180 @@ public class SedeDAOTest {
     /**
      * Test of insertar method, of class SedeDAO.
      */
+//
     @Test
+    @Order(1)
     public void testInsertar() {
+        eliminarTodo();
         System.out.println("insertar");
-        ArrayList<Integer> listaSedeId = new ArrayList<>(); // Lista para almacenar los IDs de las sedes insertadas
-        insertarSedes(listaSedeId); // Método para insertar sedes
-        verificarInserciones();
+        ArrayList<Integer> listaIdSede = new ArrayList<>();
+        insertarSedes(listaIdSede);
+        eliminarTodo();
     }
 
-    private void insertarSedes(ArrayList<Integer> listaSedeId) {
-        SedeDTO sede = new SedeDTO(); // Crear un objeto SedeDTO
-
-        // Insertar la primera sede
-        sede.setIdSede(1);
+    private void insertarSedes(ArrayList<Integer> listaIdSede) {
+        SedeDTO sede = new SedeDTO();
         sede.setNombre("Sede Central");
         sede.setDireccion("Av. Principal 123");
         sede.setDistrito("Distrito Central");
         sede.setTelefono_contacto("987654321");
         sede.setCorreo_contacto("sede.central@email.com");
-        Integer resultado = this.sedeDAO.insertar(sede); // Llamada al método insertar del DAO
-        listaSedeId.add(resultado); // Agregar el ID de la sede a la lista
+        sede.setActiva(true);
 
-        // Insertar la segunda sede
-        sede.setIdSede(2);
+        Integer resultado = this.sedeDAO.insertar(sede);
+        assertTrue(resultado != 0);
+        listaIdSede.add(resultado);
+
         sede.setNombre("Sede PUCP");
         sede.setDireccion("Av. Universitaria 456");
         sede.setDistrito("San Miguel");
         sede.setTelefono_contacto("123456789");
         sede.setCorreo_contacto("sede.pucp@email.com");
+        sede.setActiva(true);
         resultado = this.sedeDAO.insertar(sede);
-        listaSedeId.add(resultado);
+        assertTrue(resultado != 0);
+        listaIdSede.add(resultado);
 
     }
-    
-    public void verificarInserciones() {
-    String sql = "SELECT * FROM Sede WHERE IdSede IN (1, 2)";
-    try (Connection conn = DBManager.getInstance().getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql);
-         ResultSet rs = stmt.executeQuery()) {
-         
-        while (rs.next()) {
-            System.out.println("IdSede: " + rs.getInt("IdSede"));
-            System.out.println("Nombre: " + rs.getString("Nombre"));
-            System.out.println("Direccion: " + rs.getString("Direccion"));
-            System.out.println("Distrito: " + rs.getString("Distrito"));
-            System.out.println("TelefonoContacto: " + rs.getString("TelefonoContacto"));
-            System.out.println("CorreoContacto: " + rs.getString("CorreoContacto"));
-            System.out.println("-----");
+
+    @Test
+    @Order(2)
+    public void testObtenerPorId() {
+        System.out.println("obtenerPorId");
+        ArrayList<Integer> listaIdSede = new ArrayList<>();
+        insertarSedes(listaIdSede);
+        SedeDTO sede = this.sedeDAO.obtenerPorId(listaIdSede.get(0));
+        assertEquals(sede.getIdSede(), listaIdSede.get(0));
+
+        sede = this.sedeDAO.obtenerPorId(listaIdSede.get(1));
+        assertEquals(sede.getIdSede(), listaIdSede.get(1));
+
+//        sede = this.sedeDAO.obtenerPorId(listaIdSede.get(2));
+//        assertEquals(sede.getIdSede(), listaIdSede.get(2));
+        eliminarTodo();
+    }
+
+    @Test
+    @Order(3)
+    public void testListarTodos() {
+        System.out.println("listarTodos");
+        ArrayList<Integer> listaIdSede = new ArrayList<>();
+        insertarSedes(listaIdSede);
+
+        ArrayList<SedeDTO> listaSedes = this.sedeDAO.listarTodos();
+        assertEquals(listaIdSede.size(), listaSedes.size());
+        for (Integer i = 0; i < listaIdSede.size(); i++) {
+            assertEquals(listaIdSede.get(i), listaSedes.get(i).getIdSede());
         }
-    } catch (SQLException ex) {
-        ex.printStackTrace();
+        eliminarTodo();
     }
-}
 
-    /**
-     * Test of obtenerPorId method, of class SedeDAO.
-     */
-//    @Test
-//    public void testObtenerPorId() {
-//        System.out.println("obtenerPorId");
-//        Integer idSede = null;
-//        SedeDAO instance = new SedeDAOImpl();
-//        SedeDTO expResult = null;
-//        SedeDTO result = instance.obtenerPorId(idSede);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+    @Test
+    @Order(4)
+    public void testModificar() {
+        System.out.println("modificar");
+        ArrayList<Integer> listaIdSede = new ArrayList<>();
+        insertarSedes(listaIdSede);
+
+        ArrayList<SedeDTO> listaSedes = this.sedeDAO.listarTodos();
+        assertEquals(listaIdSede.size(), listaSedes.size());
+        for (Integer i = 0; i < listaIdSede.size(); i++) {
+            listaSedes.get(i).setNombre("NuevoNombre" + i.toString());
+            listaSedes.get(i).setDireccion("NuevaDireccion" + i.toString());
+            listaSedes.get(i).setDistrito("NuevoDistrito" + i.toString());
+            listaSedes.get(i).setTelefono_contacto("NuevoTelefono" + i.toString());
+            listaSedes.get(i).setCorreo_contacto("NuevoCorreo" + i.toString());
+            listaSedes.get(i).setActiva(!listaSedes.get(i).getActiva());
+            this.sedeDAO.modificar(listaSedes.get(i));
+
+        }
+
+        ArrayList<SedeDTO> listaSedesModificados = this.sedeDAO.listarTodos();
+        assertEquals(listaSedes.size(), listaSedesModificados.size());
+        for (Integer i = 0; i < listaSedes.size(); i++) {
+            assertEquals(listaSedes.get(i).getNombre(), listaSedesModificados.get(i).getNombre());
+            assertEquals(listaSedes.get(i).getDireccion(), listaSedesModificados.get(i).getDireccion());
+            assertEquals(listaSedes.get(i).getDistrito(), listaSedesModificados.get(i).getDistrito());
+            assertEquals(listaSedes.get(i).getTelefono_contacto(), listaSedesModificados.get(i).getTelefono_contacto());
+            assertEquals(listaSedes.get(i).getCorreo_contacto(), listaSedesModificados.get(i).getCorreo_contacto());
+            assertEquals(listaSedes.get(i).getActiva(), listaSedesModificados.get(i).getActiva());
+        }
+
+
+        eliminarTodo();
+    }
+
+    @Test
+    @Order(5)
+    public void testEliminar() {
+        System.out.println("eliminar");
+        ArrayList<Integer> listaIdSede = new ArrayList<>();
+        insertarSedes(listaIdSede);
+        eliminarTodo();
+    }
+
+    private void eliminarTodo() {
+        ArrayList<SedeDTO> listaSedes = this.sedeDAO.listarTodos();
+        for (Integer i = 0; i < listaSedes.size(); i++) {
+            Integer resultado = this.sedeDAO.eliminar(listaSedes.get(i));
+            assertNotEquals(0, resultado);
+            SedeDTO almacen = this.sedeDAO.obtenerPorId(listaSedes.get(i).getIdSede());
+            assertNull(almacen);
+        }
+    }
+
+//        @Test
+//    public void testInsertar_v1() {
+//        System.out.println("insertar");
+//        ArrayList<Integer> listaSedeId = new ArrayList<>(); // Lista para almacenar los IDs de las sedes insertadas
+//        insertarSedes_v1(listaSedeId); // Método para insertar sedes
+//        verificarInserciones_v1();
 //    }
 //
-//    /**
-//     * Test of listarTodos method, of class SedeDAO.
-//     */
-//    @Test
-//    public void testListarTodos() {
-//        System.out.println("listarTodos");
-//        SedeDAO instance = new SedeDAOImpl();
-//        ArrayList<SedeDTO> expResult = null;
-//        ArrayList<SedeDTO> result = instance.listarTodos();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//    private void insertarSedes_v1(ArrayList<Integer> listaSedeId) {
+//        SedeDTO sede = new SedeDTO(); // Crear un objeto SedeDTO
+//
+//        // Insertar la primera sede
+//        //sede.setIdSede(1);
+//        sede.setNombre("Sede Central");
+//        sede.setDireccion("Av. Principal 123");
+//        sede.setDistrito("Distrito Central");
+//        sede.setTelefono_contacto("987654321");
+//        sede.setCorreo_contacto("sede.central@email.com");
+//        sede.setActiva(true);
+//        Integer resultado = this.sedeDAO.insertar(sede); // Llamada al método insertar del DAO
+//        listaSedeId.add(resultado); // Agregar el ID de la sede a la lista
+//
+//        // Insertar la segunda sede
+//        //sede.setIdSede(2);
+//        sede.setNombre("Sede PUCP");
+//        sede.setDireccion("Av. Universitaria 456");
+//        sede.setDistrito("San Miguel");
+//        sede.setTelefono_contacto("123456789");
+//        sede.setCorreo_contacto("sede.pucp@email.com");
+//        sede.setActiva(true);
+//        resultado = this.sedeDAO.insertar(sede);
+//        listaSedeId.add(resultado);
+//
 //    }
 //
-//    /**
-//     * Test of modificar method, of class SedeDAO.
-//     */
-//    @Test
-//    public void testModificar() {
-//        System.out.println("modificar");
-//        SedeDTO sede = null;
-//        SedeDAO instance = new SedeDAOImpl();
-//        Integer expResult = null;
-//        Integer result = instance.modificar(sede);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+//    public void verificarInserciones_v1() {
+//        String sql = "SELECT * FROM BIB_SEDE WHERE ID_SEDE IN (1, 2)";
+//        try (Connection conn = DBManager.getInstance().getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 //
-//    /**
-//     * Test of eliminar method, of class SedeDAO.
-//     */
-//    @Test
-//    public void testEliminar() {
-//        System.out.println("eliminar");
-//        Integer idSede = null;
-//        SedeDAO instance = new SedeDAOImpl();
-//        Integer expResult = null;
-//        Integer result = instance.eliminar(idSede);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    public class SedeDAOImpl implements SedeDAO {
-//
-//        public Integer insertar(SedeDTO sede) {
-//            return null;
+//            while (rs.next()) {
+//                //System.out.println("IdSede: " + rs.getInt("ID_SEDE"));
+//                System.out.println("Nombre: " + rs.getString("NOMBRE"));
+//                System.out.println("Direccion: " + rs.getString("DIRECCION"));
+//                System.out.println("Distrito: " + rs.getString("DISTRITO"));
+//                System.out.println("TelefonoContacto: " + rs.getString("TELEFONO_CONTACTO"));
+//                System.out.println("CorreoContacto: " + rs.getString("CORREO_CONTACTO"));
+//                System.out.println("Activa: " + rs.getInt("ACTIVA"));
+//                System.out.println("-----");
+//            }
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
 //        }
-//
-//        public SedeDTO obtenerPorId(Integer idSede) {
-//            return null;
-//        }
-//
-//        public ArrayList<SedeDTO> listarTodos() {
-//            return null;
-//        }
-//
-//        public Integer modificar(SedeDTO sede) {
-//            return null;
-//        }
-//
-//        public Integer eliminar(Integer idSede) {
-//            return null;
-//        }
+//        eliminarTodo();
 //    }
 }

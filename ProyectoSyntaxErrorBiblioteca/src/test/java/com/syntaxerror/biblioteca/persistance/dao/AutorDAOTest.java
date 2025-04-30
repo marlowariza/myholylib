@@ -4,7 +4,7 @@ package com.syntaxerror.biblioteca.persistance.dao;
 
 import com.syntaxerror.biblioteca.db.DBManager;
 import com.syntaxerror.biblioteca.model.AutorDTO;
-import com.syntaxerror.biblioteca.persistance.dao.impl.AutorDAOImp;
+import com.syntaxerror.biblioteca.persistance.dao.impl.AutorDAOImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +25,7 @@ public class AutorDAOTest {
     private AutorDAO autorDAO;
     
     public AutorDAOTest() {
-        this.autorDAO = new AutorDAOImp(); // Instancia el objeto correctamente
+        this.autorDAO = new AutorDAOImpl(); // Instancia el objeto correctamente
     }
 
     @Test
