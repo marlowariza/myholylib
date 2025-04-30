@@ -10,6 +10,9 @@ public class SedeDTO {
     private String distrito;
     private String telefono_contacto;
     private String correo_contacto;
+
+    private Boolean activa;
+
     private ArrayList<EjemplarDTO> ejemplares;
     private ArrayList<PersonaDTO> personas;
 
@@ -20,18 +23,22 @@ public class SedeDTO {
         this.distrito = null;
         this.telefono_contacto = null;
         this.correo_contacto = null;
+        this.activa = null;
+
         this.ejemplares = new ArrayList<>();
         this.personas = new ArrayList<>();
     }
 
     public SedeDTO(Integer idSede, String nombre, String direccion, String distrito,
-            String telefono_contacto, String correo_contacto) {
+            String telefono_contacto, String correo_contacto, Boolean activa) {
         this.idSede = idSede;
         this.nombre = nombre;
         this.direccion = direccion;
         this.distrito = distrito;
         this.telefono_contacto = telefono_contacto;
         this.correo_contacto = correo_contacto;
+        this.activa = activa;
+
         this.ejemplares = new ArrayList<>();
         this.personas = new ArrayList<>();
     }
@@ -43,6 +50,8 @@ public class SedeDTO {
         this.distrito = otraSede.distrito;
         this.telefono_contacto = otraSede.telefono_contacto;
         this.correo_contacto = otraSede.correo_contacto;
+        this.activa = otraSede.activa;
+
         this.ejemplares = otraSede.ejemplares != null ? new ArrayList<>(otraSede.ejemplares) : new ArrayList<>();
         this.personas = otraSede.personas != null ? new ArrayList<>(otraSede.personas) : new ArrayList<>();
     }
@@ -93,6 +102,14 @@ public class SedeDTO {
 
     public void setIdSede(Integer idSede) {
         this.idSede = idSede;
+    }
+
+    public Boolean getActiva() {
+        return activa;
+    }
+
+    public void setActiva(Boolean activa) {
+        this.activa = activa;
     }
 
     public void agregarEjemplar(EjemplarDTO m) {
