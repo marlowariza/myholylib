@@ -20,10 +20,10 @@ public class BibliotecarioDTO extends PersonaDTO {
     }
 
     public BibliotecarioDTO(Integer idPersona, String nombre, String direccion,
-            String telefono, String correo, String contrasenha,
+            String telefono, String correo, String contrasenha, SedeDTO sede,
             Turnos turno,Integer idBibliotecario ,Date fechaContratoInicio,Date fechaContratoFinal,Boolean vigente) {
         super(idPersona, nombre,direccion,
-                telefono, correo, contrasenha);
+                telefono, correo, contrasenha,sede);
         this.idBibliotecario=idBibliotecario;
         this.turno = turno;
         this.fechaContratoInicio = fechaContratoInicio;

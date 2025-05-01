@@ -1,7 +1,5 @@
 package com.syntaxerror.biblioteca.model;
 
-import java.util.ArrayList;
-
 public class SedeDTO {
 
     private Integer idSede;
