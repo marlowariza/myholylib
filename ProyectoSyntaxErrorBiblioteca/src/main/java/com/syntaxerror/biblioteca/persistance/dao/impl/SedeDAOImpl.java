@@ -35,8 +35,8 @@ public class SedeDAOImpl extends DAOImplBase implements SedeDAO {
         this.statement.setString(1, this.sede.getNombre());
         this.statement.setString(2, this.sede.getDireccion());
         this.statement.setString(3, this.sede.getDistrito());
-        this.statement.setString(4, this.sede.getTelefono_contacto());
-        this.statement.setString(5, this.sede.getCorreo_contacto());
+        this.statement.setString(4, this.sede.getTelefonoContacto());
+        this.statement.setString(5, this.sede.getCorreoContacto());
         this.statement.setInt(6, this.sede.getActiva()? 1 : 0);
 
         //Si no es autoincremental 
@@ -56,8 +56,8 @@ public class SedeDAOImpl extends DAOImplBase implements SedeDAO {
         this.statement.setString(1, this.sede.getNombre());
         this.statement.setString(2, this.sede.getDireccion());
         this.statement.setString(3, this.sede.getDistrito());
-        this.statement.setString(4, this.sede.getTelefono_contacto());
-        this.statement.setString(5, this.sede.getCorreo_contacto());
+        this.statement.setString(4, this.sede.getTelefonoContacto());
+        this.statement.setString(5, this.sede.getCorreoContacto());
         this.statement.setInt(6, this.sede.getActiva() ? 1 : 0);
         this.statement.setInt(7, this.sede.getIdSede());
         //En modificar el ID va al ultimo
@@ -82,8 +82,8 @@ public class SedeDAOImpl extends DAOImplBase implements SedeDAO {
         this.sede.setNombre(this.resultSet.getString("NOMBRE"));
         this.sede.setDireccion(this.resultSet.getString("DIRECCION"));
         this.sede.setDistrito(this.resultSet.getString("DISTRITO"));
-        this.sede.setTelefono_contacto(this.resultSet.getString("TELEFONO_CONTACTO"));
-        this.sede.setCorreo_contacto(this.resultSet.getString("CORREO_CONTACTO"));
+        this.sede.setTelefonoContacto(this.resultSet.getString("TELEFONO_CONTACTO"));
+        this.sede.setCorreoContacto(this.resultSet.getString("CORREO_CONTACTO"));
         this.sede.setActiva(this.resultSet.getInt("ACTIVA")==1);
         
     }

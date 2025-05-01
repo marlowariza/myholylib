@@ -8,39 +8,30 @@ public class SedeDTO {
     private String nombre;
     private String direccion;
     private String distrito;
-    private String telefono_contacto;
-    private String correo_contacto;
+    private String telefonoContacto;
+    private String correoContacto;
 
     private Boolean activa;
-
-    private ArrayList<EjemplarDTO> ejemplares;
-    private ArrayList<PersonaDTO> personas;
 
     public SedeDTO() {
         this.idSede = null;
         this.nombre = null;
         this.direccion = null;
         this.distrito = null;
-        this.telefono_contacto = null;
-        this.correo_contacto = null;
+        this.telefonoContacto = null;
+        this.correoContacto = null;
         this.activa = null;
-
-        this.ejemplares = new ArrayList<>();
-        this.personas = new ArrayList<>();
     }
 
     public SedeDTO(Integer idSede, String nombre, String direccion, String distrito,
-            String telefono_contacto, String correo_contacto, Boolean activa) {
+            String telefonoContacto, String correoContacto, Boolean activa) {
         this.idSede = idSede;
         this.nombre = nombre;
         this.direccion = direccion;
         this.distrito = distrito;
-        this.telefono_contacto = telefono_contacto;
-        this.correo_contacto = correo_contacto;
+        this.telefonoContacto = telefonoContacto;
+        this.correoContacto = correoContacto;
         this.activa = activa;
-
-        this.ejemplares = new ArrayList<>();
-        this.personas = new ArrayList<>();
     }
 
     public SedeDTO(SedeDTO otraSede) {
@@ -48,12 +39,9 @@ public class SedeDTO {
         this.nombre = otraSede.nombre;
         this.direccion = otraSede.direccion;
         this.distrito = otraSede.distrito;
-        this.telefono_contacto = otraSede.telefono_contacto;
-        this.correo_contacto = otraSede.correo_contacto;
+        this.telefonoContacto = otraSede.telefonoContacto;
+        this.correoContacto = otraSede.correoContacto;
         this.activa = otraSede.activa;
-
-        this.ejemplares = otraSede.ejemplares != null ? new ArrayList<>(otraSede.ejemplares) : new ArrayList<>();
-        this.personas = otraSede.personas != null ? new ArrayList<>(otraSede.personas) : new ArrayList<>();
     }
 
     public String getNombre() {
@@ -80,20 +68,20 @@ public class SedeDTO {
         this.distrito = distrito;
     }
 
-    public String getTelefono_contacto() {
-        return telefono_contacto;
+    public String getTelefonoContacto() {
+        return telefonoContacto;
     }
 
-    public void setTelefono_contacto(String telefono_contacto) {
-        this.telefono_contacto = telefono_contacto;
+    public void setTelefonoContacto(String telefonoContacto) {
+        this.telefonoContacto = telefonoContacto;
     }
 
-    public String getCorreo_contacto() {
-        return correo_contacto;
+    public String getCorreoContacto() {
+        return correoContacto;
     }
 
-    public void setCorreo_contacto(String correo_contacto) {
-        this.correo_contacto = correo_contacto;
+    public void setCorreoContacto(String correoContacto) {
+        this.correoContacto = correoContacto;
     }
 
     public Integer getIdSede() {
@@ -110,23 +98,5 @@ public class SedeDTO {
 
     public void setActiva(Boolean activa) {
         this.activa = activa;
-    }
-
-    public void agregarEjemplar(EjemplarDTO m) {
-        if (!ejemplares.contains(m)) {
-            ejemplares.add(m);
-        }
-    }
-
-    public void quitarEjemplar(EjemplarDTO m) {
-        if (ejemplares.contains(m)) {
-            ejemplares.remove(m);
-        }
-    }
-
-    public void agregarPersona(PersonaDTO persona) {
-        if (personas != null) {
-            this.personas.add(persona);
-        }
     }
 }
