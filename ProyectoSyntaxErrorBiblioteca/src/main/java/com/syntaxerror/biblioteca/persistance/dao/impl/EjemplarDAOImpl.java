@@ -1,6 +1,5 @@
 package com.syntaxerror.biblioteca.persistance.dao.impl;
 
-
 import com.syntaxerror.biblioteca.model.EjemplarDTO;
 import com.syntaxerror.biblioteca.model.MaterialDTO;
 import com.syntaxerror.biblioteca.model.SedeDTO;
@@ -37,12 +36,11 @@ public class EjemplarDAOImpl extends DAOImplBase implements EjemplarDAO {
 
         //si es autoincremental, se salta el (1,ID)
         this.statement.setDate(1, new Date(this.ejemplar.getFechaAdquisicion().getTime()));
-        this.statement.setInt(2, this.ejemplar.getDisponible()?1:0);
+        this.statement.setInt(2, this.ejemplar.getDisponible() ? 1 : 0);
         this.statement.setString(3, this.ejemplar.getUbicacion());
         this.statement.setInt(4, this.ejemplar.getSede().getIdSede());
         this.statement.setInt(5, this.ejemplar.getMaterial().getIdMaterial());
     }
-
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
@@ -70,21 +68,21 @@ public class EjemplarDAOImpl extends DAOImplBase implements EjemplarDAO {
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
-                this.ejemplar = new EjemplarDTO();
+        this.ejemplar = new EjemplarDTO();
         this.ejemplar.setIdEjemplar(this.resultSet.getInt("ID_EJEMPLAR"));
         this.ejemplar.setFechaAdquisicion(this.resultSet.getDate("FECHA_ADQUISICION"));
         this.ejemplar.setDisponible(this.resultSet.getInt("DISPONIBLE") == 1);
         this.ejemplar.setUbicacion(this.resultSet.getString("UBICACION"));
-        
+
         // Crear objetos DTO básicos para las relaciones
         SedeDTO sede = new SedeDTO();
         sede.setIdSede(this.resultSet.getInt("SEDE_IDSEDE"));
         this.ejemplar.setSede(sede);
-        
+
         MaterialDTO material = new MaterialDTO();
         material.setIdMaterial(this.resultSet.getInt("MATERIAL_IDMATERIAL"));
         this.ejemplar.setMaterial(material);
-        
+
     }
 
     @Override
