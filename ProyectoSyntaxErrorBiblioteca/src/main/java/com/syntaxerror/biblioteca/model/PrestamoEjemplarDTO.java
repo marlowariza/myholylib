@@ -4,41 +4,41 @@ import com.syntaxerror.biblioteca.model.enums.EstadoPrestamo;
 import java.util.Date;
 
 public class PrestamoEjemplarDTO {
-    private PrestamoDTO prestamo;
-    private EjemplarDTO ejemplar;
+    private Integer idPrestamo;
+    private Integer idEjemplar;
     private EstadoPrestamo estado; // Puedes cambiar esto a un Enum si lo deseas
     private Date fechaRealDevolucion;
 
     // Constructores
     public PrestamoEjemplarDTO() {
-        this.prestamo = null;
-        this.ejemplar = null;
+        this.idPrestamo = null;
+        this.idEjemplar = null;
         this.estado = null;
         this.fechaRealDevolucion = null;
     }
 
-    public PrestamoEjemplarDTO(PrestamoDTO prestamo, EjemplarDTO ejemplar, EstadoPrestamo estado, Date fechaRealDevolucion) {
-        this.prestamo = prestamo;
-        this.ejemplar = ejemplar;
+    public PrestamoEjemplarDTO(Integer idPrestamo, Integer idEjemplar, EstadoPrestamo estado, Date fechaRealDevolucion) {
+        this.idPrestamo = idPrestamo;
+        this.idEjemplar = idEjemplar;
         this.estado = estado;
         this.fechaRealDevolucion = fechaRealDevolucion;
     }
 
     // Getters y Setters
-    public PrestamoDTO getPrestamo() {
-        return prestamo;
+    public Integer getIdPrestamo() {
+        return idPrestamo;
     }
 
-    public void setPrestamo(PrestamoDTO prestamo) {
-        this.prestamo = prestamo;
+    public void setIdPrestamo(Integer idPrestamo) {
+        this.idPrestamo = idPrestamo;
     }
 
-    public EjemplarDTO getEjemplar() {
-        return ejemplar;
+    public Integer getIdEjemplar() {
+        return idEjemplar;
     }
 
-    public void setEjemplar(EjemplarDTO ejemplar) {
-        this.ejemplar = ejemplar;
+    public void setIdEjemplar(Integer idEjemplar) {
+        this.idEjemplar = idEjemplar;
     }
 
     public EstadoPrestamo getEstado() {

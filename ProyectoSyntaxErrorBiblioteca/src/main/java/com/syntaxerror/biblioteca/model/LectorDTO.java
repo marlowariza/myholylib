@@ -1,34 +1,29 @@
 package com.syntaxerror.biblioteca.model;
 
 import com.syntaxerror.biblioteca.model.enums.NivelDeIngles;
-import java.util.ArrayList;
 
 public class LectorDTO extends PersonaDTO {
 
     private Integer idLector;
     private NivelDeIngles nivel;
-    private ArrayList<PrestamoDTO> prestamos;
 
     // Constructores
     public LectorDTO() {
         this.idLector = null;
         this.nivel = null;
-        this.prestamos = new ArrayList<>();
     }
 
     public LectorDTO(Integer idPersona, String nombre, String direccion,
-            String telefono, String correo, String contrasenha, Integer idLector, NivelDeIngles nivel) {
-        super(idPersona, nombre, direccion, telefono, correo, contrasenha);
+            String telefono, String correo, String contrasenha,SedeDTO sede, Integer idLector, NivelDeIngles nivel) {
+        super(idPersona, nombre, direccion, telefono, correo, contrasenha,sede);
         this.idLector = idLector;
         this.nivel = nivel;
-        this.prestamos = new ArrayList<>();
     }
 
     public LectorDTO(LectorDTO lector) {
         super(lector);
         this.idLector = lector.idLector;
         this.nivel = lector.nivel;
-        this.prestamos = new ArrayList<>(lector.prestamos);
     }
 
     //Getters y setters
@@ -47,12 +42,4 @@ public class LectorDTO extends PersonaDTO {
     public void setNivel(NivelDeIngles nivel) {
         this.nivel = nivel;
     }
-
-
-    public void agregarPrestamo(PrestamoDTO prestamo) {
-        if (prestamo != null) {
-            this.prestamos.add(prestamo);
-        }
-    }
-
 }
