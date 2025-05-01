@@ -1,7 +1,5 @@
 package com.syntaxerror.biblioteca.model;
 
-import com.syntaxerror.biblioteca.model.enums.EstadoPrestamo;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
