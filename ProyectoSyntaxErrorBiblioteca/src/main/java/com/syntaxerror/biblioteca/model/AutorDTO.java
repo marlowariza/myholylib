@@ -1,6 +1,5 @@
 package com.syntaxerror.biblioteca.model;
 
-import java.util.ArrayList;
 
 public class AutorDTO {
 
@@ -9,7 +8,6 @@ public class AutorDTO {
     private String nacionalidad;
     private Boolean activo;
     private Integer cantidadObras;
-    private ArrayList<MaterialDTO> materiales;
 
     // Constructores
     public AutorDTO() {
@@ -18,7 +16,6 @@ public class AutorDTO {
         this.nacionalidad = null;
         this.activo = null;
         this.cantidadObras = null;
-        this.materiales = new ArrayList<>();
     }
 
     public AutorDTO(Integer idAutor, String nombre, String nacionalidad, Boolean activo, Integer cantidadObras) {
@@ -27,7 +24,6 @@ public class AutorDTO {
         this.nacionalidad = nacionalidad;
         this.activo = activo;
         this.cantidadObras = cantidadObras;
-        this.materiales = new ArrayList<>();
     }
 
     public AutorDTO(AutorDTO autor) {
@@ -36,7 +32,6 @@ public class AutorDTO {
         this.nacionalidad = autor.nacionalidad;
         this.activo = autor.activo;
         this.cantidadObras = autor.cantidadObras;
-        this.materiales = new ArrayList<>(autor.materiales);
     }
 
     // Getters y Setters
@@ -79,11 +74,4 @@ public class AutorDTO {
     public void setCantidadObras(Integer cantidadObras) {
         this.cantidadObras = cantidadObras;
     }
-
-public void agregarMaterial(MaterialDTO material) {
-    if (!this.materiales.contains(material)) {
-        this.materiales.add(material);
-        material.agregarAutor(this); // Relación bidireccional
-    }
-}
 }
