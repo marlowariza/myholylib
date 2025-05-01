@@ -48,8 +48,8 @@ public class SedeDAOTest {
         sede.setNombre("Sede Central");
         sede.setDireccion("Av. Principal 123");
         sede.setDistrito("Distrito Central");
-        sede.setTelefono_contacto("987654321");
-        sede.setCorreo_contacto("sede.central@email.com");
+        sede.setTelefonoContacto("987654321");
+        sede.setCorreoContacto("sede.central@email.com");
         sede.setActiva(true);
 
         Integer resultado = this.sedeDAO.insertar(sede);
@@ -59,8 +59,8 @@ public class SedeDAOTest {
         sede.setNombre("Sede PUCP");
         sede.setDireccion("Av. Universitaria 456");
         sede.setDistrito("San Miguel");
-        sede.setTelefono_contacto("123456789");
-        sede.setCorreo_contacto("sede.pucp@email.com");
+        sede.setTelefonoContacto("123456789");
+        sede.setCorreoContacto("sede.pucp@email.com");
         sede.setActiva(true);
         resultado = this.sedeDAO.insertar(sede);
         assertTrue(resultado != 0);
@@ -113,8 +113,8 @@ public class SedeDAOTest {
             listaSedes.get(i).setNombre("NuevoNombre" + i.toString());
             listaSedes.get(i).setDireccion("NuevaDireccion" + i.toString());
             listaSedes.get(i).setDistrito("NuevoDistrito" + i.toString());
-            listaSedes.get(i).setTelefono_contacto("NuevoTelefono" + i.toString());
-            listaSedes.get(i).setCorreo_contacto("NuevoCorreo" + i.toString());
+            listaSedes.get(i).setTelefonoContacto("NuevoTelefono" + i.toString());
+            listaSedes.get(i).setCorreoContacto("NuevoCorreo" + i.toString());
             listaSedes.get(i).setActiva(!listaSedes.get(i).getActiva());
             this.sedeDAO.modificar(listaSedes.get(i));
 
@@ -126,8 +126,8 @@ public class SedeDAOTest {
             assertEquals(listaSedes.get(i).getNombre(), listaSedesModificados.get(i).getNombre());
             assertEquals(listaSedes.get(i).getDireccion(), listaSedesModificados.get(i).getDireccion());
             assertEquals(listaSedes.get(i).getDistrito(), listaSedesModificados.get(i).getDistrito());
-            assertEquals(listaSedes.get(i).getTelefono_contacto(), listaSedesModificados.get(i).getTelefono_contacto());
-            assertEquals(listaSedes.get(i).getCorreo_contacto(), listaSedesModificados.get(i).getCorreo_contacto());
+            assertEquals(listaSedes.get(i).getTelefonoContacto(), listaSedesModificados.get(i).getTelefonoContacto());
+            assertEquals(listaSedes.get(i).getCorreoContacto(), listaSedesModificados.get(i).getCorreoContacto());
             assertEquals(listaSedes.get(i).getActiva(), listaSedesModificados.get(i).getActiva());
         }
 
