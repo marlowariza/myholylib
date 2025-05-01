@@ -100,8 +100,8 @@ public class SedeDAOImpl extends DAOImplBase implements SedeDAO {
     }
 
     @Override
-    public Integer insertar(SedeDTO almacen) {
-        this.sede = almacen;
+    public Integer insertar(SedeDTO sede) {
+        this.sede = sede;
         return super.insertar();
     }
 
@@ -119,14 +119,14 @@ public class SedeDAOImpl extends DAOImplBase implements SedeDAO {
     }
 
     @Override
-    public Integer modificar(SedeDTO almacen) {
-        this.sede = almacen;
+    public Integer modificar(SedeDTO sede) {
+        this.sede = sede;
         return super.modificar();
     }
 
     @Override
-    public Integer eliminar(SedeDTO almacen) {
-        this.sede = almacen;
+    public Integer eliminar(SedeDTO sede) {
+        this.sede = sede;
         return super.eliminar();
     }
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class SancionDTO {
 
-    private Integer idsancion;
+    private Integer idSancion;
     private TipoSancion tipo;
     private Date fecha;
     private Double monto;
@@ -16,7 +16,7 @@ public class SancionDTO {
 
     // Constructores
     public SancionDTO() {
-        this.idsancion = null;
+        this.idSancion = null;
         this.tipo = null;
         this.fecha = null;
         this.monto = null;
@@ -27,7 +27,7 @@ public class SancionDTO {
 
     public SancionDTO(Integer idSancion, TipoSancion tipo, Date fecha, Double monto, Date duracion, String descripcion,
             PrestamoDTO prestamo) {
-        this.idsancion = idSancion;
+        this.idSancion = idSancion;
         this.fecha = fecha;
         this.monto = monto;
         this.descripcion = descripcion;
@@ -37,7 +37,7 @@ public class SancionDTO {
     }
 
     public SancionDTO(SancionDTO penalidad) {
-        this.idsancion = penalidad.idsancion;
+        this.idSancion = penalidad.idSancion;
         this.fecha = penalidad.fecha;
         this.monto = penalidad.monto;
         this.descripcion = penalidad.descripcion;
@@ -47,12 +47,12 @@ public class SancionDTO {
     }
 
     // Getters y Setters
-    public Integer getIdsancion() {
-        return idsancion;
+    public Integer getIdSancion() {
+        return idSancion;
     }
 
-    public void setIdsancion(Integer idsancion) {
-        this.idsancion = idsancion;
+    public void setIdSancion(Integer idSancion) {
+        this.idSancion = idSancion;
     }
 
     public Date getDuracion() {
