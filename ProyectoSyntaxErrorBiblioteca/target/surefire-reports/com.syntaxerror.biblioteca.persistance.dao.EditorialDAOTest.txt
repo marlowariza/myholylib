@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.syntaxerror.biblioteca.persistance.dao.EditorialDAOTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 47.08 s -- in com.syntaxerror.biblioteca.persistance.dao.EditorialDAOTest
