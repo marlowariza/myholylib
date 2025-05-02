@@ -1,12 +1,12 @@
 package com.syntaxerror.biblioteca.model;
 
-import com.syntaxerror.biblioteca.model.enums.EstadoPrestamo;
+import com.syntaxerror.biblioteca.model.enums.EstadoPrestamoEjemplar;
 import java.util.Date;
 
 public class PrestamoEjemplarDTO {
     private Integer idPrestamo;
     private Integer idEjemplar;
-    private EstadoPrestamo estado; // Puedes cambiar esto a un Enum si lo deseas
+    private EstadoPrestamoEjemplar estado; // Puedes cambiar esto a un Enum si lo deseas
     private Date fechaRealDevolucion;
 
     // Constructores
@@ -17,7 +17,8 @@ public class PrestamoEjemplarDTO {
         this.fechaRealDevolucion = null;
     }
 
-    public PrestamoEjemplarDTO(Integer idPrestamo, Integer idEjemplar, EstadoPrestamo estado, Date fechaRealDevolucion) {
+    public PrestamoEjemplarDTO(Integer idPrestamo, Integer idEjemplar, EstadoPrestamoEjemplar estado,
+            Date fechaRealDevolucion) {
         this.idPrestamo = idPrestamo;
         this.idEjemplar = idEjemplar;
         this.estado = estado;
@@ -41,11 +42,11 @@ public class PrestamoEjemplarDTO {
         this.idEjemplar = idEjemplar;
     }
 
-    public EstadoPrestamo getEstado() {
+    public EstadoPrestamoEjemplar getEstado() {
         return estado;
     }
 
-    public void setEstado(EstadoPrestamo estado) {
+    public void setEstado(EstadoPrestamoEjemplar estado) {
         this.estado = estado;
     }
 
