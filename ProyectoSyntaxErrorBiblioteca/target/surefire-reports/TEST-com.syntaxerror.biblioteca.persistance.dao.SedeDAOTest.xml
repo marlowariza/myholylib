@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.syntaxerror.biblioteca.db.util.CifradoTest" time="0.002" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.syntaxerror.biblioteca.persistance.dao.SedeDAOTest" time="47.186" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -59,8 +59,73 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testDescifrarMD5" classname="com.syntaxerror.biblioteca.db.util.CifradoTest" time="0.0">
-    <system-out><![CDATA[descifrarMD5
+  <testcase name="testModificar" classname="com.syntaxerror.biblioteca.persistance.dao.SedeDAOTest" time="12.032">
+    <system-out><![CDATA[modificar
 ]]></system-out>
+    <system-err><![CDATA[may. 02, 2025 4:52:33 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_SEDE(NOMBRE, DIRECCION, DISTRITO, TELEFONO_CONTACTO, CORREO_CONTACTO, ACTIVA) VALUES ('Sede Central', 'Av. Principal 123', 'Distrito Central', '987654321', 'sede.central@email.com', 1)
+may. 02, 2025 4:52:35 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_SEDE(NOMBRE, DIRECCION, DISTRITO, TELEFONO_CONTACTO, CORREO_CONTACTO, ACTIVA) VALUES ('Sede PUCP', 'Av. Universitaria 456', 'San Miguel', '123456789', 'sede.pucp@email.com', 1)
+may. 02, 2025 4:52:37 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: UPDATE BIB_SEDE SET NOMBRE='NuevoNombre0', DIRECCION='NuevaDireccion0', DISTRITO='NuevoDistrito0', TELEFONO_CONTACTO='NuevoTelefono0', CORREO_CONTACTO='NuevoCorreo0', ACTIVA=0 WHERE ID_SEDE=163
+may. 02, 2025 4:52:38 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: UPDATE BIB_SEDE SET NOMBRE='NuevoNombre1', DIRECCION='NuevaDireccion1', DISTRITO='NuevoDistrito1', TELEFONO_CONTACTO='NuevoTelefono1', CORREO_CONTACTO='NuevoCorreo1', ACTIVA=0 WHERE ID_SEDE=164
+may. 02, 2025 4:52:41 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_SEDE WHERE ID_SEDE=163
+may. 02, 2025 4:52:43 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_SEDE WHERE ID_SEDE=164
+]]></system-err>
+  </testcase>
+  <testcase name="testObtenerPorId" classname="com.syntaxerror.biblioteca.persistance.dao.SedeDAOTest" time="9.946">
+    <system-out><![CDATA[obtenerPorId
+]]></system-out>
+    <system-err><![CDATA[may. 02, 2025 4:52:45 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_SEDE(NOMBRE, DIRECCION, DISTRITO, TELEFONO_CONTACTO, CORREO_CONTACTO, ACTIVA) VALUES ('Sede Central', 'Av. Principal 123', 'Distrito Central', '987654321', 'sede.central@email.com', 1)
+may. 02, 2025 4:52:47 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_SEDE(NOMBRE, DIRECCION, DISTRITO, TELEFONO_CONTACTO, CORREO_CONTACTO, ACTIVA) VALUES ('Sede PUCP', 'Av. Universitaria 456', 'San Miguel', '123456789', 'sede.pucp@email.com', 1)
+may. 02, 2025 4:52:51 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_SEDE WHERE ID_SEDE=165
+may. 02, 2025 4:52:53 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_SEDE WHERE ID_SEDE=166
+]]></system-err>
+  </testcase>
+  <testcase name="testEliminar" classname="com.syntaxerror.biblioteca.persistance.dao.SedeDAOTest" time="7.899">
+    <system-out><![CDATA[eliminar
+]]></system-out>
+    <system-err><![CDATA[may. 02, 2025 4:52:55 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_SEDE(NOMBRE, DIRECCION, DISTRITO, TELEFONO_CONTACTO, CORREO_CONTACTO, ACTIVA) VALUES ('Sede Central', 'Av. Principal 123', 'Distrito Central', '987654321', 'sede.central@email.com', 1)
+may. 02, 2025 4:52:57 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_SEDE(NOMBRE, DIRECCION, DISTRITO, TELEFONO_CONTACTO, CORREO_CONTACTO, ACTIVA) VALUES ('Sede PUCP', 'Av. Universitaria 456', 'San Miguel', '123456789', 'sede.pucp@email.com', 1)
+may. 02, 2025 4:52:59 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_SEDE WHERE ID_SEDE=167
+may. 02, 2025 4:53:01 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_SEDE WHERE ID_SEDE=168
+]]></system-err>
+  </testcase>
+  <testcase name="testInsertar" classname="com.syntaxerror.biblioteca.persistance.dao.SedeDAOTest" time="8.675">
+    <system-out><![CDATA[insertar
+]]></system-out>
+    <system-err><![CDATA[may. 02, 2025 4:53:04 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_SEDE(NOMBRE, DIRECCION, DISTRITO, TELEFONO_CONTACTO, CORREO_CONTACTO, ACTIVA) VALUES ('Sede Central', 'Av. Principal 123', 'Distrito Central', '987654321', 'sede.central@email.com', 1)
+may. 02, 2025 4:53:05 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_SEDE(NOMBRE, DIRECCION, DISTRITO, TELEFONO_CONTACTO, CORREO_CONTACTO, ACTIVA) VALUES ('Sede PUCP', 'Av. Universitaria 456', 'San Miguel', '123456789', 'sede.pucp@email.com', 1)
+may. 02, 2025 4:53:08 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_SEDE WHERE ID_SEDE=169
+may. 02, 2025 4:53:10 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_SEDE WHERE ID_SEDE=170
+]]></system-err>
+  </testcase>
+  <testcase name="testListarTodos" classname="com.syntaxerror.biblioteca.persistance.dao.SedeDAOTest" time="8.627">
+    <system-out><![CDATA[listarTodos
+]]></system-out>
+    <system-err><![CDATA[may. 02, 2025 4:53:12 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_SEDE(NOMBRE, DIRECCION, DISTRITO, TELEFONO_CONTACTO, CORREO_CONTACTO, ACTIVA) VALUES ('Sede Central', 'Av. Principal 123', 'Distrito Central', '987654321', 'sede.central@email.com', 1)
+may. 02, 2025 4:53:13 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_SEDE(NOMBRE, DIRECCION, DISTRITO, TELEFONO_CONTACTO, CORREO_CONTACTO, ACTIVA) VALUES ('Sede PUCP', 'Av. Universitaria 456', 'San Miguel', '123456789', 'sede.pucp@email.com', 1)
+may. 02, 2025 4:53:16 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_SEDE WHERE ID_SEDE=171
+may. 02, 2025 4:53:18 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_SEDE WHERE ID_SEDE=172
+]]></system-err>
   </testcase>
 </testsuite>
