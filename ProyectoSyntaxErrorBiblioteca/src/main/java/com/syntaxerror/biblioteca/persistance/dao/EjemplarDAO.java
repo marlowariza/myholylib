@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.syntaxerror.biblioteca.model.EjemplarDTO;
 
 public interface EjemplarDAO {
+
     public Integer insertar(EjemplarDTO ejemplar);
 
     public EjemplarDTO obtenerPorId(Integer ejemplarId);
