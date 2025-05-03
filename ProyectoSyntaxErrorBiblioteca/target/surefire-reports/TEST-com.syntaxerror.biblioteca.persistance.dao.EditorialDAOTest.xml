@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.syntaxerror.biblioteca.db.util.CifradoTest" time="0.002" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.syntaxerror.biblioteca.persistance.dao.EditorialDAOTest" time="47.075" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -59,8 +59,73 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testDescifrarMD5" classname="com.syntaxerror.biblioteca.db.util.CifradoTest" time="0.0">
-    <system-out><![CDATA[descifrarMD5
+  <testcase name="testModificar" classname="com.syntaxerror.biblioteca.persistance.dao.EditorialDAOTest" time="12.241">
+    <system-out><![CDATA[modificar
 ]]></system-out>
+    <system-err><![CDATA[may. 02, 2025 4:51:46 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_EDITORIAL(NOMBRE, SITIOWEB, PAIS) VALUES ('Editorial Planeta', 'https://www.planetadelibros.com', 'España')
+may. 02, 2025 4:51:47 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_EDITORIAL(NOMBRE, SITIOWEB, PAIS) VALUES ('Penguin Random House', 'https://www.penguinrandomhouse.com', 'Estados Unidos')
+may. 02, 2025 4:51:50 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: UPDATE BIB_EDITORIAL SET NOMBRE='NuevoNombre0', SITIOWEB='NuevoSitioWeb0', PAIS='NuevoPais0' WHERE ID_EDITORIAL=11
+may. 02, 2025 4:51:51 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: UPDATE BIB_EDITORIAL SET NOMBRE='NuevoNombre1', SITIOWEB='NuevoSitioWeb1', PAIS='NuevoPais1' WHERE ID_EDITORIAL=12
+may. 02, 2025 4:51:54 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_EDITORIAL WHERE ID_EDITORIAL=11
+may. 02, 2025 4:51:56 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_EDITORIAL WHERE ID_EDITORIAL=12
+]]></system-err>
+  </testcase>
+  <testcase name="testObtenerPorId" classname="com.syntaxerror.biblioteca.persistance.dao.EditorialDAOTest" time="9.699">
+    <system-out><![CDATA[obtenerPorId
+]]></system-out>
+    <system-err><![CDATA[may. 02, 2025 4:51:58 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_EDITORIAL(NOMBRE, SITIOWEB, PAIS) VALUES ('Editorial Planeta', 'https://www.planetadelibros.com', 'España')
+may. 02, 2025 4:52:00 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_EDITORIAL(NOMBRE, SITIOWEB, PAIS) VALUES ('Penguin Random House', 'https://www.penguinrandomhouse.com', 'Estados Unidos')
+may. 02, 2025 4:52:04 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_EDITORIAL WHERE ID_EDITORIAL=13
+may. 02, 2025 4:52:06 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_EDITORIAL WHERE ID_EDITORIAL=14
+]]></system-err>
+  </testcase>
+  <testcase name="testEliminar" classname="com.syntaxerror.biblioteca.persistance.dao.EditorialDAOTest" time="7.745">
+    <system-out><![CDATA[eliminar
+]]></system-out>
+    <system-err><![CDATA[may. 02, 2025 4:52:08 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_EDITORIAL(NOMBRE, SITIOWEB, PAIS) VALUES ('Editorial Planeta', 'https://www.planetadelibros.com', 'España')
+may. 02, 2025 4:52:09 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_EDITORIAL(NOMBRE, SITIOWEB, PAIS) VALUES ('Penguin Random House', 'https://www.penguinrandomhouse.com', 'Estados Unidos')
+may. 02, 2025 4:52:12 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_EDITORIAL WHERE ID_EDITORIAL=15
+may. 02, 2025 4:52:14 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_EDITORIAL WHERE ID_EDITORIAL=16
+]]></system-err>
+  </testcase>
+  <testcase name="testInsertar" classname="com.syntaxerror.biblioteca.persistance.dao.EditorialDAOTest" time="8.632">
+    <system-out><![CDATA[insertar
+]]></system-out>
+    <system-err><![CDATA[may. 02, 2025 4:52:17 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_EDITORIAL(NOMBRE, SITIOWEB, PAIS) VALUES ('Editorial Planeta', 'https://www.planetadelibros.com', 'España')
+may. 02, 2025 4:52:18 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_EDITORIAL(NOMBRE, SITIOWEB, PAIS) VALUES ('Penguin Random House', 'https://www.penguinrandomhouse.com', 'Estados Unidos')
+may. 02, 2025 4:52:20 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_EDITORIAL WHERE ID_EDITORIAL=17
+may. 02, 2025 4:52:22 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_EDITORIAL WHERE ID_EDITORIAL=18
+]]></system-err>
+  </testcase>
+  <testcase name="testListarTodos" classname="com.syntaxerror.biblioteca.persistance.dao.EditorialDAOTest" time="8.753">
+    <system-out><![CDATA[listarTodos
+]]></system-out>
+    <system-err><![CDATA[may. 02, 2025 4:52:24 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_EDITORIAL(NOMBRE, SITIOWEB, PAIS) VALUES ('Editorial Planeta', 'https://www.planetadelibros.com', 'España')
+may. 02, 2025 4:52:26 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_EDITORIAL(NOMBRE, SITIOWEB, PAIS) VALUES ('Penguin Random House', 'https://www.penguinrandomhouse.com', 'Estados Unidos')
+may. 02, 2025 4:52:29 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_EDITORIAL WHERE ID_EDITORIAL=19
+may. 02, 2025 4:52:31 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_EDITORIAL WHERE ID_EDITORIAL=20
+]]></system-err>
   </testcase>
 </testsuite>

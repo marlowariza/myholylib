@@ -1,6 +1,6 @@
 com\syntaxerror\biblioteca\db\util\CifradoTest.class
-com\syntaxerror\biblioteca\persistance\dao\AutorDAOTest$AutorDAOImpl.class
 com\syntaxerror\biblioteca\persistance\dao\EjemplarDAOTest.class
 com\syntaxerror\biblioteca\persistance\dao\SedeDAOTest.class
+com\syntaxerror\biblioteca\persistance\dao\EditorialDAOTest.class
 com\syntaxerror\biblioteca\db\DBManagerTest.class
 com\syntaxerror\biblioteca\persistance\dao\AutorDAOTest.class
