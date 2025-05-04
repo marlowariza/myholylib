@@ -4,36 +4,152 @@
  */
 package com.syntaxerror.biblioteca.persistance.dao;
 
+import com.syntaxerror.biblioteca.db.DBManager;
+import com.syntaxerror.biblioteca.model.EjemplarDTO;
+import com.syntaxerror.biblioteca.model.MaterialDTO;
+import com.syntaxerror.biblioteca.model.SedeDTO;
+import com.syntaxerror.biblioteca.persistance.dao.impl.EjemplarDAOImpl;
+import com.syntaxerror.biblioteca.persistance.dao.impl.MaterialDAOImpl;
+import com.syntaxerror.biblioteca.persistance.dao.impl.SedeDAOImpl;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Order;
 
 /**
  *
- * @author josue
+ * @author Fabian
  */
 public class EjemplarDAOTest {
-    
+
+    private EjemplarDAO ejemplarDAO;
+    private SedeDAO sedeDAO;
+    private MaterialDAO materialDAO;
+
     public EjemplarDAOTest() {
+        this.ejemplarDAO = new EjemplarDAOImpl(); // Instancia el objeto correctamente
+        this.sedeDAO= new SedeDAOImpl(); // Instancia el objeto correctamente
+        this.materialDAO = new MaterialDAOImpl(); // Instancia el objeto correctamente
     }
-    
-    @BeforeAll
-    public static void setUpClass() {
+
+    @Test
+    @Order(1)
+    public void testInsertar() {
+        eliminarTodo();
+        System.out.println("insertar");
+        ArrayList<Integer> listaIdEjemplar = new ArrayList<>();
+        insertarEjemplares(listaIdEjemplar);
+        eliminarTodo();
     }
-    
-    @AfterAll
-    public static void tearDownClass() {
+
+    private void insertarEjemplares(ArrayList<Integer> listaIdEjemplar) {
+        EjemplarDTO ejemplar = new EjemplarDTO();
+
+        SedeDTO sede = obtenerSedeFK();
+        MaterialDTO material = obtenerMaterialFK();
+        ejemplar.setFechaAdquisicion(Date.valueOf("2023-05-01"));
+        ejemplar.setDisponible(true);
+        ejemplar.setUbicacion("Pasillo-3");
+        ejemplar.setSede(sede);
+        ejemplar.setMaterial(material);
+
+        Integer resultado = this.ejemplarDAO.insertar(ejemplar);
+        assertTrue(resultado != 0);
+        listaIdEjemplar.add(resultado);
+
     }
-    
-    @BeforeEach
-    public void setUp() {
+
+    private SedeDTO obtenerSedeFK() {
+        ArrayList<SedeDTO> listaSedes = this.sedeDAO.listarTodos();
+        return listaSedes.get(0);
     }
-    
-    @AfterEach
-    public void tearDown() {
+
+    private MaterialDTO obtenerMaterialFK() {
+        ArrayList<MaterialDTO> listaMateriales = this.materialDAO.listarTodos();
+        return listaMateriales.get(0);
     }
-    
+
+    @Test
+    @Order(2)
+    public void testObtenerPorId() {
+        System.out.println("obtenerPorId");
+        ArrayList<Integer> listaIdEjemplar = new ArrayList<>();
+        insertarEjemplares(listaIdEjemplar);
+        EjemplarDTO ejemplar = this.ejemplarDAO.obtenerPorId(listaIdEjemplar.get(0));
+        assertEquals(ejemplar.getIdEjemplar(), listaIdEjemplar.get(0));
+        eliminarTodo();
+    }
+
+    @Test
+    @Order(3)
+    public void testListarTodos() {
+        System.out.println("listarTodos");
+        ArrayList<Integer> listaIdEjemplar = new ArrayList<>();
+        insertarEjemplares(listaIdEjemplar);
+
+        ArrayList<EjemplarDTO> listaEjemplares = this.ejemplarDAO.listarTodos();
+        assertEquals(listaIdEjemplar.size(), listaEjemplares.size());
+        for (Integer i = 0; i < listaIdEjemplar.size(); i++) {
+            assertEquals(listaIdEjemplar.get(i), listaEjemplares.get(i).getIdEjemplar());
+        }
+        eliminarTodo();
+    }
+
+    @Test
+    @Order(4)
+    public void testModificar() {
+        System.out.println("modificar");
+        ArrayList<Integer> listaIdEjemplar = new ArrayList<>();
+        insertarEjemplares(listaIdEjemplar);
+
+        ArrayList<EjemplarDTO> listaEjemplares = this.ejemplarDAO.listarTodos();
+        assertEquals(listaIdEjemplar.size(), listaEjemplares.size());
+        for (Integer i = 0; i < listaIdEjemplar.size(); i++) {
+            listaEjemplares.get(i).setFechaAdquisicion(Date.valueOf("2025-05-01"));
+            listaEjemplares.get(i).setDisponible(!listaEjemplares.get(i).getDisponible());
+            listaEjemplares.get(i).setUbicacion("Mas a la derecha" + i.toString());
+            this.ejemplarDAO.modificar(listaEjemplares.get(i));
+
+        }
+
+        ArrayList<EjemplarDTO> listaEjemplaresModificados = this.ejemplarDAO.listarTodos();
+        assertEquals(listaEjemplares.size(), listaEjemplaresModificados.size());
+        for (Integer i = 0; i < listaEjemplares.size(); i++) {
+            assertEquals(listaEjemplares.get(i).getFechaAdquisicion(), listaEjemplaresModificados.get(i).getFechaAdquisicion());
+            assertEquals(listaEjemplares.get(i).getDisponible(), listaEjemplaresModificados.get(i).getDisponible());
+            assertEquals(listaEjemplares.get(i).getUbicacion(), listaEjemplaresModificados.get(i).getUbicacion());
+        }
+
+
+        eliminarTodo();
+    }
+
+    @Test
+    @Order(5)
+    public void testEliminar() {
+        System.out.println("eliminar");
+        ArrayList<Integer> listaIdEjemplar = new ArrayList<>();
+        insertarEjemplares(listaIdEjemplar);
+        eliminarTodo();
+    }
+
+    private void eliminarTodo() {
+        ArrayList<EjemplarDTO> listaEjemplares = this.ejemplarDAO.listarTodos();
+        for (Integer i = 0; i < listaEjemplares.size(); i++) {
+            Integer resultado = this.ejemplarDAO.eliminar(listaEjemplares.get(i));
+            assertNotEquals(0, resultado);
+            EjemplarDTO almacen = this.ejemplarDAO.obtenerPorId(listaEjemplares.get(i).getIdEjemplar());
+            assertNull(almacen);
+        }
+    }
 }

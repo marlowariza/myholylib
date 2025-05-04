@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="48.182" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="46.13" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="user.country" value="PE"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\jalva\AppData\Local\Temp\surefire10062456976610338439\surefirebooter-20250502165054667_3.jar C:\Users\jalva\AppData\Local\Temp\surefire10062456976610338439 2025-05-02T16-50-54_539-jvmRun1 surefire-20250502165054667_1tmp surefire_0-20250502165054667_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\jalva\AppData\Local\Temp\surefire15192258990081630496\surefirebooter-20250503224343127_3.jar C:\Users\jalva\AppData\Local\Temp\surefire15192258990081630496 2025-05-03T22-43-42_990-jvmRun1 surefire-20250503224343127_1tmp surefire_0-20250503224343127_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\jalva\OneDrive\Documentos\GitHub\myholylib\ProyectoSyntaxErrorBiblioteca\target\test-classes;C:\Users\jalva\OneDrive\Documentos\GitHub\myholylib\ProyectoSyntaxErrorBiblioteca\target\classes;C:\Users\jalva\.m2\repository\commons-codec\commons-codec\1.18.0\commons-codec-1.18.0.jar;C:\Users\jalva\.m2\repository\com\mysql\mysql-connector-j\9.2.0\mysql-connector-j-9.2.0.jar;C:\Users\jalva\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\jalva\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\jalva\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\jalva\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\jalva\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\jalva\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\jalva\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\jalva\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\jalva\AppData\Local\Temp\surefire10062456976610338439\surefirebooter-20250502165054667_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\jalva\AppData\Local\Temp\surefire15192258990081630496\surefirebooter-20250503224343127_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.6+8-LTS-188"/>
@@ -59,73 +59,73 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testModificar" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="12.124">
+  <testcase name="testModificar" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="11.9">
     <system-out><![CDATA[modificar
 ]]></system-out>
-    <system-err><![CDATA[may. 02, 2025 4:50:58 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+    <system-err><![CDATA[may. 03, 2025 10:43:47 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('J.K. Rowling', 'Británica', 1, 15)
-may. 02, 2025 4:50:59 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+may. 03, 2025 10:43:48 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('George Orwell', 'Británico', 0, 10)
-may. 02, 2025 4:51:02 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: UPDATE BIB_AUTOR SET NOMBRE_COMPLETO='NuevoNombre0', NACIONALIDAD='NuevoSitioWeb0', ACTIVO=0, CANTIDAD_OBRAS=12 WHERE ID_AUTOR=3
-may. 02, 2025 4:51:03 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: UPDATE BIB_AUTOR SET NOMBRE_COMPLETO='NuevoNombre1', NACIONALIDAD='NuevoSitioWeb1', ACTIVO=1, CANTIDAD_OBRAS=7 WHERE ID_AUTOR=4
-may. 02, 2025 4:51:06 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=3
-may. 02, 2025 4:51:08 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=4
+may. 03, 2025 10:43:50 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: UPDATE BIB_AUTOR SET NOMBRE_COMPLETO='NuevoNombre0', NACIONALIDAD='NuevoSitioWeb0', ACTIVO=0, CANTIDAD_OBRAS=12 WHERE ID_AUTOR=13
+may. 03, 2025 10:43:51 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: UPDATE BIB_AUTOR SET NOMBRE_COMPLETO='NuevoNombre1', NACIONALIDAD='NuevoSitioWeb1', ACTIVO=1, CANTIDAD_OBRAS=7 WHERE ID_AUTOR=14
+may. 03, 2025 10:43:54 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=13
+may. 03, 2025 10:43:56 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=14
 ]]></system-err>
   </testcase>
-  <testcase name="testObtenerPorId" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="9.709">
+  <testcase name="testObtenerPorId" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="9.493">
     <system-out><![CDATA[obtenerPorId
 ]]></system-out>
-    <system-err><![CDATA[may. 02, 2025 4:51:10 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+    <system-err><![CDATA[may. 03, 2025 10:43:58 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('J.K. Rowling', 'Británica', 1, 15)
-may. 02, 2025 4:51:11 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+may. 03, 2025 10:44:00 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('George Orwell', 'Británico', 0, 10)
-may. 02, 2025 4:51:16 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=5
-may. 02, 2025 4:51:18 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=6
+may. 03, 2025 10:44:04 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=15
+may. 03, 2025 10:44:06 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=16
 ]]></system-err>
   </testcase>
-  <testcase name="testEliminar" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="8.626">
+  <testcase name="testEliminar" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="7.639">
     <system-out><![CDATA[eliminar
 ]]></system-out>
-    <system-err><![CDATA[may. 02, 2025 4:51:20 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+    <system-err><![CDATA[may. 03, 2025 10:44:08 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('J.K. Rowling', 'Británica', 1, 15)
-may. 02, 2025 4:51:21 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+may. 03, 2025 10:44:09 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('George Orwell', 'Británico', 0, 10)
-may. 02, 2025 4:51:23 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=7
-may. 02, 2025 4:51:26 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=8
+may. 03, 2025 10:44:11 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=17
+may. 03, 2025 10:44:13 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=18
 ]]></system-err>
   </testcase>
-  <testcase name="testInsertar" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="8.97">
+  <testcase name="testInsertar" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="8.537">
     <system-out><![CDATA[insertar
 ]]></system-out>
-    <system-err><![CDATA[may. 02, 2025 4:51:30 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+    <system-err><![CDATA[may. 03, 2025 10:44:16 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('J.K. Rowling', 'Británica', 1, 15)
-may. 02, 2025 4:51:31 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+may. 03, 2025 10:44:18 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('George Orwell', 'Británico', 0, 10)
-may. 02, 2025 4:51:33 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=9
-may. 02, 2025 4:51:35 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=10
+may. 03, 2025 10:44:20 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=19
+may. 03, 2025 10:44:22 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=20
 ]]></system-err>
   </testcase>
-  <testcase name="testListarTodos" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="8.743">
+  <testcase name="testListarTodos" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="8.546">
     <system-out><![CDATA[listarTodos
 ]]></system-out>
-    <system-err><![CDATA[may. 02, 2025 4:51:37 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+    <system-err><![CDATA[may. 03, 2025 10:44:24 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('J.K. Rowling', 'Británica', 1, 15)
-may. 02, 2025 4:51:39 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+may. 03, 2025 10:44:25 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('George Orwell', 'Británico', 0, 10)
-may. 02, 2025 4:51:42 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=11
-may. 02, 2025 4:51:44 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=12
+may. 03, 2025 10:44:28 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=21
+may. 03, 2025 10:44:31 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=22
 ]]></system-err>
   </testcase>
 </testsuite>
