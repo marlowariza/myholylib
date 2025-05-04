@@ -4,22 +4,18 @@
  */
 package com.syntaxerror.biblioteca.persistance.dao;
 
-import com.syntaxerror.biblioteca.db.DBManager;
 import com.syntaxerror.biblioteca.model.EjemplarDTO;
 import com.syntaxerror.biblioteca.model.MaterialDTO;
 import com.syntaxerror.biblioteca.model.SedeDTO;
+import com.syntaxerror.biblioteca.model.EditorialDTO;
+import com.syntaxerror.biblioteca.model.enums.NivelDeIngles;
 import com.syntaxerror.biblioteca.persistance.dao.impl.EjemplarDAOImpl;
 import com.syntaxerror.biblioteca.persistance.dao.impl.MaterialDAOImpl;
 import com.syntaxerror.biblioteca.persistance.dao.impl.SedeDAOImpl;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import com.syntaxerror.biblioteca.persistance.dao.impl.EditorialDAOImpl;
 import java.sql.Date;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -35,11 +31,13 @@ public class EjemplarDAOTest {
     private EjemplarDAO ejemplarDAO;
     private SedeDAO sedeDAO;
     private MaterialDAO materialDAO;
+    private EditorialDAO editorialDAO;
 
     public EjemplarDAOTest() {
         this.ejemplarDAO = new EjemplarDAOImpl(); // Instancia el objeto correctamente
-        this.sedeDAO= new SedeDAOImpl(); // Instancia el objeto correctamente
+        this.sedeDAO = new SedeDAOImpl(); // Instancia el objeto correctamente
         this.materialDAO = new MaterialDAOImpl(); // Instancia el objeto correctamente
+        this.editorialDAO = new EditorialDAOImpl();
     }
 
     @Test
@@ -70,13 +68,46 @@ public class EjemplarDAOTest {
     }
 
     private SedeDTO obtenerSedeFK() {
-        ArrayList<SedeDTO> listaSedes = this.sedeDAO.listarTodos();
-        return listaSedes.get(0);
+        SedeDTO sede = new SedeDTO();
+        sede.setNombre("Sede Test");
+        sede.setDireccion("Dirección Test");
+        sede.setDistrito("Distrito Test");
+        sede.setTelefonoContacto("123456789");
+        sede.setCorreoContacto("test@test.com");
+        sede.setActiva(true);
+
+        // Insertar la sede y obtener su ID
+        Integer idSede = this.sedeDAO.insertar(sede);
+        sede.setIdSede(idSede);
+        return sede;
+    }
+
+    private EditorialDTO obtenerEditorialFK() {
+        EditorialDTO editorial = new EditorialDTO();
+        editorial.setNombre("Editorial Test");
+        editorial.setPais("País Test");
+
+        // Insertar la editorial y obtener su ID
+        Integer idEditorial = this.editorialDAO.insertar(editorial);
+        editorial.setIdEditorial(idEditorial);
+        return editorial;
     }
 
     private MaterialDTO obtenerMaterialFK() {
-        ArrayList<MaterialDTO> listaMateriales = this.materialDAO.listarTodos();
-        return listaMateriales.get(0);
+        MaterialDTO material = new MaterialDTO();
+        material.setTitulo("Material Test");
+        material.setEdicion("1ra Edición");
+        material.setNivel(NivelDeIngles.BASICO);
+        material.setAnioPublicacion(2024);
+
+        // Obtener y establecer la editorial
+        EditorialDTO editorial = obtenerEditorialFK();
+        material.setEditorial(editorial);
+
+        // Insertar el material y obtener su ID
+        Integer idMaterial = this.materialDAO.insertar(material);
+        material.setIdMaterial(idMaterial);
+        return material;
     }
 
     @Test
@@ -125,11 +156,11 @@ public class EjemplarDAOTest {
         ArrayList<EjemplarDTO> listaEjemplaresModificados = this.ejemplarDAO.listarTodos();
         assertEquals(listaEjemplares.size(), listaEjemplaresModificados.size());
         for (Integer i = 0; i < listaEjemplares.size(); i++) {
-            assertEquals(listaEjemplares.get(i).getFechaAdquisicion(), listaEjemplaresModificados.get(i).getFechaAdquisicion());
+            assertEquals(listaEjemplares.get(i).getFechaAdquisicion(),
+                    listaEjemplaresModificados.get(i).getFechaAdquisicion());
             assertEquals(listaEjemplares.get(i).getDisponible(), listaEjemplaresModificados.get(i).getDisponible());
             assertEquals(listaEjemplares.get(i).getUbicacion(), listaEjemplaresModificados.get(i).getUbicacion());
         }
-
 
         eliminarTodo();
     }
@@ -151,5 +182,17 @@ public class EjemplarDAOTest {
             EjemplarDTO almacen = this.ejemplarDAO.obtenerPorId(listaEjemplares.get(i).getIdEjemplar());
             assertNull(almacen);
         }
+    }
+
+    @BeforeEach
+    public void setUp() {
+        // Limpiar la base de datos antes de cada prueba
+        eliminarTodo();
+    }
+
+    @AfterEach
+    public void tearDown() {
+        // Limpiar la base de datos después de cada prueba
+        eliminarTodo();
     }
 }
