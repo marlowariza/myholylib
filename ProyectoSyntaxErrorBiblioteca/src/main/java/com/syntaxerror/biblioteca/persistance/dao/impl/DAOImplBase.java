@@ -1,4 +1,3 @@
-
 package com.syntaxerror.biblioteca.persistance.dao.impl;
 
 import com.syntaxerror.biblioteca.db.DBManager;
@@ -6,8 +5,10 @@ import com.syntaxerror.biblioteca.persistance.dao.impl.util.Columna;
 import com.syntaxerror.biblioteca.persistance.dao.impl.util.Tipo_Operacion;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -375,10 +376,10 @@ public abstract class DAOImplBase {
         } catch (SQLException ex) {
             if (conTransaccion)
                 try {
-                    this.rollbackTransaccion();
-                } catch (SQLException ex1) {
-                    Logger.getLogger(DAOImplBase.class.getName()).log(Level.SEVERE, null, ex1);
-                }
+                this.rollbackTransaccion();
+            } catch (SQLException ex1) {
+                Logger.getLogger(DAOImplBase.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             Logger.getLogger(DAOImplBase.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
@@ -389,4 +390,281 @@ public abstract class DAOImplBase {
         }
 
     }
+
+    protected Integer insertarPersona(
+            String nombre,
+            String direccion,
+            String telefono,
+            String correo,
+            String contrasenha,
+            Integer sedeId
+    ) throws SQLException {
+        iniciarTransaccion();
+        Integer nextId;
+
+        try {
+            // Cálculo de próximo ID
+            String seqSql = "SELECT COALESCE(MAX(ID_PERSONA), 0) + 1 FROM BIB_PERSONA";
+            try (Statement st = conexion.createStatement(); ResultSet rs = st.executeQuery(seqSql)) {
+                rs.next();
+                nextId = rs.getInt(1);
+            }
+
+            // INSERT con ese ID
+            String insertSql = """
+            INSERT INTO BIB_PERSONA
+              (ID_PERSONA, NOMBRE_COMPLETO, DIRECCION, TELEFONO, CORREO, CONTRASENHA, SEDE_IDSEDE)
+            VALUES
+              (?, ?, ?, ?, ?, ?, ?)
+        """;
+            try (PreparedStatement ps = conexion.prepareStatement(insertSql)) {
+                ps.setInt(1, nextId);
+                ps.setString(2, nombre);
+                ps.setString(3, direccion);
+                ps.setString(4, telefono);
+                ps.setString(5, correo);
+                ps.setString(6, contrasenha);
+                ps.setInt(7, sedeId);
+                ps.executeUpdate();
+                comitarTransaccion();
+            }
+
+            return nextId;
+        } finally {
+            cerrarConexion();
+        }
+    }
+
+// 2) MODIFICAR usando el ID que ya tienes
+    protected boolean modificarPersona(
+            Integer idPersona,
+            String nombre,
+            String direccion,
+            String telefono,
+            String correo,
+            String contrasenha,
+            Integer sedeId
+    ) throws SQLException {
+        abrirConexion();
+        try {
+            String sql = """
+            UPDATE BIB_PERSONA
+               SET NOMBRE_COMPLETO = ?,
+                   DIRECCION        = ?,
+                   TELEFONO         = ?,
+                   CORREO           = ?,
+                   CONTRASENHA      = ?,
+                   SEDE_IDSEDE      = ?
+             WHERE ID_PERSONA      = ?
+        """;
+            try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+                ps.setString(1, nombre);
+                ps.setString(2, direccion);
+                ps.setString(3, telefono);
+                ps.setString(4, correo);
+                ps.setString(5, contrasenha);
+                ps.setInt(6, sedeId);
+                ps.setInt(7, idPersona);
+                return ps.executeUpdate() > 0;
+            }
+           
+        } 
+      
+        finally {
+            cerrarConexion();
+        }
+    }
+
+// 3) ELIMINAR la persona asociada a un lector (clave foránea)
+    protected void eliminarPersonaByLector(Integer idLector) throws SQLException {
+        iniciarTransaccion();
+        try {
+            // 3.1) Recuperar FK persona_id
+            Integer personaId = null;
+            String sel = "SELECT PERSONA_IDPERSONA FROM BIB_LECTOR WHERE ID_LECTOR = ?";
+            try (PreparedStatement ps1 = conexion.prepareStatement(sel)) {
+                ps1.setInt(1, idLector);
+                try (ResultSet rs = ps1.executeQuery()) {
+                    if (rs.next()) {
+                        personaId = rs.getInt(1);
+                    }
+                }
+            }
+            // 3.2) Borrar persona si existe
+            if (personaId != null) {
+                String del = "DELETE FROM BIB_PERSONA WHERE ID_PERSONA = ?";
+                try (PreparedStatement ps2 = conexion.prepareStatement(del)) {
+                    ps2.setInt(1, personaId);
+                    ps2.executeUpdate();
+                }
+            }
+            comitarTransaccion();
+        } finally {
+            cerrarConexion();
+        }
+    }
+//    protected Integer insertarPersona(
+//            String nombre,
+//            String direccion,
+//            String telefono,
+//            String correo,
+//            String contrasenha,
+//            Integer sedeId
+//    ) throws SQLException {
+//        abrirConexion();
+//        String sql = """
+//        INSERT INTO BIB_PERSONA
+//          (ID_PERSONA, NOMBRE_COMPLETO, DIRECCION, TELEFONO, CORREO, CONTRASENHA, SEDE_IDSEDE)
+//        VALUES
+//          (?, ?, ?, ?, ?, ?, ?)
+//    """;
+//        try (PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+//            ps.setString(1, nombre);
+//            ps.setString(2, direccion);
+//            ps.setString(3, telefono);
+//            ps.setString(4, correo);
+//            ps.setString(5, contrasenha);
+//            ps.setInt(6, sedeId);
+//            ps.executeUpdate();
+//            try (ResultSet keys = ps.getGeneratedKeys()) {
+//                return keys.next() ? keys.getInt(1) : null;
+//            }
+//        } finally {
+//            cerrarConexion();
+//        }
+//    }
+//
+//    protected boolean modificarPersona(
+//            Integer idPersona,
+//            String nombre,
+//            String direccion,
+//            String telefono,
+//            String correo,
+//            String contrasenha,
+//            Integer sedeId
+//    ) throws SQLException {
+//        abrirConexion();
+//        String sql = """
+//        UPDATE BIB_PERSONA
+//           SET NOMBRE_COMPLETO=?, DIRECCION=?, TELEFONO=?, CORREO=?, CONTRASENHA=?, SEDE_IDSEDE=?
+//         WHERE ID_PERSONA=?
+//    """;
+//        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+//            ps.setString(1, nombre);
+//            ps.setString(2, direccion);
+//            ps.setString(3, telefono);
+//            ps.setString(4, correo);
+//            ps.setString(5, contrasenha);
+//            ps.setInt(6, sedeId);
+//            ps.setInt(7, idPersona);
+//            return ps.executeUpdate() > 0;
+//        } finally {
+//            cerrarConexion();
+//        }
+//    }
+//
+//    protected void eliminarPersonaByLector(Integer idLector) throws SQLException {
+//        abrirConexion();
+//        // 1) obtengo persona_id
+//        String sel = "SELECT PERSONA_IDPERSONA FROM BIB_LECTOR WHERE ID_LECTOR = ?";
+//        Integer personaId = null;
+//        try (PreparedStatement ps1 = conexion.prepareStatement(sel)) {
+//            ps1.setInt(1, idLector);
+//            try (ResultSet rs = ps1.executeQuery()) {
+//                if (rs.next()) {
+//                    personaId = rs.getInt(1);
+//                }
+//            }
+//        }
+//        // 2) si existe, borro
+//        if (personaId != null) {
+//            String del = "DELETE FROM BIB_PERSONA WHERE ID_PERSONA = ?";
+//            try (PreparedStatement ps2 = conexion.prepareStatement(del)) {
+//                ps2.setInt(1, personaId);
+//                ps2.executeUpdate();
+//            }
+//        }
+//        cerrarConexion();
+//    }
+
+    // 🔹 Métodos de PERSONA
+//    protected Integer insertarPersona(String nombre, String direccion, String telefono, String correo, String contrasenha, Integer sedeId) throws SQLException {
+//        String sql = "INSERT INTO BIB_PERSONA (NOMBRE_COMPLETO, DIRECCION, TELEFONO, CORREO, CONTRASENHA, SEDE_IDSEDE) VALUES (?, ?, ?, ?, ?, ?)";
+//         abrirConexion();
+//        try (PreparedStatement statement = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+//            incluirParametrosPersona(statement, nombre, direccion, telefono, correo, contrasenha, sedeId);
+//            int filasAfectadas = statement.executeUpdate();
+//
+//            if (filasAfectadas > 0) {
+//                ResultSet keys = statement.getGeneratedKeys();
+//                if (keys.next()) {
+//                    return keys.getInt(1);
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        cerrarConexion();
+//        return null;
+//    }
+//
+//    // 🔹 Método para incluir parámetros en la inserción de persona
+//    protected void incluirParametrosPersona(PreparedStatement statement, String nombre, String direccion, String telefono, String correo, String contrasenha, Integer sedeId) throws SQLException {
+//        statement.setString(1, nombre);
+//        statement.setString(2, direccion);
+//        statement.setString(3, telefono);
+//        statement.setString(4, correo);
+//        statement.setString(5, contrasenha);
+//        statement.setInt(6, sedeId);
+//    }
+//
+//    protected boolean modificarPersona(Integer idPersona, String nombre, String direccion,
+//            String telefono, String correo, String contrasenha,
+//            Integer sedeId) throws SQLException {
+//        String sql = "UPDATE BIB_PERSONA SET NOMBRE_COMPLETO=?, DIRECCION=?, TELEFONO=?, CORREO=?, CONTRASENHA=?, SEDE_IDSEDE=? WHERE IDPERSONA=?";
+//         abrirConexion();
+//        try (Connection c = DBManager.getInstance().getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+//            ps.setString(1, nombre);
+//            ps.setString(2, direccion);
+//            ps.setString(3, telefono);
+//            ps.setString(4, correo);
+//            ps.setString(5, contrasenha);
+//            ps.setInt(6, sedeId);
+//            ps.setInt(7, idPersona);
+//            cerrarConexion();
+//            return ps.executeUpdate() > 0;
+//            
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            cerrarConexion();
+//            return false;
+//        }
+//    }
+//
+//    protected void eliminarPersonaByLector(Integer idLector) throws SQLException {
+//        // Primero obtener persona_id
+//        Integer personaId = null;
+//        String sel = "SELECT PERSONA_IDPERSONA FROM BIB_LECTOR WHERE ID_LECTOR = ?";
+//         abrirConexion();
+//        try (Connection c = DBManager.getInstance().getConnection(); PreparedStatement ps1 = c.prepareStatement(sel)) {
+//            ps1.setInt(1, idLector);
+//            try (ResultSet rs = ps1.executeQuery()) {
+//                if (rs.next()) {
+//                    personaId = rs.getInt(1);
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        if (personaId != null) {
+//            String sql = "DELETE FROM BIB_PERSONA WHERE IDPERSONA = ?";
+//            try (Connection c = DBManager.getInstance().getConnection(); PreparedStatement ps2 = c.prepareStatement(sql)) {
+//                ps2.setInt(1, personaId);
+//                ps2.executeUpdate();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        cerrarConexion();
+//    }
 }
