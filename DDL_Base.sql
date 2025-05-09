@@ -247,7 +247,7 @@ CREATE TABLE IF NOT EXISTS `myholylib`.`BIB_AUTOR` ( ------------BIB_CREADOR
   `MATERNO` VARCHAR(50) NULL,
   `SEUDONIMO` VARCHAR(50) NULL,
   `TIPO_AUTOR` ENUM('PERSONA', 'INSTITUCION', 'COLECTIVO', 'ANONIMO', 'DESCONOCIDO') NOT NULL,
-  ------autor, traductor, ilustrador, narrador, editor, guionista, diseñador editorial
+  ------autor, traductor, ilustrador, narrador, editor, guionista, diseñador editorial, otro.
   `NACIONALIDAD` VARCHAR(50) NOT NULL, ----------------puede ser null
   `ACTIVO` TINYINT(0) NOT NULL,
   `CANTIDAD_OBRAS` INT NOT NULL,  ----------------tal vez innecesario
