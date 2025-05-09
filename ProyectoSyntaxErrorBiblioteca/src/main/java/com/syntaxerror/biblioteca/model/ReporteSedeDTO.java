@@ -1,10 +1,12 @@
 package com.syntaxerror.biblioteca.model;
 
 public class ReporteSedeDTO {
+
     private Integer anio;
     private Integer mes;
     private PrestamoDTO prestamo;
-    private LectorDTO lector;
+    private PersonaDTO persona;
+
     private SedeDTO sede;
 
     // Constructores
@@ -12,15 +14,15 @@ public class ReporteSedeDTO {
         this.anio = null;
         this.mes = null;
         this.prestamo = null;
-        this.lector = null;
+        this.persona = null;
         this.sede = null;
     }
 
-    public ReporteSedeDTO(Integer anio, Integer mes, PrestamoDTO prestamo, LectorDTO lector, SedeDTO sede) {
+    public ReporteSedeDTO(Integer anio, Integer mes, PrestamoDTO prestamo, PersonaDTO persona, SedeDTO sede) {
         this.anio = anio;
         this.mes = mes;
         this.prestamo = prestamo;
-        this.lector = lector;
+        this.persona = persona;
         this.sede = sede;
     }
 
@@ -49,19 +51,19 @@ public class ReporteSedeDTO {
         this.prestamo = prestamo;
     }
 
-    public LectorDTO getLector() {
-        return lector;
-    }
-
-    public void setLector(LectorDTO lector) {
-        this.lector = lector;
-    }
-
     public SedeDTO getSede() {
         return sede;
     }
 
     public void setSede(SedeDTO sede) {
         this.sede = sede;
+    }
+
+    public PersonaDTO getPersona() {
+        return persona;
+    }
+
+    public void setPersona(PersonaDTO persona) {
+        this.persona = persona;
     }
 }

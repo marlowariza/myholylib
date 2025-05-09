@@ -1,6 +1,6 @@
 package com.syntaxerror.biblioteca.persistance.dao.impl;
 
-import com.syntaxerror.biblioteca.model.LectorDTO;
+import com.syntaxerror.biblioteca.model.PersonaDTO;
 import com.syntaxerror.biblioteca.model.PrestamoDTO;
 import com.syntaxerror.biblioteca.persistance.dao.PrestamoDAO;
 import com.syntaxerror.biblioteca.persistance.dao.impl.util.Columna;
@@ -25,7 +25,7 @@ public class PrestamoDAOImpl extends DAOImplBase implements PrestamoDAO {
         this.listaColumnas.add(new Columna("FECHA_SOLICITUD", false, false));
         this.listaColumnas.add(new Columna("FECHA_PRESTAMO", false, false));
         this.listaColumnas.add(new Columna("FECHA_DEVOLUCION", false, false));
-        this.listaColumnas.add(new Columna("LECTOR_IDLECTOR", false, false));
+        this.listaColumnas.add(new Columna("PERSONA_IDPERSONA", false, false));
     }
 
     @Override
@@ -35,7 +35,7 @@ public class PrestamoDAOImpl extends DAOImplBase implements PrestamoDAO {
         this.statement.setDate(1, new Date(this.prestamo.getFechaSolicitud().getTime()));
         this.statement.setDate(2, new Date(this.prestamo.getFechaPrestamo().getTime()));
         this.statement.setDate(3, new Date(this.prestamo.getFechaDevolucion().getTime()));
-        this.statement.setInt(4, this.prestamo.getLector().getIdLector());
+        this.statement.setInt(4, this.prestamo.getPersona().getIdPersona());
     }
 
     @Override
@@ -44,7 +44,7 @@ public class PrestamoDAOImpl extends DAOImplBase implements PrestamoDAO {
         this.statement.setDate(1, new Date(this.prestamo.getFechaSolicitud().getTime()));
         this.statement.setDate(2, new Date(this.prestamo.getFechaPrestamo().getTime()));
         this.statement.setDate(3, new Date(this.prestamo.getFechaDevolucion().getTime()));
-        this.statement.setInt(4, this.prestamo.getLector().getIdLector());
+        this.statement.setInt(4, this.prestamo.getPersona().getIdPersona());
         this.statement.setInt(5, this.prestamo.getIdPrestamo());
         //En modificar el ID va al ultimo
     }
@@ -70,9 +70,9 @@ public class PrestamoDAOImpl extends DAOImplBase implements PrestamoDAO {
         this.prestamo.setFechaDevolucion(this.resultSet.getDate("FECHA_DEVOLUCION"));
 
         // Crear objetos DTO básicos para las relaciones
-        LectorDTO lector = new LectorDTO();
-        lector.setIdLector(this.resultSet.getInt("LECTOR_IDLECTOR"));
-        this.prestamo.setLector(lector);
+        PersonaDTO persona = new PersonaDTO();
+        persona.setIdPersona(this.resultSet.getInt("PERSONA_IDPERSONA"));
+        this.prestamo.setPersona(persona);
 
     }
 

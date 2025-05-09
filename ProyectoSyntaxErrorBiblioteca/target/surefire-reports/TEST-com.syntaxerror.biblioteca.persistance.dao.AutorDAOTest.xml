@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="46.13" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="204.691" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\jalva\OneDrive\Documentos\GitHub\myholylib\ProyectoSyntaxErrorBiblioteca\target\test-classes;C:\Users\jalva\OneDrive\Documentos\GitHub\myholylib\ProyectoSyntaxErrorBiblioteca\target\classes;C:\Users\jalva\.m2\repository\commons-codec\commons-codec\1.18.0\commons-codec-1.18.0.jar;C:\Users\jalva\.m2\repository\com\mysql\mysql-connector-j\9.2.0\mysql-connector-j-9.2.0.jar;C:\Users\jalva\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\jalva\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\jalva\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\jalva\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\jalva\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\jalva\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\jalva\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\jalva\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
+    <property name="java.class.path" value="C:\Users\Fabian\OneDrive\Documents\GitHub\myholylib\ProyectoSyntaxErrorBiblioteca\target\test-classes;C:\Users\Fabian\OneDrive\Documents\GitHub\myholylib\ProyectoSyntaxErrorBiblioteca\target\classes;C:\Users\Fabian\.m2\repository\commons-codec\commons-codec\1.18.0\commons-codec-1.18.0.jar;C:\Users\Fabian\.m2\repository\com\mysql\mysql-connector-j\9.2.0\mysql-connector-j-9.2.0.jar;C:\Users\Fabian\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\Fabian\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\Fabian\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Fabian\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Fabian\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\Fabian\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\Fabian\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\Fabian\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -15,43 +15,44 @@
     <property name="user.country" value="PE"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\jalva\AppData\Local\Temp\surefire15192258990081630496\surefirebooter-20250503224343127_3.jar C:\Users\jalva\AppData\Local\Temp\surefire15192258990081630496 2025-05-03T22-43-42_990-jvmRun1 surefire-20250503224343127_1tmp surefire_0-20250503224343127_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Fabian\AppData\Local\Temp\surefire2816536590324175572\surefirebooter-20250508195807610_3.jar C:\Users\Fabian\AppData\Local\Temp\surefire2816536590324175572 2025-05-08T19-58-07_340-jvmRun1 surefire-20250508195807610_1tmp surefire_0-20250508195807610_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\jalva\OneDrive\Documentos\GitHub\myholylib\ProyectoSyntaxErrorBiblioteca\target\test-classes;C:\Users\jalva\OneDrive\Documentos\GitHub\myholylib\ProyectoSyntaxErrorBiblioteca\target\classes;C:\Users\jalva\.m2\repository\commons-codec\commons-codec\1.18.0\commons-codec-1.18.0.jar;C:\Users\jalva\.m2\repository\com\mysql\mysql-connector-j\9.2.0\mysql-connector-j-9.2.0.jar;C:\Users\jalva\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\jalva\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\jalva\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\jalva\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\jalva\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\jalva\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\jalva\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\jalva\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
+    <property name="test" value="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest"/>
+    <property name="surefire.test.class.path" value="C:\Users\Fabian\OneDrive\Documents\GitHub\myholylib\ProyectoSyntaxErrorBiblioteca\target\test-classes;C:\Users\Fabian\OneDrive\Documents\GitHub\myholylib\ProyectoSyntaxErrorBiblioteca\target\classes;C:\Users\Fabian\.m2\repository\commons-codec\commons-codec\1.18.0\commons-codec-1.18.0.jar;C:\Users\Fabian\.m2\repository\com\mysql\mysql-connector-j\9.2.0\mysql-connector-j-9.2.0.jar;C:\Users\Fabian\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\Fabian\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\Fabian\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Fabian\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Fabian\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\Fabian\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\Fabian\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\Fabian\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="C:\Users\jalva"/>
+    <property name="user.home" value="C:\Users\Fabian"/>
     <property name="user.language" value="es"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.version.date" value="2025-01-21"/>
     <property name="java.home" value="C:\Program Files\Java\jdk-21"/>
     <property name="file.separator" value="\"/>
-    <property name="basedir" value="C:\Users\jalva\OneDrive\Documentos\GitHub\myholylib\ProyectoSyntaxErrorBiblioteca"/>
-    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="basedir" value="C:\Users\Fabian\OneDrive\Documents\GitHub\myholylib\ProyectoSyntaxErrorBiblioteca"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\jalva\AppData\Local\Temp\surefire15192258990081630496\surefirebooter-20250503224343127_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Fabian\AppData\Local\Temp\surefire2816536590324175572\surefirebooter-20250508195807610_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.6+8-LTS-188"/>
-    <property name="user.name" value="JL"/>
+    <property name="user.name" value="Fabian"/>
     <property name="stdout.encoding" value="Cp1252"/>
     <property name="path.separator" value=";"/>
     <property name="os.version" value="10.0"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
-    <property name="maven.ext.class.path" value="D:\Aplicaciones\NetBeans-21\netbeans\java\maven-nblib\netbeans-eventspy.jar"/>
-    <property name="localRepository" value="C:\Users\jalva\.m2\repository"/>
+    <property name="maven.ext.class.path" value="C:\Program Files\NetBeans-23\netbeans\java\maven-nblib\netbeans-eventspy.jar"/>
+    <property name="localRepository" value="C:\Users\Fabian\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
-    <property name="java.io.tmpdir" value="C:\Users\jalva\AppData\Local\Temp\"/>
+    <property name="java.io.tmpdir" value="C:\Users\Fabian\AppData\Local\Temp\"/>
     <property name="java.version" value="21.0.6"/>
-    <property name="user.dir" value="C:\Users\jalva\OneDrive\Documentos\GitHub\myholylib\ProyectoSyntaxErrorBiblioteca"/>
+    <property name="user.dir" value="C:\Users\Fabian\OneDrive\Documents\GitHub\myholylib\ProyectoSyntaxErrorBiblioteca"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk-21\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Oracle Client for Microsoft Tools\;D:\Aplicaciones\Oracle\dbhomeXE\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;c:\MinGw\bin;c:\MinGW\MSYS\1.0\bin;C:\Oracle\instantclient_23_6\;C:\Program Files (x86)\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\Program Files\dotnet\;C:\Windows\Microsoft.NET\Framework64\v4.0.30319;C:\Program Files\Git\cmd;C:\Users\jalva\AppData\Local\Microsoft\WindowsApps;C:\Users\jalva\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\jalva\AppData\Local\GitHubDesktop\bin;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-21\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\app\Fabian\product\21c\dbhomeXE\bin;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\;C:\Program Files\dotnet\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\MinGW\bin;C:\MinGW\MSYS\1.0\bin;C:\Program Files\Java\jdk-21\bin;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Users\Fabian\AppData\Local\Programs\Python\Python38-32\Scripts\;C:\Users\Fabian\AppData\Local\Programs\Python\Python38-32\;C:\Users\Fabian\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\PyCharm Community Edition 2020.2.2\bin;;C:\flutter\bin;C:\Users\Fabian\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Fabian\.dotnet\tools;C:\Users\Fabian\AppData\Local\GitHubDesktop\bin;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="stderr.encoding" value="Cp1252"/>
     <property name="java.vendor" value="Oracle Corporation"/>
@@ -59,73 +60,73 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testModificar" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="11.9">
+  <testcase name="testModificar" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="38.964">
     <system-out><![CDATA[modificar
 ]]></system-out>
-    <system-err><![CDATA[may. 03, 2025 10:43:47 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+    <system-err><![CDATA[may. 08, 2025 7:58:12 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('J.K. Rowling', 'Británica', 1, 15)
-may. 03, 2025 10:43:48 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+may. 08, 2025 7:58:16 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('George Orwell', 'Británico', 0, 10)
-may. 03, 2025 10:43:50 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: UPDATE BIB_AUTOR SET NOMBRE_COMPLETO='NuevoNombre0', NACIONALIDAD='NuevoSitioWeb0', ACTIVO=0, CANTIDAD_OBRAS=12 WHERE ID_AUTOR=13
-may. 03, 2025 10:43:51 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: UPDATE BIB_AUTOR SET NOMBRE_COMPLETO='NuevoNombre1', NACIONALIDAD='NuevoSitioWeb1', ACTIVO=1, CANTIDAD_OBRAS=7 WHERE ID_AUTOR=14
-may. 03, 2025 10:43:54 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=13
-may. 03, 2025 10:43:56 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=14
+may. 08, 2025 7:58:22 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: UPDATE BIB_AUTOR SET NOMBRE_COMPLETO='NuevoNombre0', NACIONALIDAD='NuevoSitioWeb0', ACTIVO=0, CANTIDAD_OBRAS=12 WHERE ID_AUTOR=43
+may. 08, 2025 7:58:26 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: UPDATE BIB_AUTOR SET NOMBRE_COMPLETO='NuevoNombre1', NACIONALIDAD='NuevoSitioWeb1', ACTIVO=1, CANTIDAD_OBRAS=7 WHERE ID_AUTOR=44
+may. 08, 2025 7:58:36 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=43
+may. 08, 2025 7:58:43 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=44
 ]]></system-err>
   </testcase>
-  <testcase name="testObtenerPorId" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="9.493">
+  <testcase name="testObtenerPorId" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="38.07">
     <system-out><![CDATA[obtenerPorId
 ]]></system-out>
-    <system-err><![CDATA[may. 03, 2025 10:43:58 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+    <system-err><![CDATA[may. 08, 2025 7:58:50 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('J.K. Rowling', 'Británica', 1, 15)
-may. 03, 2025 10:44:00 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+may. 08, 2025 7:58:54 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('George Orwell', 'Británico', 0, 10)
-may. 03, 2025 10:44:04 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=15
-may. 03, 2025 10:44:06 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=16
+may. 08, 2025 7:59:11 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=45
+may. 08, 2025 7:59:20 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=46
 ]]></system-err>
   </testcase>
-  <testcase name="testEliminar" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="7.639">
+  <testcase name="testEliminar" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="40.367">
     <system-out><![CDATA[eliminar
 ]]></system-out>
-    <system-err><![CDATA[may. 03, 2025 10:44:08 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+    <system-err><![CDATA[may. 08, 2025 7:59:29 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('J.K. Rowling', 'Británica', 1, 15)
-may. 03, 2025 10:44:09 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+may. 08, 2025 7:59:38 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('George Orwell', 'Británico', 0, 10)
-may. 03, 2025 10:44:11 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=17
-may. 03, 2025 10:44:13 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=18
+may. 08, 2025 7:59:50 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=47
+may. 08, 2025 7:59:59 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=48
 ]]></system-err>
   </testcase>
-  <testcase name="testInsertar" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="8.537">
+  <testcase name="testInsertar" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="45.973">
     <system-out><![CDATA[insertar
 ]]></system-out>
-    <system-err><![CDATA[may. 03, 2025 10:44:16 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+    <system-err><![CDATA[may. 08, 2025 8:00:18 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('J.K. Rowling', 'Británica', 1, 15)
-may. 03, 2025 10:44:18 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+may. 08, 2025 8:00:23 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('George Orwell', 'Británico', 0, 10)
-may. 03, 2025 10:44:20 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=19
-may. 03, 2025 10:44:22 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=20
+may. 08, 2025 8:00:34 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=49
+may. 08, 2025 8:00:45 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=50
 ]]></system-err>
   </testcase>
-  <testcase name="testListarTodos" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="8.546">
+  <testcase name="testListarTodos" classname="com.syntaxerror.biblioteca.persistance.dao.AutorDAOTest" time="41.283">
     <system-out><![CDATA[listarTodos
 ]]></system-out>
-    <system-err><![CDATA[may. 03, 2025 10:44:24 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+    <system-err><![CDATA[may. 08, 2025 8:00:58 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('J.K. Rowling', 'Británica', 1, 15)
-may. 03, 2025 10:44:25 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+may. 08, 2025 8:01:03 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
 INFO: com.mysql.cj.jdbc.CallableStatement: INSERT INTO BIB_AUTOR(NOMBRE_COMPLETO, NACIONALIDAD, ACTIVO, CANTIDAD_OBRAS) VALUES ('George Orwell', 'Británico', 0, 10)
-may. 03, 2025 10:44:28 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=21
-may. 03, 2025 10:44:31 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
-INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=22
+may. 08, 2025 8:01:17 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=51
+may. 08, 2025 8:01:28 P. M. com.syntaxerror.biblioteca.persistance.dao.impl.DAOImplBase ejecutarModificacionEnBD
+INFO: com.mysql.cj.jdbc.CallableStatement: DELETE FROM BIB_AUTOR WHERE ID_AUTOR=52
 ]]></system-err>
   </testcase>
 </testsuite>
