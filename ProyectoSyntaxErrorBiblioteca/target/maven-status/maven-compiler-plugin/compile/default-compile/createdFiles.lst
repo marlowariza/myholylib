@@ -20,6 +20,7 @@ com\syntaxerror\biblioteca\persistance\dao\impl\TemaDAOImpl.class
 com\syntaxerror\biblioteca\persistance\dao\TemaDAO.class
 com\syntaxerror\biblioteca\model\EditorialDTO.class
 com\syntaxerror\biblioteca\persistance\dao\SancionDAO.class
+com\syntaxerror\biblioteca\business\MaterialBO.class
 com\syntaxerror\biblioteca\model\EjemplarDTO.class
 com\syntaxerror\biblioteca\persistance\dao\impl\util\Columna.class
 com\syntaxerror\biblioteca\model\enums\Turnos.class
@@ -34,7 +35,9 @@ com\syntaxerror\biblioteca\persistance\dao\impl\DAOImplBase.class
 com\syntaxerror\biblioteca\model\enums\FormatoDigital.class
 com\syntaxerror\biblioteca\model\SancionDTO.class
 com\syntaxerror\biblioteca\persistance\dao\impl\util\Tipo_Operacion.class
+com\syntaxerror\biblioteca\persistance\dao\impl\PersonaDAOImpl.class
 com\syntaxerror\biblioteca\persistance\dao\impl\DAOImplBase$1.class
+com\syntaxerror\biblioteca\business\EditorialBO.class
 com\syntaxerror\biblioteca\model\AutorDTO.class
 com\syntaxerror\biblioteca\model\PrestamoDTO.class
 com\syntaxerror\biblioteca\model\ReporteGeneralDTO.class

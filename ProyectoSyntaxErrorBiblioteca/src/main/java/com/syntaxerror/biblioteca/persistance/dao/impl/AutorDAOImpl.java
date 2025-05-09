@@ -16,7 +16,7 @@ public class AutorDAOImpl extends DAOImplBase implements AutorDAO {
     private AutorDTO autor;
 
     public AutorDAOImpl() {
-        super("BIB_AUTOR");
+        super("BIB_CREADOR");
         this.retornarLlavePrimaria = true;
         this.autor = null;
     }
