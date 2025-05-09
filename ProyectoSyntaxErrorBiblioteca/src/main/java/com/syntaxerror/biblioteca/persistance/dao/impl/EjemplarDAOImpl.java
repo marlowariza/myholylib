@@ -3,6 +3,8 @@ package com.syntaxerror.biblioteca.persistance.dao.impl;
 import com.syntaxerror.biblioteca.model.EjemplarDTO;
 import com.syntaxerror.biblioteca.model.MaterialDTO;
 import com.syntaxerror.biblioteca.model.SedeDTO;
+import com.syntaxerror.biblioteca.model.enums.FormatoDigital;
+import com.syntaxerror.biblioteca.model.enums.TipoEjemplar;
 import com.syntaxerror.biblioteca.persistance.dao.EjemplarDAO;
 import com.syntaxerror.biblioteca.persistance.dao.impl.util.Columna;
 
@@ -26,6 +28,8 @@ public class EjemplarDAOImpl extends DAOImplBase implements EjemplarDAO {
         this.listaColumnas.add(new Columna("ID_EJEMPLAR", true, true));
         this.listaColumnas.add(new Columna("FECHA_ADQUISICION", false, false));
         this.listaColumnas.add(new Columna("DISPONIBLE", false, false));
+        this.listaColumnas.add(new Columna("TIPO_EJEMPLAR", false, false));
+        this.listaColumnas.add(new Columna("FORMATO_DIGITAL", false, false));
         this.listaColumnas.add(new Columna("UBICACION", false, false));
         this.listaColumnas.add(new Columna("SEDE_IDSEDE", false, false));
         this.listaColumnas.add(new Columna("MATERIAL_IDMATERIAL", false, false));
@@ -38,8 +42,10 @@ public class EjemplarDAOImpl extends DAOImplBase implements EjemplarDAO {
         this.statement.setDate(1, new Date(this.ejemplar.getFechaAdquisicion().getTime()));
         this.statement.setInt(2, this.ejemplar.getDisponible() ? 1 : 0);
         this.statement.setString(3, this.ejemplar.getUbicacion());
-        this.statement.setInt(4, this.ejemplar.getSede().getIdSede());
-        this.statement.setInt(5, this.ejemplar.getMaterial().getIdMaterial());
+        this.statement.setString(4, this.ejemplar.getTipo().name());
+        this.statement.setString(5, this.ejemplar.getFormatoDigital().name());
+        this.statement.setInt(6, this.ejemplar.getSede().getIdSede());
+        this.statement.setInt(7, this.ejemplar.getMaterial().getIdMaterial());
     }
 
     @Override
@@ -48,9 +54,11 @@ public class EjemplarDAOImpl extends DAOImplBase implements EjemplarDAO {
         this.statement.setDate(1, new Date(this.ejemplar.getFechaAdquisicion().getTime()));
         this.statement.setInt(2, this.ejemplar.getDisponible() ? 1 : 0);
         this.statement.setString(3, this.ejemplar.getUbicacion());
-        this.statement.setInt(4, this.ejemplar.getSede().getIdSede());
-        this.statement.setInt(5, this.ejemplar.getMaterial().getIdMaterial());
-        this.statement.setInt(6, this.ejemplar.getIdEjemplar());
+        this.statement.setString(4, this.ejemplar.getTipo().name());
+        this.statement.setString(5, this.ejemplar.getFormatoDigital().name());
+        this.statement.setInt(6, this.ejemplar.getSede().getIdSede());
+        this.statement.setInt(7, this.ejemplar.getMaterial().getIdMaterial());
+        this.statement.setInt(8, this.ejemplar.getIdEjemplar());
         //En modificar el ID va al ultimo
     }
 
@@ -72,6 +80,8 @@ public class EjemplarDAOImpl extends DAOImplBase implements EjemplarDAO {
         this.ejemplar.setIdEjemplar(this.resultSet.getInt("ID_EJEMPLAR"));
         this.ejemplar.setFechaAdquisicion(this.resultSet.getDate("FECHA_ADQUISICION"));
         this.ejemplar.setDisponible(this.resultSet.getInt("DISPONIBLE") == 1);
+        this.ejemplar.setTipo(TipoEjemplar.valueOf(this.resultSet.getString("TIPO_EJEMPLAR")));
+        this.ejemplar.setFormatoDigital(FormatoDigital.valueOf(this.resultSet.getString("FORMATO_DIGITAL")));
         this.ejemplar.setUbicacion(this.resultSet.getString("UBICACION"));
 
         // Crear objetos DTO básicos para las relaciones

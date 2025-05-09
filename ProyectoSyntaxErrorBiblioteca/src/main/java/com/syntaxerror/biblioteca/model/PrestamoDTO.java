@@ -8,7 +8,7 @@ public class PrestamoDTO {
     private Date fechaSolicitud;
     private Date fechaPrestamo;
     private Date fechaDevolucion;
-    private LectorDTO lector;
+    private PersonaDTO persona;
 
     // Constructores
     public PrestamoDTO() {
@@ -16,15 +16,15 @@ public class PrestamoDTO {
         this.fechaSolicitud = null;
         this.fechaPrestamo = null;
         this.fechaDevolucion = null;
-        this.lector = null;
+        this.persona = null;
     }
 
-    public PrestamoDTO(Integer idPrestamo, Date fechaSolicitud, Date fechaPrestamo, Date fechaDevolucion, LectorDTO lector) {
+    public PrestamoDTO(Integer idPrestamo, Date fechaSolicitud, Date fechaPrestamo, Date fechaDevolucion, PersonaDTO persona) {
         this.idPrestamo = idPrestamo;
         this.fechaPrestamo = fechaPrestamo;
         this.fechaDevolucion = fechaDevolucion;
         this.fechaSolicitud = fechaSolicitud;
-        this.lector = lector;
+        this.persona = persona;
     }
 
     public PrestamoDTO(PrestamoDTO prestamo) {
@@ -32,7 +32,7 @@ public class PrestamoDTO {
         this.fechaPrestamo = prestamo.fechaPrestamo;
         this.fechaDevolucion = prestamo.fechaDevolucion;
         this.fechaSolicitud = prestamo.fechaSolicitud;
-        this.lector = prestamo.lector;
+        this.persona = prestamo.persona;
     }
 
     // Getters y Setters
@@ -60,20 +60,20 @@ public class PrestamoDTO {
         this.fechaDevolucion = fechaDevolucion;
     }
 
-    public LectorDTO getLector() {
-        return lector;
-    }
-
-    public void setLector(LectorDTO lector) {
-        this.lector = lector;
-    }
-
     public Date getFechaSolicitud() {
         return fechaSolicitud;
     }
 
     public void setFechaSolicitud(Date fechaSolicitud) {
         this.fechaSolicitud = fechaSolicitud;
+    }
+
+    public PersonaDTO getPersona() {
+        return persona;
+    }
+
+    public void setPersona(PersonaDTO persona) {
+        this.persona = persona;
     }
 
 }

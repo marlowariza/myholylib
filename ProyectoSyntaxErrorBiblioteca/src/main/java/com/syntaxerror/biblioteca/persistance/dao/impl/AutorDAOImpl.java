@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.syntaxerror.biblioteca.model.AutorDTO;
+import com.syntaxerror.biblioteca.model.enums.TipoAutor;
 import com.syntaxerror.biblioteca.persistance.dao.AutorDAO;
 import com.syntaxerror.biblioteca.persistance.dao.impl.util.Columna;
 import java.util.List;
@@ -23,7 +24,11 @@ public class AutorDAOImpl extends DAOImplBase implements AutorDAO {
     @Override
     protected void configurarListaDeColumnas() {
         this.listaColumnas.add(new Columna("ID_AUTOR", true, true));
-        this.listaColumnas.add(new Columna("NOMBRE_COMPLETO", false, false));
+        this.listaColumnas.add(new Columna("NOMBRE", false, false));
+        this.listaColumnas.add(new Columna("PATERNO", false, false));
+        this.listaColumnas.add(new Columna("MATERNO", false, false));
+        this.listaColumnas.add(new Columna("SEUDONIMO", false, false));
+        this.listaColumnas.add(new Columna("TIPO_AUTOR", false, false));
         this.listaColumnas.add(new Columna("NACIONALIDAD", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
         this.listaColumnas.add(new Columna("CANTIDAD_OBRAS", false, false));
@@ -39,9 +44,13 @@ public class AutorDAOImpl extends DAOImplBase implements AutorDAO {
     protected void incluirValorDeParametrosParaInsercion() {
         try {
             this.statement.setString(1, this.autor.getNombre());
-            this.statement.setString(2, this.autor.getNacionalidad());
-            this.statement.setInt(3, this.autor.getActivo() ? 1 : 0);
-            this.statement.setInt(4, this.autor.getCantidadObras());
+            this.statement.setString(2, this.autor.getPaterno());
+            this.statement.setString(3, this.autor.getMaterno());
+            this.statement.setString(4, this.autor.getSeudonimo());
+            this.statement.setString(5, this.autor.getTipo().name());
+            this.statement.setString(6, this.autor.getNacionalidad());
+            this.statement.setInt(7, this.autor.getActivo() ? 1 : 0);
+            this.statement.setInt(8, this.autor.getCantidadObras());
         } catch (SQLException ex) {
             Logger.getLogger(AutorDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -51,10 +60,14 @@ public class AutorDAOImpl extends DAOImplBase implements AutorDAO {
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
 
         this.statement.setString(1, this.autor.getNombre());
-        this.statement.setString(2, this.autor.getNacionalidad());
-        this.statement.setInt(3, this.autor.getActivo() ? 1 : 0);
-        this.statement.setInt(4, this.autor.getCantidadObras());
-        this.statement.setInt(5, this.autor.getIdAutor());
+        this.statement.setString(2, this.autor.getPaterno());
+        this.statement.setString(3, this.autor.getMaterno());
+        this.statement.setString(4, this.autor.getSeudonimo());
+        this.statement.setString(5, this.autor.getTipo().name());
+        this.statement.setString(6, this.autor.getNacionalidad());
+        this.statement.setInt(7, this.autor.getActivo() ? 1 : 0);
+        this.statement.setInt(8, this.autor.getCantidadObras());
+        this.statement.setInt(9, this.autor.getIdAutor());
         //En modificar el ID va al ultimo
     }
 
@@ -74,7 +87,11 @@ public class AutorDAOImpl extends DAOImplBase implements AutorDAO {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.autor = new AutorDTO();
         autor.setIdAutor(this.resultSet.getInt("ID_AUTOR"));
-        autor.setNombre(this.resultSet.getString("NOMBRE_COMPLETO"));
+        autor.setNombre(this.resultSet.getString("NOMBRE"));
+        autor.setPaterno(this.resultSet.getString("PATERNO"));
+        autor.setMaterno(this.resultSet.getString("MATERNO"));
+        autor.setSeudonimo(this.resultSet.getString("SEUDONIMO"));
+        autor.setTipo(TipoAutor.valueOf(this.resultSet.getString("TIPO_AUTOR")));
         autor.setNacionalidad(this.resultSet.getString("NACIONALIDAD"));
         autor.setActivo(this.resultSet.getInt("ACTIVO") == 1);
         autor.setCantidadObras(this.resultSet.getInt("CANTIDAD_OBRAS"));

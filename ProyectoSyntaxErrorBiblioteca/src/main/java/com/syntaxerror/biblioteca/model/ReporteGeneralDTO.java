@@ -1,24 +1,25 @@
 package com.syntaxerror.biblioteca.model;
 
 public class ReporteGeneralDTO {
+
     private Integer anio;
     private Integer mes;
     private PrestamoDTO prestamo;
-    private LectorDTO lector;
+    private PersonaDTO persona;
 
     // Constructores
     public ReporteGeneralDTO() {
         this.anio = null;
         this.mes = null;
         this.prestamo = null;
-        this.lector = null;
+        this.persona = null;
     }
 
-    public ReporteGeneralDTO(Integer anio, Integer mes, PrestamoDTO prestamo, LectorDTO lector) {
+    public ReporteGeneralDTO(Integer anio, Integer mes, PrestamoDTO prestamo, PersonaDTO persona) {
         this.anio = anio;
         this.mes = mes;
         this.prestamo = prestamo;
-        this.lector = lector;
+        this.persona = persona;
     }
 
     // Getters y Setters
@@ -46,11 +47,12 @@ public class ReporteGeneralDTO {
         this.prestamo = prestamo;
     }
 
-    public LectorDTO getLector() {
-        return lector;
+    public PersonaDTO getPersona() {
+        return persona;
     }
 
-    public void setLector(LectorDTO lector) {
-        this.lector = lector;
+    public void setPersona(PersonaDTO persona) {
+        this.persona = persona;
     }
+
 }

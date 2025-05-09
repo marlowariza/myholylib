@@ -23,6 +23,7 @@ public class TemaDAOImpl extends DAOImplBase implements TemaDAO {
         this.listaColumnas.add(new Columna("ID_TEMA", true, true));
         this.listaColumnas.add(new Columna("DESCRIPCION", false, false));
         this.listaColumnas.add(new Columna("CATEGORIA", false, false));
+        this.listaColumnas.add(new Columna("ID_TEMA_PADRE", false, false));
     }
 
     @Override
@@ -30,6 +31,7 @@ public class TemaDAOImpl extends DAOImplBase implements TemaDAO {
         //si es autoincremental, se salta el (1,ID)
         this.statement.setString(1, this.tema.getDescripcion());
         this.statement.setString(2, this.tema.getCategoria().name());
+        this.statement.setInt(3, this.tema.getTemaPadre().getIdTema());
     }
 
     @Override
@@ -37,7 +39,8 @@ public class TemaDAOImpl extends DAOImplBase implements TemaDAO {
 
         this.statement.setString(1, this.tema.getDescripcion());
         this.statement.setString(2, this.tema.getCategoria().name());
-        this.statement.setInt(3, this.tema.getIdTema());
+        this.statement.setInt(3, this.tema.getTemaPadre().getIdTema());
+        this.statement.setInt(4, this.tema.getIdTema());
         //En modificar el ID va al ultimo
     }
 
@@ -59,6 +62,14 @@ public class TemaDAOImpl extends DAOImplBase implements TemaDAO {
         this.tema.setIdTema(this.resultSet.getInt("ID_TEMA"));
         this.tema.setDescripcion(this.resultSet.getString("DESCRIPCION"));
         this.tema.setCategoria(Categoria.valueOf(this.resultSet.getString("CATEGORIA")));
+        // Crear objetos DTO básicos para las relaciones
+        int idPadre = resultSet.getInt("ID_TEMA_PADRE");
+        if (!resultSet.wasNull()) {
+            TemaDTO padre = new TemaDTO();
+            padre.setIdTema(idPadre);
+            this.tema.setTemaPadre(padre);
+        }
+
     }
 
     @Override
