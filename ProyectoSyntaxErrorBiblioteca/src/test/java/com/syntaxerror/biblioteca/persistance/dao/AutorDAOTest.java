@@ -6,6 +6,7 @@ package com.syntaxerror.biblioteca.persistance.dao;
 
 import com.syntaxerror.biblioteca.db.DBManager;
 import com.syntaxerror.biblioteca.model.AutorDTO;
+import com.syntaxerror.biblioteca.model.enums.TipoAutor;
 import com.syntaxerror.biblioteca.persistance.dao.impl.AutorDAOImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,6 +51,7 @@ public class AutorDAOTest {
     private void insertarAutores(ArrayList<Integer> listaIdAutor) {
         AutorDTO autor = new AutorDTO();
         autor.setNombre("J.K. Rowling");
+        autor.setTipo(TipoAutor.AUTOR);
         autor.setNacionalidad("Británica");
         autor.setActivo(true);
         autor.setCantidadObras(15);
@@ -60,6 +62,7 @@ public class AutorDAOTest {
         listaIdAutor.add(resultado);
         
         autor.setNombre("George Orwell");
+        autor.setTipo(TipoAutor.AUTOR);
         autor.setNacionalidad("Británico");
         autor.setActivo(false);
         autor.setCantidadObras(10);

@@ -9,6 +9,7 @@ import com.syntaxerror.biblioteca.model.MaterialDTO;
 import com.syntaxerror.biblioteca.model.SedeDTO;
 import com.syntaxerror.biblioteca.model.EditorialDTO;
 import com.syntaxerror.biblioteca.model.enums.NivelDeIngles;
+import com.syntaxerror.biblioteca.model.enums.TipoEjemplar;
 import com.syntaxerror.biblioteca.persistance.dao.impl.EjemplarDAOImpl;
 import com.syntaxerror.biblioteca.persistance.dao.impl.MaterialDAOImpl;
 import com.syntaxerror.biblioteca.persistance.dao.impl.SedeDAOImpl;
@@ -60,6 +61,7 @@ public class EjemplarDAOTest {
         ejemplar.setUbicacion("Pasillo-3");
         ejemplar.setSede(sede);
         ejemplar.setMaterial(material);
+        ejemplar.setTipo(TipoEjemplar.FISICO);
 
         Integer resultado = this.ejemplarDAO.insertar(ejemplar);
         assertTrue(resultado != 0);
