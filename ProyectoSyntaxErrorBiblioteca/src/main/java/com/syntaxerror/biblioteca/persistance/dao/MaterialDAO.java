@@ -14,4 +14,6 @@ public interface MaterialDAO {
     public Integer modificar(MaterialDTO material);
 
     public Integer eliminar(MaterialDTO material);
+    
+    public Integer eliminarPorEditorial(Integer editorialId);
 }

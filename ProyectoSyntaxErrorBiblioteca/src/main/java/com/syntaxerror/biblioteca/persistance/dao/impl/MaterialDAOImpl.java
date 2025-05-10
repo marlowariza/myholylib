@@ -5,6 +5,7 @@ import com.syntaxerror.biblioteca.model.MaterialDTO;
 import com.syntaxerror.biblioteca.model.enums.NivelDeIngles;
 import com.syntaxerror.biblioteca.persistance.dao.MaterialDAO;
 import com.syntaxerror.biblioteca.persistance.dao.impl.util.Columna;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,56 @@ public class MaterialDAOImpl extends DAOImplBase implements MaterialDAO {
         this.retornarLlavePrimaria = true;
         this.material = null;
     }
+    
+    @Override
+    public Integer eliminarPorEditorial(Integer editorialId) {
+        int resultado = 0;
+        try {
+            this.iniciarTransaccion();
+            
+            // Verificar si existen materiales asociados a la editorial
+            String checkSql = "SELECT COUNT(*) FROM BIB_MATERIAL WHERE EDITORIAL_IDEDITORIAL = ?";
+            this.colocarSQLenStatement(checkSql);
+            this.statement.setInt(1, editorialId);
+
+            // Ejecutar la consulta de verificación
+            ResultSet aux = this.statement.executeQuery();
+            
+            if (aux.next()) {
+                int cantMateriales = aux.getInt(1);
+
+                if (cantMateriales == 0) {
+                    System.out.println("No existen materiales asociados a la editorial con ID: " + editorialId);
+                    return 0; // No hay materiales para eliminar
+                }
+            }
+            
+            String sql = "DELETE FROM BIB_MATERIAL WHERE EDITORIAL_IDEDITORIAL = ?";
+            this.colocarSQLenStatement(sql);
+
+            this.statement.setInt(1, editorialId);
+
+            resultado = this.ejecutarModificacionEnBD();
+
+            this.comitarTransaccion();
+        } catch (SQLException ex) {
+            System.err.println("Error al intentar ejecutar consulta - ELIMINAR: " + ex);
+            try {
+                this.rollbackTransaccion();
+            } catch (SQLException ex1) {
+                System.err.println("Error al hacer rollback - " + ex1);
+            }
+        } finally {
+            try {
+                this.cerrarConexion();
+            } catch (SQLException ex) {
+                System.err.println("Error al cerrar la conexión - " + ex);
+            }
+        }
+
+        return resultado;
+    }
+
 
     @Override
     protected void configurarListaDeColumnas() {

@@ -22,6 +22,11 @@ public class EjemplarDAOImpl extends DAOImplBase implements EjemplarDAO {
         this.retornarLlavePrimaria = true;
         this.ejemplar = null;
     }
+    
+    public Boolean esDigital(String tipo){
+        return "DIGITAL".equals(tipo);
+    }
+    
 
     @Override
     protected void configurarListaDeColumnas() {
@@ -41,9 +46,12 @@ public class EjemplarDAOImpl extends DAOImplBase implements EjemplarDAO {
         //si es autoincremental, se salta el (1,ID)
         this.statement.setDate(1, new Date(this.ejemplar.getFechaAdquisicion().getTime()));
         this.statement.setInt(2, this.ejemplar.getDisponible() ? 1 : 0);
-        this.statement.setString(3, this.ejemplar.getUbicacion());
-        this.statement.setString(4, this.ejemplar.getTipo().name());
-        this.statement.setString(5, this.ejemplar.getFormatoDigital().name());
+        this.statement.setString(3, this.ejemplar.getTipo().name());
+       if(esDigital(this.ejemplar.getTipo().name()))
+            this.statement.setString(4, this.ejemplar.getFormatoDigital().name());
+        else
+            this.statement.setNull(4, java.sql.Types.VARCHAR);  // Establece NULL si es FISICO
+        this.statement.setString(5, this.ejemplar.getUbicacion());
         this.statement.setInt(6, this.ejemplar.getSede().getIdSede());
         this.statement.setInt(7, this.ejemplar.getMaterial().getIdMaterial());
     }
@@ -53,9 +61,12 @@ public class EjemplarDAOImpl extends DAOImplBase implements EjemplarDAO {
 
         this.statement.setDate(1, new Date(this.ejemplar.getFechaAdquisicion().getTime()));
         this.statement.setInt(2, this.ejemplar.getDisponible() ? 1 : 0);
-        this.statement.setString(3, this.ejemplar.getUbicacion());
-        this.statement.setString(4, this.ejemplar.getTipo().name());
-        this.statement.setString(5, this.ejemplar.getFormatoDigital().name());
+        this.statement.setString(3, this.ejemplar.getTipo().name());
+       if(esDigital(this.ejemplar.getTipo().name()))
+            this.statement.setString(4, this.ejemplar.getFormatoDigital().name());
+        else
+            this.statement.setNull(4, java.sql.Types.VARCHAR);  // Establece NULL si es FISICO
+        this.statement.setString(5, this.ejemplar.getUbicacion());
         this.statement.setInt(6, this.ejemplar.getSede().getIdSede());
         this.statement.setInt(7, this.ejemplar.getMaterial().getIdMaterial());
         this.statement.setInt(8, this.ejemplar.getIdEjemplar());
@@ -81,7 +92,15 @@ public class EjemplarDAOImpl extends DAOImplBase implements EjemplarDAO {
         this.ejemplar.setFechaAdquisicion(this.resultSet.getDate("FECHA_ADQUISICION"));
         this.ejemplar.setDisponible(this.resultSet.getInt("DISPONIBLE") == 1);
         this.ejemplar.setTipo(TipoEjemplar.valueOf(this.resultSet.getString("TIPO_EJEMPLAR")));
-        this.ejemplar.setFormatoDigital(FormatoDigital.valueOf(this.resultSet.getString("FORMATO_DIGITAL")));
+        
+        // Verificar si el FORMATO_DIGITAL es NULL antes de intentar asignarlo
+        String formatoDigitalStr = this.resultSet.getString("FORMATO_DIGITAL");
+        if (formatoDigitalStr != null) {
+            this.ejemplar.setFormatoDigital(FormatoDigital.valueOf(formatoDigitalStr));
+        } else {
+            this.ejemplar.setFormatoDigital(null);
+        }
+        
         this.ejemplar.setUbicacion(this.resultSet.getString("UBICACION"));
 
         // Crear objetos DTO básicos para las relaciones

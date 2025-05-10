@@ -139,6 +139,8 @@ public abstract class DAOImplBase {
                 System.err.println("Error al cerrar la conexión - " + ex);
             }
         }
+        
+        System.out.println(resultado);
         return resultado;
     }
 
@@ -213,6 +215,7 @@ public abstract class DAOImplBase {
             }
         }
         sql = sql.concat(sql_predicado);
+        System.out.println(sql);
         return sql;
     }
 
