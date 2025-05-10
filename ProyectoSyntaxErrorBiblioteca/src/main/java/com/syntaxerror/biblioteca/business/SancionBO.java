@@ -20,30 +20,37 @@ public class SancionBO {
         this.sancionDAO = new SancionDAOImpl();
     }
 
-    public int insertar(TipoSancion tipo, Date fecha, Double monto, Date duracion, String descripcion, PrestamoDTO prestamo) {
-        SancionDTO sancion = new SancionDTO();
-        sancion.setTipo(tipo);
-        sancion.setFecha(fecha);
-        sancion.setMonto(monto);
-        sancion.setDuracion(duracion);
-        sancion.setDescripcion(descripcion);
-        sancion.setPrestamo(prestamo);
+public int insertar(TipoSancion tipo, Date fecha, Double monto, Date duracion, String descripcion, Integer idPrestamo) {
+    SancionDTO sancion = new SancionDTO();
+    sancion.setTipo(tipo);
+    sancion.setFecha(fecha);
+    sancion.setMonto(monto);
+    sancion.setDuracion(duracion);
+    sancion.setDescripcion(descripcion);
 
-        return this.sancionDAO.insertar(sancion);
-    }
+    PrestamoDTO prestamo = new PrestamoDTO();
+    prestamo.setIdPrestamo(idPrestamo);
+    sancion.setPrestamo(prestamo);
 
-    public int modificar(Integer idSancion, TipoSancion tipo, Date fecha, Double monto, Date duracion, String descripcion, PrestamoDTO prestamo) {
-        SancionDTO sancion = new SancionDTO();
-        sancion.setIdSancion(idSancion);
-        sancion.setTipo(tipo);
-        sancion.setFecha(fecha);
-        sancion.setMonto(monto);
-        sancion.setDuracion(duracion);
-        sancion.setDescripcion(descripcion);
-        sancion.setPrestamo(prestamo);
+    return this.sancionDAO.insertar(sancion);
+}
 
-        return this.sancionDAO.modificar(sancion);
-    }
+public int modificar(Integer idSancion, TipoSancion tipo, Date fecha, Double monto, Date duracion, String descripcion, Integer idPrestamo) {
+    SancionDTO sancion = new SancionDTO();
+    sancion.setIdSancion(idSancion);
+    sancion.setTipo(tipo);
+    sancion.setFecha(fecha);
+    sancion.setMonto(monto);
+    sancion.setDuracion(duracion);
+    sancion.setDescripcion(descripcion);
+
+    PrestamoDTO prestamo = new PrestamoDTO();
+    prestamo.setIdPrestamo(idPrestamo);
+    sancion.setPrestamo(prestamo);
+
+    return this.sancionDAO.modificar(sancion);
+}
+
 
     public int eliminar(Integer idSancion) {
         SancionDTO sancion = new SancionDTO();
