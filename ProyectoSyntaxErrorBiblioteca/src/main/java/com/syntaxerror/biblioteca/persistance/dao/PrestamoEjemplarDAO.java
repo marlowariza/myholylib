@@ -1,21 +1,23 @@
 package com.syntaxerror.biblioteca.persistance.dao;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import com.syntaxerror.biblioteca.model.PrestamoEjemplarDTO;
 
 public interface PrestamoEjemplarDAO {
-    Integer insertar(PrestamoEjemplarDTO prestamoEjemplar);
+    public Integer insertar(PrestamoEjemplarDTO prestamoEjemplar);
 
-    Integer modificar(PrestamoEjemplarDTO prestamoEjemplar);
+    public PrestamoEjemplarDTO obtenerPorIds(Integer idPrestamo, Integer idEjemplar);
 
-    Integer eliminar(Integer idPrestamo, Integer idEjemplar);
+    public ArrayList<PrestamoEjemplarDTO> listarPorPrestamo(Integer idPrestamo);
 
-    PrestamoEjemplarDTO buscarPorIds(Integer idPrestamo, Integer idEjemplar);
+    public ArrayList<PrestamoEjemplarDTO> listarPorEjemplar(Integer idEjemplar);
 
-    List<PrestamoEjemplarDTO> buscarPorPrestamo(Integer idPrestamo);
+    public ArrayList<PrestamoEjemplarDTO> listarTodos();
 
-    List<PrestamoEjemplarDTO> buscarPorEjemplar(Integer idEjemplar);
+    public Integer modificar(PrestamoEjemplarDTO prestamoEjemplar);
 
-    boolean existeRelacion(Integer idPrestamo, Integer idEjemplar);
+    public Integer eliminar(Integer idPrestamo, Integer idEjemplar);
+
+    public boolean existeRelacion(Integer idPrestamo, Integer idEjemplar);
 }

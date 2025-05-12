@@ -1,8 +1,5 @@
 package com.syntaxerror.biblioteca.persistance.dao.impl;
 
-import com.syntaxerror.biblioteca.db.DBManager;
-import com.syntaxerror.biblioteca.persistance.dao.impl.util.Columna;
-import com.syntaxerror.biblioteca.persistance.dao.impl.util.Tipo_Operacion;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,6 +9,10 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.syntaxerror.biblioteca.db.DBManager;
+import com.syntaxerror.biblioteca.persistance.dao.impl.util.Columna;
+import com.syntaxerror.biblioteca.persistance.dao.impl.util.Tipo_Operacion;
 
 public abstract class DAOImplBase {
 

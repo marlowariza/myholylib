@@ -8,14 +8,19 @@ import java.util.logging.Logger;
 
 import com.syntaxerror.biblioteca.persistance.dao.impl.util.Columna;
 
-public abstract class RelacionDAOImplBase extends DAOImplBase {
+public abstract class RelacionDAOImplBase<T, U> extends DAOImplBase {
     protected String columnaId1;
     protected String columnaId2;
+    protected String tablaEntidad1;
+    protected String tablaEntidad2;
 
-    public RelacionDAOImplBase(String nombreTabla, String columnaId1, String columnaId2) {
+    public RelacionDAOImplBase(String nombreTabla, String columnaId1, String columnaId2, 
+                             String tablaEntidad1, String tablaEntidad2) {
         super(nombreTabla);
         this.columnaId1 = columnaId1;
         this.columnaId2 = columnaId2;
+        this.tablaEntidad1 = tablaEntidad1;
+        this.tablaEntidad2 = tablaEntidad2;
     }
 
     @Override
@@ -105,18 +110,16 @@ public abstract class RelacionDAOImplBase extends DAOImplBase {
         return existe;
     }
 
-    public List<Integer> buscarRelacionadosPorId1(Integer id) {
+    protected ArrayList<Integer> buscarRelacionadosPorId1(Integer id) {
         return buscarRelacionados(id, columnaId1, columnaId2);
     }
 
-    public List<Integer> buscarRelacionadosPorId2(Integer id) {
+    protected ArrayList<Integer> buscarRelacionadosPorId2(Integer id) {
         return buscarRelacionados(id, columnaId2, columnaId1);
     }
 
-    // refactoriza buscarRelacionadosPorId1 y buscarRelacionadosPorId1,
-    // parametrizando que columna se filtra
-    private List<Integer> buscarRelacionados(Integer id, String columnaFiltro, String columnaResultado) {
-        List<Integer> resultados = new ArrayList<>();
+    private ArrayList<Integer> buscarRelacionados(Integer id, String columnaFiltro, String columnaResultado) {
+        ArrayList<Integer> resultados = new ArrayList<>();
         try {
             this.abrirConexion();
             String sql = String.format("SELECT %s FROM %s WHERE %s = ?",
@@ -138,6 +141,10 @@ public abstract class RelacionDAOImplBase extends DAOImplBase {
         }
         return resultados;
     }
+
+    // Métodos abstractos que las clases hijas deben implementar
+    protected abstract T obtenerEntidad1(Integer id) throws SQLException;
+    protected abstract U obtenerEntidad2(Integer id) throws SQLException;
 
     // Métodos abstractos requeridos por DAOImplBase
     @Override

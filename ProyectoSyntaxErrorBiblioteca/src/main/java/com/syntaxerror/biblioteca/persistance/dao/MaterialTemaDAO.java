@@ -1,15 +1,18 @@
 package com.syntaxerror.biblioteca.persistance.dao;
 
-import java.util.List;
+import java.util.ArrayList;
+
+import com.syntaxerror.biblioteca.model.MaterialDTO;
+import com.syntaxerror.biblioteca.model.TemaDTO;
 
 public interface MaterialTemaDAO {
-    Integer asociarMaterialTema(Integer idMaterial, Integer idTema);
+    public Integer asociar(Integer idMaterial, Integer idTema);
 
-    Integer desasociarMaterialTema(Integer idMaterial, Integer idTema);
+    public Integer desasociar(Integer idMaterial, Integer idTema);
 
-    boolean existeAsociacion(Integer idMaterial, Integer idTema);
+    public boolean existeRelacion(Integer idMaterial, Integer idTema);
 
-    List<Integer> buscarTemasPorMaterial(Integer idMaterial);
+    public ArrayList<TemaDTO> listarTemasPorMaterial(Integer idMaterial);
 
-    List<Integer> buscarMaterialesPorTema(Integer idTema);
+    public ArrayList<MaterialDTO> listarMaterialesPorTema(Integer idTema);
 }

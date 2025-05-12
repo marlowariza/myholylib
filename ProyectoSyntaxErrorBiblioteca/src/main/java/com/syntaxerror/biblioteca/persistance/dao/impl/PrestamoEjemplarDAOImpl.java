@@ -12,9 +12,11 @@ import com.syntaxerror.biblioteca.model.enums.EstadoPrestamoEjemplar;
 import com.syntaxerror.biblioteca.persistance.dao.PrestamoEjemplarDAO;
 import com.syntaxerror.biblioteca.persistance.dao.impl.util.Columna;
 
-public class PrestamoEjemplarDAOImpl extends RelacionDAOImplBase implements PrestamoEjemplarDAO {
+public class PrestamoEjemplarDAOImpl extends RelacionDAOImplBase<PrestamoEjemplarDTO, PrestamoEjemplarDTO> implements PrestamoEjemplarDAO {
+    private static final Logger LOGGER = Logger.getLogger(PrestamoEjemplarDAOImpl.class.getName());
+    
     public PrestamoEjemplarDAOImpl() {
-        super("BIB_PRESTAMO_EJEMPLAR", "ID_PRESTAMO", "ID_EJEMPLAR");
+        super("BIB_PRESTAMO_EJEMPLAR", "ID_PRESTAMO", "ID_EJEMPLAR", "BIB_PRESTAMO", "BIB_EJEMPLAR");
     }
 
     @Override
@@ -34,65 +36,30 @@ public class PrestamoEjemplarDAOImpl extends RelacionDAOImplBase implements Pres
             this.colocarSQLenStatement(sql);
             this.statement.setInt(1, prestamoEjemplar.getIdPrestamo());
             this.statement.setInt(2, prestamoEjemplar.getIdEjemplar());
-            this.statement.setDate(3, new Date(prestamoEjemplar.getFechaRealDevolucion().getTime()));
+            this.statement.setDate(3, prestamoEjemplar.getFechaRealDevolucion() != null ? 
+                    new Date(prestamoEjemplar.getFechaRealDevolucion().getTime()) : null);
             this.statement.setString(4, prestamoEjemplar.getEstado().name());
             resultado = this.ejecutarModificacionEnBD();
             this.comitarTransaccion();
         } catch (SQLException ex) {
-            Logger.getLogger(PrestamoEjemplarDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
             try {
                 this.rollbackTransaccion();
             } catch (SQLException ex1) {
-                Logger.getLogger(PrestamoEjemplarDAOImpl.class.getName()).log(Level.SEVERE, null, ex1);
+                LOGGER.log(Level.SEVERE, null, ex1);
             }
         } finally {
             try {
                 this.cerrarConexion();
             } catch (SQLException ex) {
-                Logger.getLogger(PrestamoEjemplarDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                LOGGER.log(Level.SEVERE, null, ex);
             }
         }
         return resultado;
     }
 
     @Override
-    public Integer modificar(PrestamoEjemplarDTO prestamoEjemplar) {
-        int resultado = 0;
-        try {
-            this.iniciarTransaccion();
-            String sql = String.format("UPDATE %s SET FECHA_DEVOLUCION_REAL = ?, ESTADO = ? WHERE %s = ? AND %s = ?",
-                    nombreTabla, columnaId1, columnaId2);
-            this.colocarSQLenStatement(sql);
-            this.statement.setDate(1, new Date(prestamoEjemplar.getFechaRealDevolucion().getTime()));
-            this.statement.setString(2, prestamoEjemplar.getEstado().name());
-            this.statement.setInt(3, prestamoEjemplar.getIdPrestamo());
-            this.statement.setInt(4, prestamoEjemplar.getIdEjemplar());
-            resultado = this.ejecutarModificacionEnBD();
-            this.comitarTransaccion();
-        } catch (SQLException ex) {
-            Logger.getLogger(PrestamoEjemplarDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            try {
-                this.rollbackTransaccion();
-            } catch (SQLException ex1) {
-                Logger.getLogger(PrestamoEjemplarDAOImpl.class.getName()).log(Level.SEVERE, null, ex1);
-            }
-        } finally {
-            try {
-                this.cerrarConexion();
-            } catch (SQLException ex) {
-                Logger.getLogger(PrestamoEjemplarDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return resultado;
-    }
-
-    @Override
-    public Integer eliminar(Integer idPrestamo, Integer idEjemplar) {
-        return super.eliminarRelacion(idPrestamo, idEjemplar);
-    }
-
-    @Override
-    public PrestamoEjemplarDTO buscarPorIds(Integer idPrestamo, Integer idEjemplar) {
+    public PrestamoEjemplarDTO obtenerPorIds(Integer idPrestamo, Integer idEjemplar) {
         PrestamoEjemplarDTO prestamoEjemplar = null;
         try {
             this.abrirConexion();
@@ -106,30 +73,90 @@ public class PrestamoEjemplarDAOImpl extends RelacionDAOImplBase implements Pres
                 prestamoEjemplar = mapearResultSetADTO();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PrestamoEjemplarDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
         } finally {
             try {
                 this.cerrarConexion();
             } catch (SQLException ex) {
-                Logger.getLogger(PrestamoEjemplarDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                LOGGER.log(Level.SEVERE, null, ex);
             }
         }
         return prestamoEjemplar;
     }
 
     @Override
-    public List<PrestamoEjemplarDTO> buscarPorPrestamo(Integer idPrestamo) {
-        return buscarRelacionados(idPrestamo, columnaId1);
+    public ArrayList<PrestamoEjemplarDTO> listarPorPrestamo(Integer idPrestamo) {
+        return new ArrayList<>(buscarRelacionados(idPrestamo, columnaId1));
     }
 
     @Override
-    public List<PrestamoEjemplarDTO> buscarPorEjemplar(Integer idEjemplar) {
-        return buscarRelacionados(idEjemplar, columnaId2);
+    public ArrayList<PrestamoEjemplarDTO> listarPorEjemplar(Integer idEjemplar) {
+        return new ArrayList<>(buscarRelacionados(idEjemplar, columnaId2));
+    }
+
+    @Override
+    public ArrayList<PrestamoEjemplarDTO> listarTodos() {
+        ArrayList<PrestamoEjemplarDTO> resultados = new ArrayList<>();
+        try {
+            this.abrirConexion();
+            String sql = String.format("SELECT * FROM %s", nombreTabla);
+            this.colocarSQLenStatement(sql);
+            this.ejecutarConsultaEnBD();
+            while (this.resultSet.next()) {
+                resultados.add(mapearResultSetADTO());
+            }
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                this.cerrarConexion();
+            } catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+        }
+        return resultados;
+    }
+
+    @Override
+    public Integer modificar(PrestamoEjemplarDTO prestamoEjemplar) {
+        int resultado = 0;
+        try {
+            this.iniciarTransaccion();
+            String sql = String.format("UPDATE %s SET FECHA_DEVOLUCION_REAL = ?, ESTADO = ? WHERE %s = ? AND %s = ?",
+                    nombreTabla, columnaId1, columnaId2);
+            this.colocarSQLenStatement(sql);
+            this.statement.setDate(1, prestamoEjemplar.getFechaRealDevolucion() != null ? 
+                    new Date(prestamoEjemplar.getFechaRealDevolucion().getTime()) : null);
+            this.statement.setString(2, prestamoEjemplar.getEstado().name());
+            this.statement.setInt(3, prestamoEjemplar.getIdPrestamo());
+            this.statement.setInt(4, prestamoEjemplar.getIdEjemplar());
+            resultado = this.ejecutarModificacionEnBD();
+            this.comitarTransaccion();
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, null, ex);
+            try {
+                this.rollbackTransaccion();
+            } catch (SQLException ex1) {
+                LOGGER.log(Level.SEVERE, null, ex1);
+            }
+        } finally {
+            try {
+                this.cerrarConexion();
+            } catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+        }
+        return resultado;
+    }
+
+    @Override
+    public Integer eliminar(Integer idPrestamo, Integer idEjemplar) {
+        return eliminarRelacion(idPrestamo, idEjemplar);
     }
 
     @Override
     public boolean existeRelacion(Integer idPrestamo, Integer idEjemplar) {
-        return super.existeRelacion(idPrestamo, idEjemplar);
+        return existeRelacion(idPrestamo, idEjemplar);
     }
 
     private List<PrestamoEjemplarDTO> buscarRelacionados(Integer id, String columnaFiltro) {
@@ -144,12 +171,12 @@ public class PrestamoEjemplarDAOImpl extends RelacionDAOImplBase implements Pres
                 resultados.add(mapearResultSetADTO());
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PrestamoEjemplarDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
         } finally {
             try {
                 this.cerrarConexion();
             } catch (SQLException ex) {
-                Logger.getLogger(PrestamoEjemplarDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                LOGGER.log(Level.SEVERE, null, ex);
             }
         }
         return resultados;
@@ -162,5 +189,15 @@ public class PrestamoEjemplarDAOImpl extends RelacionDAOImplBase implements Pres
         dto.setFechaRealDevolucion(this.resultSet.getDate("FECHA_DEVOLUCION_REAL"));
         dto.setEstado(EstadoPrestamoEjemplar.valueOf(this.resultSet.getString("ESTADO")));
         return dto;
+    }
+
+    @Override
+    protected PrestamoEjemplarDTO obtenerEntidad1(Integer id) throws SQLException {
+        return obtenerPorIds(id, null);
+    }
+
+    @Override
+    protected PrestamoEjemplarDTO obtenerEntidad2(Integer id) throws SQLException {
+        return obtenerPorIds(null, id);
     }
 }
