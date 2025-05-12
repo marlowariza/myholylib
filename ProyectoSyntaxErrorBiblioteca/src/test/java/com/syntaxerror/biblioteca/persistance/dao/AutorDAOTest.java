@@ -4,39 +4,25 @@
  */
 package com.syntaxerror.biblioteca.persistance.dao;
 
-import com.syntaxerror.biblioteca.db.DBManager;
-import com.syntaxerror.biblioteca.model.AutorDTO;
-import com.syntaxerror.biblioteca.persistance.dao.impl.AutorDAOImpl;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.syntaxerror.biblioteca.model.CreadorDTO;
+import com.syntaxerror.biblioteca.model.enums.TipoAutor;
+import com.syntaxerror.biblioteca.persistance.dao.impl.CreadorDAOImpl;
 import java.util.ArrayList;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Order;
 
 /**
- *
- * @author Fabian
+ * Test class for CreadorDAO implementation
  */
 public class AutorDAOTest {
 
-    private AutorDAO autorDAO;
+    private final CreadorDAO creadorDAO;
 
     public AutorDAOTest() {
-        this.autorDAO = new AutorDAOImpl(); // Instancia el objeto correctamente
+        this.creadorDAO = new CreadorDAOImpl();
     }
 
-    /**
-     * Test of insertar method, of class SedeDAO.
-     */
-//
     @Test
     @Order(1)
     public void testInsertar() {
@@ -48,24 +34,29 @@ public class AutorDAOTest {
     }
 
     private void insertarAutores(ArrayList<Integer> listaIdAutor) {
-        AutorDTO autor = new AutorDTO();
-        autor.setNombre("J.K. Rowling");
+        CreadorDTO autor = new CreadorDTO();
+        autor.setNombre("J.K.");
+        autor.setPaterno("Rowling");
+        autor.setMaterno("");
+        autor.setSeudonimo("J.K. Rowling");
+        autor.setTipo(TipoAutor.AUTOR);
         autor.setNacionalidad("Británica");
         autor.setActivo(true);
-        autor.setCantidadObras(15);
-        
 
-        Integer resultado = this.autorDAO.insertar(autor);
+        Integer resultado = this.creadorDAO.insertar(autor);
         assertTrue(resultado != 0);
         listaIdAutor.add(resultado);
         
-        autor.setNombre("George Orwell");
+        autor = new CreadorDTO(); // Create new instance to avoid reusing same object
+        autor.setNombre("George");
+        autor.setPaterno("Orwell");
+        autor.setMaterno("");
+        autor.setSeudonimo("George Orwell");
+        autor.setTipo(TipoAutor.AUTOR);
         autor.setNacionalidad("Británico");
         autor.setActivo(false);
-        autor.setCantidadObras(10);
-        
 
-        resultado = this.autorDAO.insertar(autor);
+        resultado = this.creadorDAO.insertar(autor);
         assertTrue(resultado != 0);
         listaIdAutor.add(resultado);
     }
@@ -76,11 +67,24 @@ public class AutorDAOTest {
         System.out.println("obtenerPorId");
         ArrayList<Integer> listaIdAutor = new ArrayList<>();
         insertarAutores(listaIdAutor);
-        AutorDTO autor = this.autorDAO.obtenerPorId(listaIdAutor.get(0));
-        assertEquals(autor.getIdAutor(), listaIdAutor.get(0));
+        
+        CreadorDTO autor = this.creadorDAO.obtenerPorId(listaIdAutor.get(0));
+        assertNotNull(autor);
+        assertEquals(listaIdAutor.get(0), autor.getIdAutor());
+        assertEquals("J.K.", autor.getNombre());
+        assertEquals("Rowling", autor.getPaterno());
+        assertEquals("J.K. Rowling", autor.getSeudonimo());
+        assertEquals("Británica", autor.getNacionalidad());
+        assertTrue(autor.getActivo());
 
-        autor = this.autorDAO.obtenerPorId(listaIdAutor.get(1));
-        assertEquals(autor.getIdAutor(), listaIdAutor.get(1));
+        autor = this.creadorDAO.obtenerPorId(listaIdAutor.get(1));
+        assertNotNull(autor);
+        assertEquals(listaIdAutor.get(1), autor.getIdAutor());
+        assertEquals("George", autor.getNombre());
+        assertEquals("Orwell", autor.getPaterno());
+        assertEquals("George Orwell", autor.getSeudonimo());
+        assertEquals("Británico", autor.getNacionalidad());
+        assertFalse(autor.getActivo());
 
         eliminarTodo();
     }
@@ -92,7 +96,7 @@ public class AutorDAOTest {
         ArrayList<Integer> listaIdAutor = new ArrayList<>();
         insertarAutores(listaIdAutor);
 
-        ArrayList<AutorDTO> listaAutores = this.autorDAO.listarTodos();
+        ArrayList<CreadorDTO> listaAutores = this.creadorDAO.listarTodos();
         assertEquals(listaIdAutor.size(), listaAutores.size());
         for (Integer i = 0; i < listaIdAutor.size(); i++) {
             assertEquals(listaIdAutor.get(i), listaAutores.get(i).getIdAutor());
@@ -107,24 +111,31 @@ public class AutorDAOTest {
         ArrayList<Integer> listaIdAutor = new ArrayList<>();
         insertarAutores(listaIdAutor);
 
-        ArrayList<AutorDTO> listaAutores = this.autorDAO.listarTodos();
+        ArrayList<CreadorDTO> listaAutores = this.creadorDAO.listarTodos();
         assertEquals(listaIdAutor.size(), listaAutores.size());
+        
         for (Integer i = 0; i < listaIdAutor.size(); i++) {
-            listaAutores.get(i).setNombre("NuevoNombre" + i.toString());
-            listaAutores.get(i).setNacionalidad("NuevoSitioWeb" + i.toString());
-            listaAutores.get(i).setActivo(!listaAutores.get(i).getActivo());
-            listaAutores.get(i).setCantidadObras(listaAutores.get(i).getCantidadObras()-3);
-            this.autorDAO.modificar(listaAutores.get(i));
-
+            CreadorDTO autor = listaAutores.get(i);
+            autor.setNombre("NuevoNombre" + i);
+            autor.setPaterno("NuevoPaterno" + i);
+            autor.setMaterno("NuevoMaterno" + i);
+            autor.setSeudonimo("NuevoSeudonimo" + i);
+            autor.setNacionalidad("NuevaNacionalidad" + i);
+            autor.setActivo(!autor.getActivo());
+            
+            Integer resultado = this.creadorDAO.modificar(autor);
+            assertNotEquals(0, resultado);
         }
 
-        ArrayList<AutorDTO> listaAutoresModificados = this.autorDAO.listarTodos();
+        ArrayList<CreadorDTO> listaAutoresModificados = this.creadorDAO.listarTodos();
         assertEquals(listaAutores.size(), listaAutoresModificados.size());
         for (Integer i = 0; i < listaAutores.size(); i++) {
             assertEquals(listaAutores.get(i).getNombre(), listaAutoresModificados.get(i).getNombre());
+            assertEquals(listaAutores.get(i).getPaterno(), listaAutoresModificados.get(i).getPaterno());
+            assertEquals(listaAutores.get(i).getMaterno(), listaAutoresModificados.get(i).getMaterno());
+            assertEquals(listaAutores.get(i).getSeudonimo(), listaAutoresModificados.get(i).getSeudonimo());
             assertEquals(listaAutores.get(i).getNacionalidad(), listaAutoresModificados.get(i).getNacionalidad());
             assertEquals(listaAutores.get(i).getActivo(), listaAutoresModificados.get(i).getActivo());
-            assertEquals(listaAutores.get(i).getCantidadObras(), listaAutoresModificados.get(i).getCantidadObras());
         }
         eliminarTodo();
     }
@@ -139,12 +150,12 @@ public class AutorDAOTest {
     }
 
     private void eliminarTodo() {
-        ArrayList<AutorDTO> listaAutores = this.autorDAO.listarTodos();
-        for (Integer i = 0; i < listaAutores.size(); i++) {
-            Integer resultado = this.autorDAO.eliminar(listaAutores.get(i));
+        ArrayList<CreadorDTO> listaAutores = this.creadorDAO.listarTodos();
+        for (CreadorDTO autor : listaAutores) {
+            Integer resultado = this.creadorDAO.eliminar(autor);
             assertNotEquals(0, resultado);
-            AutorDTO almacen = this.autorDAO.obtenerPorId(listaAutores.get(i).getIdAutor());
-            assertNull(almacen);
+            CreadorDTO autorEliminado = this.creadorDAO.obtenerPorId(autor.getIdAutor());
+            assertNull(autorEliminado);
         }
     }
 }

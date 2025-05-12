@@ -5,17 +5,17 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.syntaxerror.biblioteca.model.AutorDTO;
+import com.syntaxerror.biblioteca.model.CreadorDTO;
 import com.syntaxerror.biblioteca.model.enums.TipoAutor;
-import com.syntaxerror.biblioteca.persistance.dao.AutorDAO;
 import com.syntaxerror.biblioteca.persistance.dao.impl.util.Columna;
 import java.util.List;
+import com.syntaxerror.biblioteca.persistance.dao.CreadorDAO;
 
-public class AutorDAOImpl extends DAOImplBase implements AutorDAO {
+public class CreadorDAOImpl extends DAOImplBase implements CreadorDAO {
 
-    private AutorDTO autor;
+    private CreadorDTO autor;
 
-    public AutorDAOImpl() {
+    public CreadorDAOImpl() {
         super("BIB_CREADOR");
         this.retornarLlavePrimaria = true;
         this.autor = null;
@@ -31,11 +31,10 @@ public class AutorDAOImpl extends DAOImplBase implements AutorDAO {
         this.listaColumnas.add(new Columna("TIPO_AUTOR", false, false));
         this.listaColumnas.add(new Columna("NACIONALIDAD", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
-        this.listaColumnas.add(new Columna("CANTIDAD_OBRAS", false, false));
     }
 
     @Override
-    public Integer insertar(AutorDTO autor) {
+    public Integer insertar(CreadorDTO autor) {
         this.autor = autor;
         return super.insertar();
     }
@@ -50,9 +49,8 @@ public class AutorDAOImpl extends DAOImplBase implements AutorDAO {
             this.statement.setString(5, this.autor.getTipo().name());
             this.statement.setString(6, this.autor.getNacionalidad());
             this.statement.setInt(7, this.autor.getActivo() ? 1 : 0);
-            this.statement.setInt(8, this.autor.getCantidadObras());
         } catch (SQLException ex) {
-            Logger.getLogger(AutorDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreadorDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -66,8 +64,7 @@ public class AutorDAOImpl extends DAOImplBase implements AutorDAO {
         this.statement.setString(5, this.autor.getTipo().name());
         this.statement.setString(6, this.autor.getNacionalidad());
         this.statement.setInt(7, this.autor.getActivo() ? 1 : 0);
-        this.statement.setInt(8, this.autor.getCantidadObras());
-        this.statement.setInt(9, this.autor.getIdAutor());
+        this.statement.setInt(8, this.autor.getIdAutor());
         //En modificar el ID va al ultimo
     }
 
@@ -85,7 +82,7 @@ public class AutorDAOImpl extends DAOImplBase implements AutorDAO {
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
-        this.autor = new AutorDTO();
+        this.autor = new CreadorDTO();
         autor.setIdAutor(this.resultSet.getInt("ID_AUTOR"));
         autor.setNombre(this.resultSet.getString("NOMBRE"));
         autor.setPaterno(this.resultSet.getString("PATERNO"));
@@ -94,7 +91,6 @@ public class AutorDAOImpl extends DAOImplBase implements AutorDAO {
         autor.setTipo(TipoAutor.valueOf(this.resultSet.getString("TIPO_AUTOR")));
         autor.setNacionalidad(this.resultSet.getString("NACIONALIDAD"));
         autor.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        autor.setCantidadObras(this.resultSet.getInt("CANTIDAD_OBRAS"));
     }
 
     @Override
@@ -109,26 +105,26 @@ public class AutorDAOImpl extends DAOImplBase implements AutorDAO {
     }
 
     @Override
-    public AutorDTO obtenerPorId(Integer idAutor) {
-        this.autor = new AutorDTO();
+    public CreadorDTO obtenerPorId(Integer idAutor) {
+        this.autor = new CreadorDTO();
         this.autor.setIdAutor(idAutor);
         super.obtenerPorId();
         return this.autor;
     }
 
     @Override
-    public ArrayList<AutorDTO> listarTodos() {
-        return (ArrayList<AutorDTO>) super.listarTodos();
+    public ArrayList<CreadorDTO> listarTodos() {
+        return (ArrayList<CreadorDTO>) super.listarTodos();
     }
 
     @Override
-    public Integer modificar(AutorDTO autor) {
+    public Integer modificar(CreadorDTO autor) {
         this.autor = autor;
         return super.modificar();
     }
 
     @Override
-    public Integer eliminar(AutorDTO autor) {
+    public Integer eliminar(CreadorDTO autor) {
         this.autor = autor;
         return super.eliminar();
     }

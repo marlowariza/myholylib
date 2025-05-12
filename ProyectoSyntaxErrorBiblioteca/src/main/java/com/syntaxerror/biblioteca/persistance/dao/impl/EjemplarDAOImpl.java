@@ -37,25 +37,27 @@ public class EjemplarDAOImpl extends DAOImplBase implements EjemplarDAO {
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-
         //si es autoincremental, se salta el (1,ID)
         this.statement.setDate(1, new Date(this.ejemplar.getFechaAdquisicion().getTime()));
         this.statement.setInt(2, this.ejemplar.getDisponible() ? 1 : 0);
         this.statement.setString(3, this.ejemplar.getUbicacion());
         this.statement.setString(4, this.ejemplar.getTipo().name());
-        this.statement.setString(5, this.ejemplar.getFormatoDigital().name());
+        // Manejar formato digital null para ejemplares físicos
+        FormatoDigital formato = this.ejemplar.getFormatoDigital();
+        this.statement.setString(5, formato != null ? formato.name() : null);
         this.statement.setInt(6, this.ejemplar.getSede().getIdSede());
         this.statement.setInt(7, this.ejemplar.getMaterial().getIdMaterial());
     }
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-
         this.statement.setDate(1, new Date(this.ejemplar.getFechaAdquisicion().getTime()));
         this.statement.setInt(2, this.ejemplar.getDisponible() ? 1 : 0);
         this.statement.setString(3, this.ejemplar.getUbicacion());
         this.statement.setString(4, this.ejemplar.getTipo().name());
-        this.statement.setString(5, this.ejemplar.getFormatoDigital().name());
+        // Manejar formato digital null para ejemplares físicos
+        FormatoDigital formato = this.ejemplar.getFormatoDigital();
+        this.statement.setString(5, formato != null ? formato.name() : null);
         this.statement.setInt(6, this.ejemplar.getSede().getIdSede());
         this.statement.setInt(7, this.ejemplar.getMaterial().getIdMaterial());
         this.statement.setInt(8, this.ejemplar.getIdEjemplar());
@@ -81,7 +83,9 @@ public class EjemplarDAOImpl extends DAOImplBase implements EjemplarDAO {
         this.ejemplar.setFechaAdquisicion(this.resultSet.getDate("FECHA_ADQUISICION"));
         this.ejemplar.setDisponible(this.resultSet.getInt("DISPONIBLE") == 1);
         this.ejemplar.setTipo(TipoEjemplar.valueOf(this.resultSet.getString("TIPO_EJEMPLAR")));
-        this.ejemplar.setFormatoDigital(FormatoDigital.valueOf(this.resultSet.getString("FORMATO_DIGITAL")));
+        // Manejar formato digital null para ejemplares físicos
+        String formatoStr = this.resultSet.getString("FORMATO_DIGITAL");
+        this.ejemplar.setFormatoDigital(formatoStr != null ? FormatoDigital.valueOf(formatoStr) : null);
         this.ejemplar.setUbicacion(this.resultSet.getString("UBICACION"));
 
         // Crear objetos DTO básicos para las relaciones
@@ -92,7 +96,6 @@ public class EjemplarDAOImpl extends DAOImplBase implements EjemplarDAO {
         MaterialDTO material = new MaterialDTO();
         material.setIdMaterial(this.resultSet.getInt("MATERIAL_IDMATERIAL"));
         this.ejemplar.setMaterial(material);
-
     }
 
     @Override

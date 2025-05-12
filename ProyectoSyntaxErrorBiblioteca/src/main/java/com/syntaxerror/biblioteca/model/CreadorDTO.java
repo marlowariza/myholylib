@@ -2,7 +2,7 @@ package com.syntaxerror.biblioteca.model;
 
 import com.syntaxerror.biblioteca.model.enums.TipoAutor;
 
-public class AutorDTO {
+public class CreadorDTO {
 
     private Integer idAutor;
     private String nombre;
@@ -12,10 +12,9 @@ public class AutorDTO {
     private TipoAutor tipo;
     private String nacionalidad;
     private Boolean activo;
-    private Integer cantidadObras;
 
     // Constructores
-    public AutorDTO() {
+    public CreadorDTO() {
         this.idAutor = null;
         this.nombre = null;
         this.paterno = null;
@@ -24,10 +23,9 @@ public class AutorDTO {
         this.tipo = null;
         this.nacionalidad = null;
         this.activo = null;
-        this.cantidadObras = null;
     }
 
-    public AutorDTO(Integer idAutor, String nombre, String paterno, String materno,
+    public CreadorDTO(Integer idAutor, String nombre, String paterno, String materno,
             String seudonimo, TipoAutor tipo, String nacionalidad, Boolean activo, Integer cantidadObras) {
         this.idAutor = idAutor;
         this.nombre = nombre;
@@ -37,10 +35,9 @@ public class AutorDTO {
         this.tipo = tipo;
         this.nacionalidad = nacionalidad;
         this.activo = activo;
-        this.cantidadObras = cantidadObras;
     }
 
-    public AutorDTO(AutorDTO autor) {
+    public CreadorDTO(CreadorDTO autor) {
         this.idAutor = autor.idAutor;
         this.nombre = autor.nombre;
         this.paterno = autor.paterno;
@@ -49,7 +46,6 @@ public class AutorDTO {
         this.tipo = autor.tipo;
         this.nacionalidad = autor.nacionalidad;
         this.activo = autor.activo;
-        this.cantidadObras = autor.cantidadObras;
     }
 
     // Getters y Setters
@@ -83,14 +79,6 @@ public class AutorDTO {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
-    }
-
-    public Integer getCantidadObras() {
-        return cantidadObras;
-    }
-
-    public void setCantidadObras(Integer cantidadObras) {
-        this.cantidadObras = cantidadObras;
     }
 
     public String getPaterno() {
