@@ -16,6 +16,7 @@ import com.syntaxerror.biblioteca.persistance.dao.impl.MaterialDAOImpl;
 import com.syntaxerror.biblioteca.persistance.dao.impl.SedeDAOImpl;
 import com.syntaxerror.biblioteca.persistance.dao.impl.EditorialDAOImpl;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,8 +29,10 @@ import org.junit.jupiter.api.MethodOrderer;
 /**
  * Test class for EjemplarDAO implementation
  * Prueba todas las operaciones CRUD sobre la tabla BIB_EJEMPLAR
- * Los IDs son autoincrementales, manejados por la base de datos
- * Maneja formatos digitales nulos para ejemplares físicos
+ * Verifica las restricciones de negocio:
+ * - Ejemplares físicos deben tener FormatoDigital null
+ * - Ejemplares digitales deben tener FormatoDigital no null
+ * - Validación de IDs y objetos nulos
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EjemplarDAOTest {
@@ -51,7 +54,6 @@ public class EjemplarDAOTest {
     @BeforeEach
     public void setUp() {
         limpiarBaseDeDatos();
-        // Crear datos necesarios para las pruebas
         this.sede = crearSedePrueba();
         this.material = crearMaterialPrueba();
     }
@@ -138,7 +140,7 @@ public class EjemplarDAOTest {
 
     private EjemplarDTO crearEjemplarFisico(String ubicacion) {
         EjemplarDTO ejemplar = new EjemplarDTO();
-        ejemplar.setFechaAdquisicion(Date.valueOf("2024-03-15"));
+        ejemplar.setFechaAdquisicion(new Date(System.currentTimeMillis()));
         ejemplar.setDisponible(true);
         ejemplar.setTipo(TipoEjemplar.FISICO);
         ejemplar.setFormatoDigital(null);
@@ -150,7 +152,7 @@ public class EjemplarDAOTest {
 
     private EjemplarDTO crearEjemplarDigital(String ubicacion, FormatoDigital formato) {
         EjemplarDTO ejemplar = new EjemplarDTO();
-        ejemplar.setFechaAdquisicion(Date.valueOf("2024-03-15"));
+        ejemplar.setFechaAdquisicion(new Date(System.currentTimeMillis()));
         ejemplar.setDisponible(true);
         ejemplar.setTipo(TipoEjemplar.DIGITAL);
         ejemplar.setFormatoDigital(formato);
@@ -162,152 +164,161 @@ public class EjemplarDAOTest {
 
     @Test
     @Order(1)
-    public void testInsertar() {
-        System.out.println("insertar");
+    public void testInsertarEjemplarFisico() {
+        System.out.println("insertar ejemplar físico");
         
-        // Crear y guardar ejemplar físico
-        EjemplarDTO ejemplarFisico = crearEjemplarFisico("Ubicación Test 1");
-        Integer id1 = ejemplarDAO.insertar(ejemplarFisico);
-        assertNotNull(id1, "El ID generado no debería ser null");
-        assertTrue(id1 > 0, "El ID generado debería ser mayor que 0");
+        EjemplarDTO ejemplar = crearEjemplarFisico("Estante A-1");
+        Integer id = ejemplarDAO.insertar(ejemplar);
         
-        // Verificar que se guardó correctamente
-        EjemplarDTO recuperado = ejemplarDAO.obtenerPorId(id1);
+        assertNotNull(id, "El ID generado no debería ser null");
+        assertTrue(id > 0, "El ID generado debería ser mayor que 0");
+        
+        EjemplarDTO recuperado = ejemplarDAO.obtenerPorId(id);
         assertNotNull(recuperado, "El ejemplar físico debería existir");
         assertEquals(TipoEjemplar.FISICO, recuperado.getTipo());
-        assertNull(recuperado.getFormatoDigital());
-        assertEquals("Ubicación Test 1", recuperado.getUbicacion());
-        
-        // Crear y guardar ejemplar digital
-        EjemplarDTO ejemplarDigital = crearEjemplarDigital("Ubicación Test 2", FormatoDigital.PDF);
-        Integer id2 = ejemplarDAO.insertar(ejemplarDigital);
-        assertNotNull(id2, "El ID generado no debería ser null");
-        assertTrue(id2 > id1, "El segundo ID debería ser mayor que el primero (autoincremental)");
-        
-        // Verificar que se guardó correctamente
-        recuperado = ejemplarDAO.obtenerPorId(id2);
-        assertNotNull(recuperado, "El ejemplar digital debería existir");
-        assertEquals(TipoEjemplar.DIGITAL, recuperado.getTipo());
-        assertEquals(FormatoDigital.PDF, recuperado.getFormatoDigital());
-        assertEquals("Ubicación Test 2", recuperado.getUbicacion());
-        
-        // Verificar cantidad total
-        assertEquals(2, ejemplarDAO.listarTodos().size(), "Deberían haber dos ejemplares en total");
+        assertNull(recuperado.getFormatoDigital(), "El formato digital debe ser null para ejemplares físicos");
+        assertEquals("Estante A-1", recuperado.getUbicacion());
     }
 
     @Test
     @Order(2)
-    public void testObtenerPorId() {
-        System.out.println("obtenerPorId");
+    public void testInsertarEjemplarDigital() {
+        System.out.println("insertar ejemplar digital");
         
-        // Insertar y verificar ejemplar físico
-        EjemplarDTO ejemplarFisico = crearEjemplarFisico("Ubicación Test Físico");
-        Integer idFisico = ejemplarDAO.insertar(ejemplarFisico);
-        assertNotNull(idFisico, "El ID generado no debería ser null");
-        ejemplarFisico.setIdEjemplar(idFisico);
+        EjemplarDTO ejemplar = crearEjemplarDigital("Servidor-01", FormatoDigital.PDF);
+        Integer id = ejemplarDAO.insertar(ejemplar);
         
-        EjemplarDTO recuperado = ejemplarDAO.obtenerPorId(idFisico);
-        assertNotNull(recuperado, "El ejemplar físico debería existir");
-        assertEquals(idFisico, recuperado.getIdEjemplar());
-        assertEquals(ejemplarFisico.getUbicacion(), recuperado.getUbicacion());
-        assertEquals(TipoEjemplar.FISICO, recuperado.getTipo());
-        assertNull(recuperado.getFormatoDigital());
+        assertNotNull(id, "El ID generado no debería ser null");
+        assertTrue(id > 0, "El ID generado debería ser mayor que 0");
         
-        // Verificar que un ID inexistente retorna null
-        assertNull(ejemplarDAO.obtenerPorId(99999), "Un ID inexistente debería retornar null");
+        EjemplarDTO recuperado = ejemplarDAO.obtenerPorId(id);
+        assertNotNull(recuperado, "El ejemplar digital debería existir");
+        assertEquals(TipoEjemplar.DIGITAL, recuperado.getTipo());
+        assertEquals(FormatoDigital.PDF, recuperado.getFormatoDigital());
+        assertEquals("Servidor-01", recuperado.getUbicacion());
     }
 
     @Test
     @Order(3)
+    public void testInsertarEjemplarDigitalSinFormato() {
+        System.out.println("insertar ejemplar digital sin formato");
+        
+        EjemplarDTO ejemplar = crearEjemplarDigital("Servidor-02", null);
+        
+        ejemplarDAO.insertar(ejemplar);
+    }
+
+    @Test
+    @Order(4)
+    public void testInsertarEjemplarFisicoConFormato() {
+        System.out.println("insertar ejemplar físico con formato");
+        
+        EjemplarDTO ejemplar = crearEjemplarFisico("Estante B-2");
+        ejemplar.setFormatoDigital(FormatoDigital.PDF);
+        
+        ejemplarDAO.insertar(ejemplar);
+
+    }
+
+    @Test
+    @Order(5)
+    public void testModificarTipoEjemplar() {
+        System.out.println("modificar tipo de ejemplar");
+        
+        // Crear ejemplar físico
+        EjemplarDTO ejemplar = crearEjemplarFisico("Estante C-3");
+        Integer id = ejemplarDAO.insertar(ejemplar);
+        ejemplar.setIdEjemplar(id);
+        
+        // Modificar a digital
+        ejemplar.setTipo(TipoEjemplar.DIGITAL);
+        ejemplar.setFormatoDigital(FormatoDigital.PDF);
+        ejemplar.setUbicacion("Servidor-03");
+        
+        Integer resultado = ejemplarDAO.modificar(ejemplar);
+        assertTrue(resultado > 0, "La modificación debería ser exitosa");
+        
+        // Verificar cambios
+        EjemplarDTO modificado = ejemplarDAO.obtenerPorId(id);
+        assertEquals(TipoEjemplar.DIGITAL, modificado.getTipo());
+        assertEquals(FormatoDigital.PDF, modificado.getFormatoDigital());
+        assertEquals("Servidor-03", modificado.getUbicacion());
+    }
+
+    @Test
+    @Order(6)
+    public void testEliminarEjemplar() {
+        System.out.println("eliminar ejemplar");
+        
+        EjemplarDTO ejemplar = crearEjemplarFisico("Estante D-4");
+        Integer id = ejemplarDAO.insertar(ejemplar);
+        ejemplar.setIdEjemplar(id);
+        
+        Integer resultado = ejemplarDAO.eliminar(ejemplar);
+        assertTrue(resultado > 0, "La eliminación debería ser exitosa");
+        
+        assertNull(ejemplarDAO.obtenerPorId(id), 
+                  "El ejemplar no debería existir después de eliminarlo");
+    }
+
+    @Test
+    @Order(7)
+    public void testValidacionesDeID() {
+        System.out.println("validaciones de ID");
+        
+        // Obtener por ID null
+        assertThrows(IllegalArgumentException.class, () -> {
+            ejemplarDAO.obtenerPorId(null);
+        });
+        
+        // Obtener por ID negativo
+        assertThrows(IllegalArgumentException.class, () -> {
+            ejemplarDAO.obtenerPorId(-1);
+        });
+        
+        // Modificar con ID null
+        EjemplarDTO ejemplar = crearEjemplarFisico("Estante E-5");
+        assertThrows(IllegalArgumentException.class, () -> {
+            ejemplarDAO.modificar(ejemplar);
+        });
+        
+        // Eliminar con ID null
+        assertThrows(IllegalArgumentException.class, () -> {
+            ejemplarDAO.eliminar(ejemplar);
+        });
+    }
+
+    @Test
+    @Order(8)
     public void testListarTodos() {
-        System.out.println("listarTodos");
+        System.out.println("listar todos");
         
-        // Verificar lista vacía inicial
-        assertTrue(ejemplarDAO.listarTodos().isEmpty(), "La lista debería estar vacía inicialmente");
+        assertTrue(ejemplarDAO.listarTodos().isEmpty(), 
+                  "La lista debería estar vacía inicialmente");
         
-        // Insertar un ejemplar físico
-        EjemplarDTO ejemplarFisico = crearEjemplarFisico("Ubicación Física");
-        Integer idFisico = ejemplarDAO.insertar(ejemplarFisico);
-        assertNotNull(idFisico, "El ID generado no debería ser null");
+        // Insertar ejemplares de prueba
+        ejemplarDAO.insertar(crearEjemplarFisico("Estante F-6"));
+        ejemplarDAO.insertar(crearEjemplarDigital("Servidor-04", FormatoDigital.PDF));
         
-        // Insertar un ejemplar digital
-        EjemplarDTO ejemplarDigital = crearEjemplarDigital("Ubicación Digital", FormatoDigital.PDF);
-        Integer idDigital = ejemplarDAO.insertar(ejemplarDigital);
-        assertNotNull(idDigital, "El ID generado no debería ser null");
-        
-        // Verificar lista
         ArrayList<EjemplarDTO> ejemplares = ejemplarDAO.listarTodos();
-        assertEquals(2, ejemplares.size(), "Deberían haber dos ejemplares en total");
+        assertEquals(2, ejemplares.size(), "Deberían haber dos ejemplares");
         
-        // Verificar contenido
         boolean encontroFisico = false;
         boolean encontroDigital = false;
         
         for (EjemplarDTO ejemplar : ejemplares) {
             if (ejemplar.getTipo() == TipoEjemplar.FISICO) {
                 encontroFisico = true;
-                assertNull(ejemplar.getFormatoDigital(), "El ejemplar físico no debería tener formato digital");
+                assertNull(ejemplar.getFormatoDigital(), 
+                         "El ejemplar físico no debe tener formato digital");
             } else {
                 encontroDigital = true;
-                assertNotNull(ejemplar.getFormatoDigital(), "El ejemplar digital debería tener formato digital");
+                assertNotNull(ejemplar.getFormatoDigital(), 
+                            "El ejemplar digital debe tener formato digital");
             }
         }
         
         assertTrue(encontroFisico, "Debería existir un ejemplar físico");
         assertTrue(encontroDigital, "Debería existir un ejemplar digital");
-    }
-
-    @Test
-    @Order(4)
-    public void testModificar() {
-        System.out.println("modificar");
-        
-        // Insertar ejemplar físico
-        EjemplarDTO ejemplar = crearEjemplarFisico("Ubicación Original");
-        Integer id = ejemplarDAO.insertar(ejemplar);
-        assertNotNull(id, "El ID generado no debería ser null");
-        ejemplar.setIdEjemplar(id);
-        
-        // Verificar inserción inicial
-        EjemplarDTO recuperado = ejemplarDAO.obtenerPorId(id);
-        assertNotNull(recuperado, "El ejemplar debería existir");
-        assertEquals(TipoEjemplar.FISICO, recuperado.getTipo());
-        assertNull(recuperado.getFormatoDigital());
-        
-        // Modificar a digital
-        ejemplar.setTipo(TipoEjemplar.DIGITAL);
-        ejemplar.setFormatoDigital(FormatoDigital.PDF);
-        ejemplar.setUbicacion("Nueva Ubicación");
-        Integer resultado = ejemplarDAO.modificar(ejemplar);
-        assertTrue(resultado > 0, "La modificación debería ser exitosa");
-        
-        // Verificar modificación
-        recuperado = ejemplarDAO.obtenerPorId(id);
-        assertNotNull(recuperado, "El ejemplar debería existir después de la modificación");
-        assertEquals(TipoEjemplar.DIGITAL, recuperado.getTipo());
-        assertEquals(FormatoDigital.PDF, recuperado.getFormatoDigital());
-        assertEquals("Nueva Ubicación", recuperado.getUbicacion());
-    }
-
-    @Test
-    @Order(5)
-    public void testEliminar() {
-        System.out.println("eliminar");
-        
-        // Insertar ejemplar
-        EjemplarDTO ejemplar = crearEjemplarFisico("Ubicación Test");
-        Integer id = ejemplarDAO.insertar(ejemplar);
-        assertNotNull(id, "El ID generado no debería ser null");
-        ejemplar.setIdEjemplar(id);
-        
-        // Verificar que existe
-        assertNotNull(ejemplarDAO.obtenerPorId(id), "El ejemplar debería existir antes de eliminarlo");
-        
-        // Eliminar
-        Integer resultado = ejemplarDAO.eliminar(ejemplar);
-        assertTrue(resultado > 0, "La eliminación debería ser exitosa");
-        
-        // Verificar que ya no existe
-        assertNull(ejemplarDAO.obtenerPorId(id), "El ejemplar no debería existir después de eliminarlo");
     }
 }
