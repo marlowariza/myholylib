@@ -28,7 +28,7 @@ public class CreadorDAOImpl extends DAOImplBase implements CreadorDAO {
         this.listaColumnas.add(new Columna("PATERNO", false, false));
         this.listaColumnas.add(new Columna("MATERNO", false, false));
         this.listaColumnas.add(new Columna("SEUDONIMO", false, false));
-        this.listaColumnas.add(new Columna("TIPO_AUTOR", false, false));
+        this.listaColumnas.add(new Columna("TIPO_CREADOR", false, false));
         this.listaColumnas.add(new Columna("NACIONALIDAD", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
     }
@@ -83,12 +83,12 @@ public class CreadorDAOImpl extends DAOImplBase implements CreadorDAO {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.creador = new CreadorDTO();
-        creador.setIdAutor(this.resultSet.getInt("ID_AUTOR"));
+        creador.setIdAutor(this.resultSet.getInt("ID_CREADOR"));
         creador.setNombre(this.resultSet.getString("NOMBRE"));
         creador.setPaterno(this.resultSet.getString("PATERNO"));
         creador.setMaterno(this.resultSet.getString("MATERNO"));
         creador.setSeudonimo(this.resultSet.getString("SEUDONIMO"));
-        creador.setTipo(TipoAutor.valueOf(this.resultSet.getString("TIPO_AUTOR")));
+        creador.setTipo(TipoAutor.valueOf(this.resultSet.getString("TIPO_CREADOR")));
         creador.setNacionalidad(this.resultSet.getString("NACIONALIDAD"));
         creador.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }
