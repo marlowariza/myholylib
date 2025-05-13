@@ -4,16 +4,20 @@ package com.syntaxerror.biblioteca.business;
 import com.syntaxerror.biblioteca.model.EditorialDTO;
 import com.syntaxerror.biblioteca.model.MaterialDTO;
 import com.syntaxerror.biblioteca.model.enums.NivelDeIngles;
+import com.syntaxerror.biblioteca.persistance.dao.EditorialDAO;
 import com.syntaxerror.biblioteca.persistance.dao.MaterialDAO;
+import com.syntaxerror.biblioteca.persistance.dao.impl.EditorialDAOImpl;
 import com.syntaxerror.biblioteca.persistance.dao.impl.MaterialDAOImpl;
 import java.util.List;
 
 public class MaterialBO {
 
     private MaterialDAO materialDAO;
+    private EditorialDAO editorialDAO;
 
     public MaterialBO() {
         this.materialDAO = new MaterialDAOImpl();
+        this.editorialDAO = new EditorialDAOImpl();
     }
 
     public int insertar(String titulo, String edicion, NivelDeIngles nivel, Integer anioPublicacion, Integer idEditorial) {
@@ -23,8 +27,9 @@ public class MaterialBO {
         material.setEdicion(edicion);
         material.setNivel(nivel);
         material.setAnioPublicacion(anioPublicacion);
-
-        EditorialDTO editorial = new EditorialDTO();
+        
+        EditorialDTO editorial = this.editorialDAO.obtenerPorId(idEditorial);
+        
         editorial.setIdEditorial(idEditorial);
         material.setEditorial(editorial);
 
@@ -39,7 +44,8 @@ public class MaterialBO {
         material.setNivel(nivel);
         material.setAnioPublicacion(anioPublicacion);
 
-        EditorialDTO editorial = new EditorialDTO();
+        EditorialDTO editorial = this.editorialDAO.obtenerPorId(idEditorial);
+        
         editorial.setIdEditorial(idEditorial);
         material.setEditorial(editorial);
 
