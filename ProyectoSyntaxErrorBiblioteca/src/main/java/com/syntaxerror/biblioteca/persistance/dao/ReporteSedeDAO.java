@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 public interface ReporteSedeDAO {
 
-    ArrayList<ReporteSedeDTO> listarPorPeriodoYSede(Integer anio, Integer mes, Integer sedeId);
+    ArrayList<ReporteSedeDTO> listarPorPeriodoYSede(Integer anio, Integer mes, Integer idSede,Integer idPrestamo,Integer idPersona);
 
     public void insertarDatosDePrueba();
 
     public void eliminarDatosDePrueba();
 
-    void generarReportePorSede(Integer anio, Integer mes, Integer sedeId);
+    void generarReportePorSede(Integer anio, Integer mes);
 }

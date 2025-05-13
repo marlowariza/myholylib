@@ -42,8 +42,6 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-
-        //si es autoincremental, se salta el (1,ID)
         this.statement.setString(1, this.persona.getNombre());
         this.statement.setString(2, this.persona.getPaterno());
         this.statement.setString(3, this.persona.getMaterno());
@@ -52,11 +50,34 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
         this.statement.setString(6, this.persona.getCorreo());
         this.statement.setString(7, this.persona.getContrasenha());
         this.statement.setString(8, this.persona.getTipo().name());
-        this.statement.setString(9, this.persona.getNivel().name());
-        this.statement.setString(10, this.persona.getTurno().name());
-        this.statement.setDate(11, new java.sql.Date(this.persona.getFechaContratoInicio().getTime()));
-        this.statement.setDate(12, new java.sql.Date(this.persona.getFechaContratoFinal().getTime()));
-        this.statement.setInt(13, this.persona.getVigente() ? 1 : 0);
+
+        // NIVEL solo si es LECTOR
+        if (this.persona.getTipo() == TipoPersona.LECTOR) {
+            if (this.persona.getNivel() == null) {
+                throw new SQLException("Los lectores deben tener un nivel de inglés.");
+            }
+            this.statement.setString(9, this.persona.getNivel().name());
+
+            this.statement.setNull(10, java.sql.Types.VARCHAR); // TURNO
+            this.statement.setNull(11, java.sql.Types.DATE);    // FECHA_CONTRATO_INI
+            this.statement.setNull(12, java.sql.Types.DATE);    // FECHA_CONTRATO_FIN
+            this.statement.setNull(13, java.sql.Types.INTEGER); // VIGENTE
+        } // BIBLIOTECARIO
+        else if (this.persona.getTipo() == TipoPersona.BIBLIOTECARIO) {
+            this.statement.setNull(9, java.sql.Types.VARCHAR); // NIVEL
+
+            if (this.persona.getTurno() == null || this.persona.getFechaContratoInicio() == null || this.persona.getFechaContratoFinal() == null || this.persona.getVigente() == null) {
+                throw new SQLException("Los bibliotecarios deben tener turno, fechas de contrato y estado de vigencia.");
+            }
+
+            this.statement.setString(10, this.persona.getTurno().name());
+            this.statement.setDate(11, new java.sql.Date(this.persona.getFechaContratoInicio().getTime()));
+            this.statement.setDate(12, new java.sql.Date(this.persona.getFechaContratoFinal().getTime()));
+            this.statement.setInt(13, this.persona.getVigente() ? 1 : 0);
+        } else {
+            throw new SQLException("Tipo de persona no reconocido.");
+        }
+
         this.statement.setInt(14, this.persona.getSede().getIdSede());
     }
 
@@ -90,14 +111,25 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
         this.persona.setTelefono(this.resultSet.getString("TELEFONO"));
         this.persona.setCorreo(this.resultSet.getString("CORREO"));
         this.persona.setContrasenha(this.resultSet.getString("CONTRASENHA"));
-        this.persona.setTipo(TipoPersona.valueOf(this.resultSet.getString("TIPO_PERSONA")));
-        this.persona.setNivel(NivelDeIngles.valueOf(this.resultSet.getString("NIVEL")));
-        this.persona.setTurno(Turnos.valueOf(this.resultSet.getString("TURNO")));
-        this.persona.setFechaContratoInicio(this.resultSet.getDate("FECHA_CONTRATO_INI"));
-        this.persona.setFechaContratoFinal(this.resultSet.getDate("FECHA_CONTRATO_FIN"));
-        this.persona.setVigente(this.resultSet.getInt("VIGENTE") == 1);
 
-        // Crear objetos DTO básicos para las relaciones
+        TipoPersona tipo = TipoPersona.valueOf(this.resultSet.getString("TIPO_PERSONA"));
+        this.persona.setTipo(tipo);
+
+        if (tipo == TipoPersona.LECTOR) {
+            this.persona.setNivel(NivelDeIngles.valueOf(this.resultSet.getString("NIVEL")));
+            this.persona.setTurno(null);
+            this.persona.setFechaContratoInicio(null);
+            this.persona.setFechaContratoFinal(null);
+            this.persona.setVigente(null);
+        } else if (tipo == TipoPersona.BIBLIOTECARIO) {
+            this.persona.setNivel(null);
+            this.persona.setTurno(Turnos.valueOf(this.resultSet.getString("TURNO")));
+            this.persona.setFechaContratoInicio(this.resultSet.getDate("FECHA_CONTRATO_INI"));
+            this.persona.setFechaContratoFinal(this.resultSet.getDate("FECHA_CONTRATO_FIN"));
+            this.persona.setVigente(this.resultSet.getInt("VIGENTE") == 1);
+        }
+
+        // Relación sede
         SedeDTO sede = new SedeDTO();
         sede.setIdSede(this.resultSet.getInt("SEDE_IDSEDE"));
         this.persona.setSede(sede);
@@ -116,14 +148,20 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
 
     @Override
     public Integer insertar(PersonaDTO persona) {
+        if (persona == null) {
+            throw new IllegalArgumentException("La persona no puede ser null");
+        }
         this.persona = persona;
         return super.insertar();
     }
 
     @Override
-    public PersonaDTO obtenerPorId(Integer idpersona) {
+    public PersonaDTO obtenerPorId(Integer idPersona) {
+        if (idPersona == null || idPersona <= 0) {
+            throw new IllegalArgumentException("El ID de la persona debe ser válido");
+        }
         this.persona = new PersonaDTO();
-        this.persona.setIdPersona(idpersona);
+        this.persona.setIdPersona(idPersona);
         super.obtenerPorId();
         return this.persona;
     }
@@ -135,13 +173,20 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
 
     @Override
     public Integer modificar(PersonaDTO persona) {
+        if (persona == null || persona.getIdPersona() == null || persona.getIdPersona() <= 0) {
+            throw new IllegalArgumentException("La persona y su ID deben ser válidos para modificar");
+        }
         this.persona = persona;
         return super.modificar();
     }
 
     @Override
     public Integer eliminar(PersonaDTO persona) {
+        if (persona == null || persona.getIdPersona() == null || persona.getIdPersona() <= 0) {
+            throw new IllegalArgumentException("La persona y su ID deben ser válidos para eliminar");
+        }
         this.persona = persona;
         return super.eliminar();
     }
+
 }
