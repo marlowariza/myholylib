@@ -31,7 +31,11 @@ public class TemaDAOImpl extends DAOImplBase implements TemaDAO {
         //si es autoincremental, se salta el (1,ID)
         this.statement.setString(1, this.tema.getDescripcion());
         this.statement.setString(2, this.tema.getCategoria().name());
-        this.statement.setInt(3, this.tema.getTemaPadre().getIdTema());
+        if (this.tema.getTemaPadre() != null) {
+            this.statement.setInt(3, this.tema.getTemaPadre().getIdTema());
+        } else {
+            this.statement.setNull(3, java.sql.Types.INTEGER);  // Establece el valor null para el ID del tema padre
+        }
     }
 
     @Override
@@ -39,7 +43,11 @@ public class TemaDAOImpl extends DAOImplBase implements TemaDAO {
 
         this.statement.setString(1, this.tema.getDescripcion());
         this.statement.setString(2, this.tema.getCategoria().name());
-        this.statement.setInt(3, this.tema.getTemaPadre().getIdTema());
+        if (this.tema.getTemaPadre() != null) {
+            this.statement.setInt(3, this.tema.getTemaPadre().getIdTema());
+        } else {
+            this.statement.setNull(3, java.sql.Types.INTEGER);  // Si el temaPadre es null, usamos setNull
+        }
         this.statement.setInt(4, this.tema.getIdTema());
         //En modificar el ID va al ultimo
     }
@@ -63,11 +71,14 @@ public class TemaDAOImpl extends DAOImplBase implements TemaDAO {
         this.tema.setDescripcion(this.resultSet.getString("DESCRIPCION"));
         this.tema.setCategoria(Categoria.valueOf(this.resultSet.getString("CATEGORIA")));
         // Crear objetos DTO básicos para las relaciones
+        // Verificamos si el temaPadre existe en el resultado
         int idPadre = resultSet.getInt("ID_TEMA_PADRE");
-        if (!resultSet.wasNull()) {
+        if (!resultSet.wasNull()) {  // Si no fue null, creamos el temaPadre
             TemaDTO padre = new TemaDTO();
             padre.setIdTema(idPadre);
             this.tema.setTemaPadre(padre);
+        } else {
+            this.tema.setTemaPadre(null);  // Si es null, aseguramos que no se setee un temaPadre
         }
 
     }
@@ -94,6 +105,10 @@ public class TemaDAOImpl extends DAOImplBase implements TemaDAO {
         this.tema = new TemaDTO();
         this.tema.setIdTema(idTema);
         super.obtenerPorId();
+        // Verificar si el tema tiene un temaPadre, en caso de que sea null
+        if (this.tema.getTemaPadre() == null) {
+            System.out.println("Este tema no tiene tema padre.");
+        }
         return this.tema;
     }
 
