@@ -26,7 +26,7 @@ public class CreadorDTO {
     }
 
     public CreadorDTO(Integer idAutor, String nombre, String paterno, String materno,
-            String seudonimo, TipoAutor tipo, String nacionalidad, Boolean activo, Integer cantidadObras) {
+            String seudonimo, TipoAutor tipo, String nacionalidad, Boolean activo) {
         this.idAutor = idAutor;
         this.nombre = nombre;
         this.paterno = paterno;
