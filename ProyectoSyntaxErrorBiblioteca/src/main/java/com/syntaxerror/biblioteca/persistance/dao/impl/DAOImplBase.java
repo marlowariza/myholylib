@@ -312,12 +312,47 @@ public abstract class DAOImplBase {
         }
     }
 
+    //ListarTodos anterior, el nuevo es para los reportes tmb
+    
+//    public List listarTodos() {
+//        List lista = new ArrayList<>();
+//        try {
+//            this.abrirConexion();
+//            String sql = this.generarSQLParaListarTodos();
+//            this.colocarSQLenStatement(sql);
+//            this.ejecutarConsultaEnBD();
+//            while (this.resultSet.next()) {
+//                agregarObjetoALaLista(lista);
+//            }
+//        } catch (SQLException ex) {
+//            System.err.println("Error al intentar listarTodos - " + ex);
+//        } finally {
+//            try {
+//                this.cerrarConexion();
+//            } catch (SQLException ex) {
+//                System.err.println("Error al cerrar la conexión - " + ex);
+//            }
+//        }
+//        return lista;
+//    }
     public List listarTodos() {
+        String sql = null;
+        Consumer incluirValorDeParametros = null;
+        Object parametros = null;
+        return this.listarTodos(sql, incluirValorDeParametros, parametros);
+    }
+
+    public List listarTodos(String sql, Consumer incluirValorDeParametros, Object parametros) {
         List lista = new ArrayList<>();
         try {
             this.abrirConexion();
-            String sql = this.generarSQLParaListarTodos();
+            if (sql == null) {
+                sql = this.generarSQLParaListarTodos();
+            }
             this.colocarSQLenStatement(sql);
+            if (incluirValorDeParametros != null) {
+                incluirValorDeParametros.accept(parametros);
+            }
             this.ejecutarConsultaEnBD();
             while (this.resultSet.next()) {
                 agregarObjetoALaLista(lista);
