@@ -156,7 +156,7 @@ public class PrestamoEjemplarDAOImpl extends RelacionDAOImplBase<PrestamoEjempla
 
     @Override
     public boolean existeRelacion(Integer idPrestamo, Integer idEjemplar) {
-        return existeRelacion(idPrestamo, idEjemplar);
+        return super.existeRelacion(idPrestamo, idEjemplar);
     }
 
     private List<PrestamoEjemplarDTO> buscarRelacionados(Integer id, String columnaFiltro) {

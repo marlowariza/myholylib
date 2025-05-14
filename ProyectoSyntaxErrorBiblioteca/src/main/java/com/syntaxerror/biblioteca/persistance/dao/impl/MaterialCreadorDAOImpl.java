@@ -30,7 +30,7 @@ public class MaterialCreadorDAOImpl extends RelacionDAOImplBase<MaterialDTO, Cre
 
     @Override
     public boolean existeRelacion(Integer idMaterial, Integer idAutor) {
-        return existeRelacion(idMaterial, idAutor);
+        return super.existeRelacion(idMaterial, idAutor);
     }
 
     @Override

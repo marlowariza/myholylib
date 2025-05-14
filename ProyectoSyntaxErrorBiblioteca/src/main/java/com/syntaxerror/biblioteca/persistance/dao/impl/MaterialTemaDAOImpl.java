@@ -12,8 +12,9 @@ import com.syntaxerror.biblioteca.model.enums.NivelDeIngles;
 import com.syntaxerror.biblioteca.persistance.dao.MaterialTemaDAO;
 
 public class MaterialTemaDAOImpl extends RelacionDAOImplBase<MaterialDTO, TemaDTO> implements MaterialTemaDAO {
+
     private static final Logger LOGGER = Logger.getLogger(MaterialTemaDAOImpl.class.getName());
-    
+
     public MaterialTemaDAOImpl() {
         super("BIB_MATERIAL_TEMA", "MATERIAL_IDMATERIAL", "TEMA_IDTEMA", "BIB_MATERIAL", "BIB_TEMA");
     }
@@ -30,7 +31,7 @@ public class MaterialTemaDAOImpl extends RelacionDAOImplBase<MaterialDTO, TemaDT
 
     @Override
     public boolean existeRelacion(Integer materialId, Integer temaId) {
-        return existeRelacion(materialId, temaId);
+        return super.existeRelacion(materialId, temaId);
     }
 
     @Override
