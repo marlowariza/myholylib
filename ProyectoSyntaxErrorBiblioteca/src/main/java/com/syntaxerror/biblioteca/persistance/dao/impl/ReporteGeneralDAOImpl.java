@@ -100,36 +100,35 @@ public class ReporteGeneralDAOImpl extends DAOImplBase implements ReporteGeneral
     }
 
     
-    
-    //No se usan
-//    @Override
-//    protected void agregarObjetoALaLista(List lista) throws SQLException {
-//        this.instanciarObjetoDelResultSet();
-//        lista.add(this.reporte);
-//    }
-//
-//    @Override
-//    protected void instanciarObjetoDelResultSet() throws SQLException {
-//        this.reporte = new ReporteGeneralDTO();
-//
-//        this.reporte.setAnio(this.resultSet.getInt("ANHIO"));
-//        this.reporte.setMes(this.resultSet.getInt("MES"));
-//
-//        // Prestamo
-//        PrestamoDTO prestamo = new PrestamoDTO();
-//        prestamo.setIdPrestamo(this.resultSet.getInt("ID_PRESTAMO"));
-//        prestamo.setFechaSolicitud(this.resultSet.getDate("FECHA_SOLICITUD"));
-//        prestamo.setFechaPrestamo(this.resultSet.getDate("FECHA_PRESTAMO"));
-//        prestamo.setFechaDevolucion(this.resultSet.getDate("FECHA_DEVOLUCION"));
-//        this.reporte.setPrestamo(prestamo);
-//
-//        // Persona
-//        PersonaDTO persona = new PersonaDTO();
-//        persona.setIdPersona(this.resultSet.getInt("ID_PERSONA"));
-//        persona.setNombre(this.resultSet.getString("NOMBRE"));
-//        persona.setPaterno(this.resultSet.getString("PATERNO"));
-//        persona.setMaterno(this.resultSet.getString("MATERNO"));
-//        this.reporte.setPersona(persona);
-//    }
+    //si se usan
+    @Override
+    protected void agregarObjetoALaLista(List lista) throws SQLException {
+        this.instanciarObjetoDelResultSet();
+        lista.add(this.reporte);
+    }
+
+    @Override
+    protected void instanciarObjetoDelResultSet() throws SQLException {
+        this.reporte = new ReporteGeneralDTO();
+
+        this.reporte.setAnio(this.resultSet.getInt("ANHIO"));
+        this.reporte.setMes(this.resultSet.getInt("MES"));
+
+        // Prestamo
+        PrestamoDTO prestamo = new PrestamoDTO();
+        prestamo.setIdPrestamo(this.resultSet.getInt("ID_PRESTAMO"));
+        prestamo.setFechaSolicitud(this.resultSet.getDate("FECHA_SOLICITUD"));
+        prestamo.setFechaPrestamo(this.resultSet.getDate("FECHA_PRESTAMO"));
+        prestamo.setFechaDevolucion(this.resultSet.getDate("FECHA_DEVOLUCION"));
+        this.reporte.setPrestamo(prestamo);
+
+        // Persona
+        PersonaDTO persona = new PersonaDTO();
+        persona.setIdPersona(this.resultSet.getInt("ID_PERSONA"));
+        persona.setNombre(this.resultSet.getString("NOMBRE"));
+        persona.setPaterno(this.resultSet.getString("PATERNO"));
+        persona.setMaterno(this.resultSet.getString("MATERNO"));
+        this.reporte.setPersona(persona);
+    }
 
 }
