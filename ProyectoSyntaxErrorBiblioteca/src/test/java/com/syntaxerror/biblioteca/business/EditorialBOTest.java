@@ -1,5 +1,6 @@
 package com.syntaxerror.biblioteca.business;
 
+import com.syntaxerror.biblioteca.business.util.BusinessException;
 import com.syntaxerror.biblioteca.model.EditorialDTO;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -38,7 +39,7 @@ public class EditorialBOTest {
     }
 
     @Test
-    public void testInsertarEditorial() {
+    public void testInsertarEditorial() throws BusinessException {
         testEliminarTodo();
         int id = this.editorialBO.insertar("Planeta", "https://planeta.com", "España");
         assertTrue(id > 0);
@@ -63,7 +64,7 @@ public class EditorialBOTest {
     }
 
     @Test
-    public void testEliminarTodo() {
+    public void testEliminarTodo() throws BusinessException {
         List<EditorialDTO> lista = editorialBO.listarTodos();
 
         for (EditorialDTO editorial : lista) {
@@ -75,7 +76,7 @@ public class EditorialBOTest {
     }
 
     @Test
-    public void testModificarEditorial() {
+    public void testModificarEditorial() throws BusinessException {
         // Insertamos una editorial inicial
         int id = editorialBO.insertar("Editorial original", "https://original.com", "Chile");
         assertTrue(id > 0, "La inserción debe devolver un ID válido");
@@ -93,7 +94,7 @@ public class EditorialBOTest {
     }
 
     @Test
-    public void testEliminarEditorial() {
+    public void testEliminarEditorial() throws BusinessException {
         // Primero insertamos una editorial
         int id = editorialBO.insertar("Editorial a eliminar", "https://elim.com", "Perú");
         assertTrue(id > 0, "La inserción debe devolver un ID válido");

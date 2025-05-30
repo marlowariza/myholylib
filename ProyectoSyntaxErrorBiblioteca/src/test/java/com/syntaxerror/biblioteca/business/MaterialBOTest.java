@@ -1,5 +1,6 @@
 package com.syntaxerror.biblioteca.business;
 
+import com.syntaxerror.biblioteca.business.util.BusinessException;
 import com.syntaxerror.biblioteca.model.MaterialDTO;
 import com.syntaxerror.biblioteca.model.enums.NivelDeIngles;
 import java.util.List;
@@ -21,7 +22,7 @@ public class MaterialBOTest {
     }
 
     @BeforeAll
-    public static void setUpClass() {
+    public static void setUpClass() throws BusinessException {
         materialBO = new MaterialBO();
         editorialBO = new EditorialBO();
         //Para insertar una sola editorial
@@ -29,12 +30,12 @@ public class MaterialBOTest {
     }
 
     @AfterAll
-    public static void tearDownClass() {
+    public static void tearDownClass() throws BusinessException {
         editorialBO.eliminar(idEditorial);
     }
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws BusinessException {
         testEliminarTodo();
     }
 
@@ -43,7 +44,7 @@ public class MaterialBOTest {
     }
 
     @Test
-    public void testInsertarMaterial() {
+    public void testInsertarMaterial() throws BusinessException {
         testEliminarTodo();
         // Insertamos un material
         int id = materialBO.insertar("Java para principiantes", "1ª edición", NivelDeIngles.BASICO, 2022, idEditorial); // 1 es el idEditorial
@@ -72,7 +73,7 @@ public class MaterialBOTest {
     }
 
     @Test
-    public void testEliminarTodo() {
+    public void testEliminarTodo() throws BusinessException {
         List<MaterialDTO> lista = materialBO.listarTodos();
 
         for (MaterialDTO material : lista) {
@@ -84,7 +85,7 @@ public class MaterialBOTest {
     }
 
     @Test
-    public void testModificarMaterial() {
+    public void testModificarMaterial() throws BusinessException {
         // Insertamos un material inicial
         int id = materialBO.insertar("Material original", "1ª edición", NivelDeIngles.INTERMEDIO, 2020, idEditorial);
         assertTrue(id > 0, "La inserción debe devolver un ID válido");
@@ -103,7 +104,7 @@ public class MaterialBOTest {
     }
 
     @Test
-    public void testEliminarMaterial() {
+    public void testEliminarMaterial() throws BusinessException {
         // Primero insertamos un material
         int id = materialBO.insertar("Material a eliminar", "1ª edición", NivelDeIngles.BASICO, 2022, idEditorial);
         assertTrue(id > 0, "La inserción debe devolver un ID válido");

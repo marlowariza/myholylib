@@ -101,7 +101,6 @@ public class ReporteGeneralDAOImpl extends DAOImplBase implements ReporteGeneral
 
     
     
-    //No se usan
     @Override
     protected void agregarObjetoALaLista(List lista) throws SQLException {
         this.instanciarObjetoDelResultSet();

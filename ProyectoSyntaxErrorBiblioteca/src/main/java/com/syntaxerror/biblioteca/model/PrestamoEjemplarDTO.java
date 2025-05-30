@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.syntaxerror.biblioteca.model;
 
 import com.syntaxerror.biblioteca.model.enums.EstadoPrestamoEjemplar;
@@ -14,7 +11,7 @@ import java.util.Date;
 public class PrestamoEjemplarDTO {
         private Integer idPrestamo;
     private Integer idEjemplar;
-    private EstadoPrestamoEjemplar estado; // Puedes cambiar esto a un Enum si lo deseas
+    private EstadoPrestamoEjemplar estado; 
     private Date fechaRealDevolucion;
 
     // Constructores
